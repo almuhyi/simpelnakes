@@ -29,7 +29,7 @@
             <i data-feather="move" class="move-icon mr-10 cursor-pointer" height="20"></i>
 
             @if(!empty($session))
-                <a href="/admin/sessions/{{ $session->id }}/delete" class="delete-action btn btn-sm btn-transparent text-gray">
+                <a href="{{ url('') }}/admin/sessions/{{ $session->id }}/delete" class="delete-action btn btn-sm btn-transparent text-gray">
                     <i data-feather="trash-2" class="mr-10 cursor-pointer" height="20"></i>
                 </a>
             @endif
@@ -40,7 +40,7 @@
 
     <div id="collapseSession{{ !empty($session) ? $session->id :'record' }}" aria-labelledby="session_{{ !empty($session) ? $session->id :'record' }}" class=" collapse @if(empty($session)) show @endif" role="tabpanel">
         <div class="panel-collapse text-gray">
-            <div class="js-content-form session-form" data-action="/admin/sessions/{{ !empty($session) ? $session->id . '/update' : 'store' }}">
+            <div class="js-content-form session-form" data-action="{{ url('') }}/admin/sessions/{{ !empty($session) ? $session->id . '/update' : 'store' }}">
                 <input type="hidden" name="ajax[{{ !empty($session) ? $session->id : 'new' }}][webinar_id]" value="{{ !empty($webinar) ? $webinar->id :'' }}">
                 <input type="hidden" name="ajax[{{ !empty($session) ? $session->id : 'new' }}][chapter_id]" value="{{ !empty($chapter) ? $chapter->id :'' }}" class="chapter-input">
 
@@ -235,7 +235,7 @@
 
                     @if(!empty($session))
                         @if(!$session->isFinished())
-                            <a href="{{ $session->getJoinLink(true) }}" target="_blank" class="ml-10 btn btn-sm btn-secondary">Gabung</a>
+                            <a href="{{ url($session->getJoinLink(true)) }}" target="_blank" class="ml-10 btn btn-sm btn-secondary">Gabung</a>
                         @else
                             <button type="button" class="js-session-has-ended ml-10 btn btn-sm btn-secondary disabled">Gabung</button>
                         @endif

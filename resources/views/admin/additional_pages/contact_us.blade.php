@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>Kontak kami</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a></div>
                 <div class="breadcrumb-item">Kontak kami</div>
             </div>
         </div>
@@ -17,7 +17,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form action="/admin/additional_page/contact_us" method="post">
+                            <form action="{{ url('/admin/additional_page/contact_us') }}" method="post">
                                 {{ csrf_field() }}
 
                                 <div class="row">
@@ -85,5 +85,5 @@
     <script>
         var removeLang = '{{ ('menghapus') }}';
     </script>
-    <script src="/assets/default/js/admin/contact_us.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/contact_us.min.js"></script>
 @endpush

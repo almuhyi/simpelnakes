@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -78,7 +78,7 @@
                                             <td class="text-left">
                                                 <div class="d-flex align-items-center">
                                                     <figure class="avatar mr-2">
-                                                        <img src="{{ $user->getAvatar() }}" alt="{{ $user->full_name }}">
+                                                        <img src="{{ asset($user->getAvatar()) }}" alt="{{ $user->full_name }}">
                                                     </figure>
                                                     <div class="media-body ml-1">
                                                         <div class="mt-0 mb-1 font-weight-bold">{{ $user->full_name }}</div>
@@ -111,7 +111,7 @@
                                             <td class="text-center mb-2" width="120">
 
                                                 @can('admin_users_edit')
-                                                    <a href="/admin/users/{{ $user->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <a href="{{ url('') }}/admin/users/{{ $user->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan

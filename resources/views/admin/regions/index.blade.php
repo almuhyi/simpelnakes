@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -17,7 +17,7 @@
 
                     @can('admin_regions_create')
                         <div class="text-right">
-                            <a href="/admin/regions/new?type={{ $type }}" class="btn btn-primary">Baru</a>
+                            <a href="{{ url('') }}/admin/regions/new?type={{ $type }}" class="btn btn-primary">Baru</a>
                         </div>
                     @endcan
                 </div>
@@ -75,7 +75,7 @@
 
                                     <td>
                                         @can('admin_regions_edit')
-                                            <a href="/admin/regions/{{ $region->id }}/edit" class="btn-transparent text-primary mr-2">
+                                            <a href="{{ url('') }}/admin/regions/{{ $region->id }}/edit" class="btn-transparent text-primary mr-2">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan

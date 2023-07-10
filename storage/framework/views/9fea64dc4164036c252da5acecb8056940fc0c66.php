@@ -6,14 +6,14 @@
 <?php $__env->startSection('content'); ?>
     <section class="section">
         <div class="section-header">
-            <h1><?php echo e(!empty($tag) ?trans('/admin/main.edit'): trans('admin/main.new')); ?> <?php echo e(trans('admin/main.tag')); ?></h1>
+            <h1><?php echo e(!empty($tag) ?'Edit': 'Baru'); ?> Tag</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/"><?php echo e(trans('admin/main.dashboard')); ?></a>
+                <div class="breadcrumb-item active"><a href="<?php echo e(url('/admin/')); ?>">Dashboard</a>
                 </div>
-                <div class="breadcrumb-item active"><a href="/admin/tags"><?php echo e(trans('admin/main.tags')); ?></a>
+                <div class="breadcrumb-item active"><a href="<?php echo e(url('/admin/tags')); ?>">Tag</a>
                 </div>
                 <div
-                    class="breadcrumb-item"><?php echo e(!empty($tag) ?trans('/admin/main.edit'): trans('admin/main.new')); ?></div>
+                    class="breadcrumb-item"><?php echo e(!empty($tag) ?'Edit': 'Baru'); ?></div>
             </div>
         </div>
 
@@ -22,12 +22,12 @@
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <form action="/admin/tags/<?php echo e(!empty($tag) ? $tag->id.'/update' : 'store'); ?>"
+                            <form action="<?php echo e(url('')); ?>/admin/tags/<?php echo e(!empty($tag) ? $tag->id.'/update' : 'store'); ?>"
                                   method="Post">
                                 <?php echo e(csrf_field()); ?>
 
                                 <div class="form-group">
-                                    <label><?php echo e(trans('/admin/main.title')); ?></label>
+                                    <label>Judul</label>
                                     <input type="text" name="title"
                                            class="form-control  <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -38,7 +38,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
                                            value="<?php echo e(!empty($tag) ? $tag->title : old('title')); ?>"
-                                           placeholder="<?php echo e(trans('admin/main.create_field_title_placeholder')); ?>"/>
+                                           placeholder="Tag akan ditampilkan di halaman pelatihan"/>
                                     <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -55,7 +55,7 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
 
                                 <div class=" mt-4">
-                                    <button class="btn btn-primary"><?php echo e(trans('admin/main.submit')); ?></button>
+                                    <button class="btn btn-primary">Simpan</button>
                                 </div>
                             </form>
                         </div>

@@ -1,7 +1,7 @@
 <div class="tab-pane mt-3 fade" id="occupations" role="tabpanel" aria-labelledby="occupations-tab">
     <div class="row">
         <div class="col-12 col-md-6">
-            <form action="/admin/users/{{ $user->id .'/occupationsUpdate' }}" method="Post">
+            <form action="{{ url('') }}/admin/users/{{ $user->id .'/occupationsUpdate' }}" method="Post">
                 {{ csrf_field() }}
 
                 @foreach($categories as $category)

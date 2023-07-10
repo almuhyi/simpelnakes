@@ -23,7 +23,7 @@
             <i data-feather="move" class="move-icon mr-10 cursor-pointer" height="20"></i>
 
             @if(!empty($textLesson))
-                <a href="/admin/text-lesson/{{ $textLesson->id }}/delete" class="delete-action btn btn-sm btn-transparent text-gray">
+                <a href="{{ url('') }}/admin/text-lesson/{{ $textLesson->id }}/delete" class="delete-action btn btn-sm btn-transparent text-gray">
                     <i data-feather="trash-2" class="mr-10 cursor-pointer" height="20"></i>
                 </a>
             @endif
@@ -34,7 +34,7 @@
 
     <div id="collapseTextLesson{{ !empty($textLesson) ? $textLesson->id :'record' }}" aria-labelledby="text_lesson_{{ !empty($textLesson) ? $textLesson->id :'record' }}" class=" collapse @if(empty($textLesson)) show @endif" role="tabpanel">
         <div class="panel-collapse text-gray">
-            <div class="js-content-form text_lesson-form" data-action="/admin/text-lesson/{{ !empty($textLesson) ? $textLesson->id . '/update' : 'store' }}">
+            <div class="js-content-form text_lesson-form" data-action="{{ url('') }}/admin/text-lesson/{{ !empty($textLesson) ? $textLesson->id . '/update' : 'store' }}">
                 <input type="hidden" name="ajax[{{ !empty($textLesson) ? $textLesson->id : 'new' }}][webinar_id]" value="{{ !empty($webinar) ? $webinar->id :'' }}">
                 <input type="hidden" name="ajax[{{ !empty($textLesson) ? $textLesson->id : 'new' }}][chapter_id]" value="{{ !empty($chapter) ? $chapter->id :'' }}" class="chapter-input">
 

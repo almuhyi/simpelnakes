@@ -2,7 +2,7 @@
     <div class="custom-modal-body">
         <h2 class="section-title after-line">Pertanyaan essay baru</h2>
 
-        <div class="quiz-questions-form" data-action="/admin/quizzes-questions/{{ empty($question_edit) ? 'store' : $question_edit->id.'/update' }}">
+        <div class="quiz-questions-form" data-action="{{ url('') }}/admin/quizzes-questions/{{ empty($question_edit) ? 'store' : $question_edit->id.'/update' }}">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="ajax[quiz_id]" value="{{ !empty($quiz) ? $quiz->id :'' }}">
             <input type="hidden" name="ajax[type]" value="{{ \App\Models\QuizzesQuestion::$descriptive }}">

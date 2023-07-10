@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.css">
 @endpush
 
 @section('content')
@@ -10,7 +10,7 @@
             <h1>
                 Tiket Dukungan Baru</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Judul</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Judul</a>
                 </div>
                 <div class="breadcrumb-item">Bantuan</div>
             </div>
@@ -24,7 +24,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 col-md-6">
-                                    <form action="/admin/supports/{{ !empty($support) ? $support->id.'/update' : 'store' }}" method="Post">
+                                    <form action="{{ url('') }}/admin/supports/{{ !empty($support) ? $support->id.'/update' : 'store' }}" method="Post">
                                         {{ csrf_field() }}
 
                                         <div class="form-group">
@@ -111,6 +111,6 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.js"></script>
 
 @endpush

@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>Kategori blog</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a></div>
                 <div class="breadcrumb-item">Kategori blog</div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                                                             <td class="text-center">{{ $category->blog_count }}</td>
                                                             <td>
                                                                 @can('admin_edit_trending_categories')
-                                                                    <a href="/admin/blog/categories/{{ $category->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                                    <a href="{{ url('') }}/admin/blog/categories/{{ $category->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                                         <i class="fa fa-edit"></i>
                                                                     </a>
                                                                 @endcan
@@ -71,7 +71,7 @@
                                     <div class="tab-pane mt-3 fade {{ ((!empty($errors) and $errors->has('title')) or !empty($editCategory)) ? 'active show' : '' }}" id="newCategory" role="tabpanel" aria-labelledby="newCategory-tab">
                                         <div class="row">
                                             <div class="col-12 col-md-6">
-                                                <form action="/admin/blog/categories/{{ !empty($editCategory) ? $editCategory->id.'/update' : 'store' }}" method="post">
+                                                <form action="{{ url('') }}/admin/blog/categories/{{ !empty($editCategory) ? $editCategory->id.'/update' : 'store' }}" method="post">
                                                     {{ csrf_field() }}
 
                                                     <div class="form-group">
@@ -104,5 +104,5 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/vendors/select2/select2.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/select2/select2.min.js"></script>
 @endpush

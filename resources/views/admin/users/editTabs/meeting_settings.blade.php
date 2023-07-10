@@ -1,11 +1,11 @@
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/vendors/leaflet/leaflet.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/leaflet/leaflet.css">
 @endpush
 
 <div class="tab-pane mt-3 fade" id="meetingSettings" role="tabpanel" aria-labelledby="meetingSettings-tab">
     <div class="row">
         <div class="col-12">
-            <form action="/admin/users/{{ $user->id }}/meetingSettings" method="Post">
+            <form action="{{ url('') }}/admin/users/{{ $user->id }}/meetingSettings" method="Post">
                 {{ csrf_field() }}
 
                 <div class="row mt-20">
@@ -191,7 +191,7 @@
 </div>
 
 @push('scripts_bottom')
-    <script src="/assets/vendors/leaflet/leaflet.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/leaflet/leaflet.min.js"></script>
 
     <script>
         var selectProvinceLang = '{{ ('Pilih provinsi') }}';
@@ -199,5 +199,5 @@
         var selectDistrictLang = '{{ ('Pilih wilayah') }}';
     </script>
 
-    <script src="/assets/default/js/panel/user_settings_tab.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/panel/user_settings_tab.min.js"></script>
 @endpush

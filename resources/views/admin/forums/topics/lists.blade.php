@@ -9,8 +9,8 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item "><a href="/admin/">Dashboard</a></div>
-                <div class="breadcrumb-item "><a href="/admin/forums">Forum</a></div>
+                <div class="breadcrumb-item "><a href="{{ url('/admin/') }}">Dashboard</a></div>
+                <div class="breadcrumb-item "><a href="{{ url('/admin/forums') }}">Forum</a></div>
                 <div class="breadcrumb-item active">{{ $pageTitle }}</div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                     <div class="card">
                         <div class="card-header">
                             @can('admin_forum_topics_create')
-                                <a href="/admin/forums/topics/create" class="btn btn-primary ml-2">Topik baru</a>
+                                <a href="{{ url('/admin/forums/topics/create') }}" class="btn btn-primary ml-2">Topik baru</a>
                             @endcan
                         </div>
                         <div class="card-body">
@@ -42,7 +42,7 @@
 
                                         <tr>
                                             <td class="text-left">
-                                                <a href="/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/posts">
+                                                <a href="{{ url('') }}/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/posts">
                                                     {{ $topic->title }}
                                                 </a>
                                             </td>
@@ -77,7 +77,7 @@
                                                 @endcan
 
                                                 @can('admin_forum_topics_posts')
-                                                    <a href="/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/posts"
+                                                    <a href="{{ url('') }}/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/posts"
                                                        class="btn-transparent btn-sm text-primary mr-1"
                                                        data-toggle="tooltip" data-placement="top" title="Post"
                                                     >

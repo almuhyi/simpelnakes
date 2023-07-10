@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Bantuan</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Bantuan</div>
             </div>
@@ -176,7 +176,7 @@
                             @foreach($supports as $support)
                                 <tr>
                                     <td>
-                                        <a href="/admin/supports/{{ $support->id }}/conversation">
+                                        <a href="{{ url('') }}/admin/supports/{{ $support->id }}/conversation">
                                             {{ $support->title }}
                                         </a>
                                     </td>
@@ -186,7 +186,7 @@
                                     <td class="text-center">{{ (!empty($support->updated_at)) ? dateTimeFormat($support->updated_at,'j M Y | H:i') : '-' }}</td>
 
                                     <td class="text-left">
-                                        <a title="{{ $support->user->full_name }}" href="{{ $support->user->getProfileUrl() }}" target="_blank">{{ $support->user->full_name }}</a>
+                                        <a title="{{ $support->user->full_name }}" href="{{ url($support->user->getProfileUrl()) }}" target="_blank">{{ $support->user->full_name }}</a>
                                     </td>
 
                                     <td class="text-center">
@@ -213,7 +213,7 @@
 
                                     <td class="text-center" width="50">
                                         @can('admin_supports_reply')
-                                            <a href="/admin/supports/{{ $support->id }}/conversation" class="btn-transparent btn-sm text-primary" data-toggle="tooltip" data-placement="top" title="Balas">
+                                            <a href="{{ url('') }}/admin/supports/{{ $support->id }}/conversation" class="btn-transparent btn-sm text-primary" data-toggle="tooltip" data-placement="top" title="Balas">
                                                 <i class="fa fa-reply" aria-hidden="true"></i>
                                             </a>
                                         @endcan

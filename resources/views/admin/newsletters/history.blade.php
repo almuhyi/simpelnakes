@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -21,7 +21,7 @@
                 <div class="card-header">
                     @can('admin_newsletters_send')
                         <div class="text-right">
-                            <a href="/admin/newsletters/send" class="btn btn-primary">Kirim buletin</a>
+                            <a href="{{ url('/admin/newsletters/send') }}" class="btn btn-primary">Kirim buletin</a>
                         </div>
                     @endcan
                 </div>
@@ -102,5 +102,5 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/js/admin/newsletter.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/newsletter.min.js"></script>
 @endpush

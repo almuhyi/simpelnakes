@@ -2,7 +2,7 @@
     <div class="custom-modal-body">
         <h2 class="section-title after-line">Bagian baru </h2>
 
-        <div class="js-content-form chapter-form mt-20" data-action="/admin/chapters/store">
+        <div class="js-content-form chapter-form mt-20" data-action="<?php echo e(url('/admin/chapters/store')); ?>">
 
             <input type="hidden" name="ajax[chapter][webinar_id]" class="js-chapter-webinar-id" value="">
             

@@ -1,7 +1,7 @@
 <div class="tab-pane mt-3 fade" id="financial" role="tabpanel" aria-labelledby="financial-tab">
     <div class="row">
         <div class="col-12 col-md-6">
-            <form action="/admin/users/{{ $user->id .'/financialUpdate' }}" method="Post">
+            <form action="{{ url('') }}/admin/users/{{ $user->id .'/financialUpdate' }}" method="Post">
                 {{ csrf_field() }}
 
                 <div class="form-group">

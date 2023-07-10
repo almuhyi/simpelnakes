@@ -2,7 +2,7 @@
 <div class="d-none" id="webinarFaqModal">
     <h3 class="section-title after-line font-20 text-dark-blue mb-25">Tambah FAQ</h3>
 
-    <div class="js-faq-form" data-action="/admin/faqs/store">
+    <div class="js-faq-form" data-action="{{ url('/admin/faqs/store') }}">
         <input type="hidden" name="webinar_id" value="{{  !empty($webinar) ? $webinar->id :''  }}">
 
         @if(!empty(getGeneralSettings('content_translate')))

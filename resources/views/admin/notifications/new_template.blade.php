@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.css">
 @endpush
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -30,7 +30,7 @@
 
                     <strong class="mt-4 d-block">Anda dapat menggunakan tag data di atas dalam judul template & teks isi.</strong>
 
-                    <form method="post" action="/admin/notifications/templates/{{ !empty($template) ? $template->id .'/update' : 'store' }}" class="form-horizontal form-bordered mt-4">
+                    <form method="post" action="{{ url('') }}/admin/notifications/templates/{{ !empty($template) ? $template->id .'/update' : 'store' }}" class="form-horizontal form-bordered mt-4">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -84,5 +84,5 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.js"></script>
 @endpush

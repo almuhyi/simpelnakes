@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.css">
 @endpush
 
 @section('content')
@@ -14,8 +14,8 @@
             </div>
 
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="/admin/forums">Forum</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a></div>
+                <div class="breadcrumb-item"><a href="{{ url('/admin/forums') }}">Forum</a></div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
         </div>
@@ -27,7 +27,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form action="/admin/forums/{{ !empty($topic) ? ($topic->forum_id.'/topics/'. $topic->id .'/update') : '/topics/store' }}" method="post">
+                            <form action="{{ url('') }}/admin/forums/{{ !empty($topic) ? ($topic->forum_id.'/topics/'. $topic->id .'/update') : '/topics/store' }}" method="post">
                                 {{ csrf_field() }}
 
                                 <div class="">
@@ -154,7 +154,7 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
-    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
-    <script src="/assets/default/js/parts/create_topics.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="{{ asset('') }}vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+    <script src="{{ asset('') }}assets/default/js/parts/create_topics.min.js"></script>
 @endpush

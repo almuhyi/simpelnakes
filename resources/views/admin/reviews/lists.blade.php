@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Ulasan</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Ulasan</div>
             </div>
@@ -162,9 +162,9 @@
                             <tr>
                                 <td class="text-left">
                                     @if(!empty($review->webinar_id))
-                                        <a href="{{ $review->webinar->getUrl() }}" target="_blank">{{ $review->webinar->title }}</a>
+                                        <a href="{{ url($review->webinar->getUrl()) }}" target="_blank">{{ $review->webinar->title }}</a>
                                     @elseif(!empty($review->bundle_id))
-                                        <a href="{{ $review->bundle->getUrl() }}" target="_blank">{{ $review->bundle->title }}</a>
+                                        <a href="{{ url($review->bundle->getUrl()) }}" target="_blank">{{ $review->bundle->title }}</a>
                                     @endif
                                 </td>
 
@@ -196,7 +196,7 @@
                                 </td>
                                 <td class="" width="50">
                                     @can('admin_reviews_status_toggle')
-                                        <a href="/admin/reviews/{{ $review->id }}/toggleStatus" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="{{ ($review->status == 'active') ? 'Hidden' : 'Publish' }}">
+                                        <a href="{{ url('') }}/admin/reviews/{{ $review->id }}/toggleStatus" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="{{ ($review->status == 'active') ? 'Hidden' : 'Publish' }}">
                                             @if($review->status == 'active')
                                                 <i class="fa fa-eye-slash" aria-hidden="true"></i>
                                             @else
@@ -294,5 +294,5 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/js/admin/reviews.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/reviews.min.js"></script>
 @endpush

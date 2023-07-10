@@ -1,4 +1,4 @@
-<div data-action="<?php echo e(!empty($quiz) ? '/admin/quizzes/'. $quiz->id .'/update' : '/admin/quizzes/store'); ?>" class="js-content-form quiz-form webinar-form">
+<div data-action="<?php echo e(url(!empty($quiz) ? '/admin/quizzes/'. $quiz->id .'/update' : '/admin/quizzes/store')); ?>" class="js-content-form quiz-form webinar-form">
     <?php echo e(csrf_field()); ?>
 
     <section>

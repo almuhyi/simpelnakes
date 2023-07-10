@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>Paket baru</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Paket SaaS</div>
             </div>
@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-6">
                     <div class="card-body">
-                        <form action="/admin/financial/registration-packages/{{ !empty($package) ? $package->id.'/update' : 'store' }}" method="Post">
+                        <form action="{{ url('') }}/admin/financial/registration-packages/{{ !empty($package) ? $package->id.'/update' : 'store' }}" method="Post">
                             {{ csrf_field() }}
 
                             @if(!empty(getGeneralSettings('content_translate')))
@@ -225,6 +225,6 @@
 
 @push('scripts_bottom')
 
-    <script src="/assets/default/js/admin/new_registration_packages.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/new_registration_packages.min.js"></script>
 @endpush
 

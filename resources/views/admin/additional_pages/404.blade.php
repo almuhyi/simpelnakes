@@ -6,7 +6,7 @@
             <h1>
                 404 Pengaturan Halaman</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a></div>
                 <div class="breadcrumb-item">404</div>
             </div>
         </div>
@@ -18,7 +18,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form action="/admin/additional_page/404" method="post">
+                            <form action="{{ url('/admin/additional_page/404') }}" method="post">
                                 {{ csrf_field() }}
 
                                 <div class="row">

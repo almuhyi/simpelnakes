@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/admin/vendor/bootstrap-colorpicker/bootstrap-colorpicker.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/admin/vendor/bootstrap-colorpicker/bootstrap-colorpicker.min.css">
 @endpush
 
 @section('content')
@@ -10,7 +10,7 @@
             <h1>
                 Kategori Tren Baru</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">
                     Kategori Tren Baru</div>
@@ -23,7 +23,7 @@
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card mt-4">
                         <div class="card-body">
-                            <form action="/admin/categories/trends/{{ !empty($trend) ? $trend->id.'/update' : 'store' }}"
+                            <form action="{{ url('') }}/admin/categories/trends/{{ !empty($trend) ? $trend->id.'/update' : 'store' }}"
                                   method="Post">
                                 {{ csrf_field() }}
 
@@ -111,6 +111,6 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/admin/vendor/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
-    <script src="/assets/default/js/admin/categories.min.js"></script>
+    <script src="{{ asset('') }}assets/admin/vendor/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/categories.min.js"></script>
 @endpush

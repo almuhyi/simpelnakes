@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="d-none" id="webinarAssignmentModal">
     <h3 class="section-title after-line font-20 text-dark-blue mb-25">Tambah tugas baru</h3>
-    <form action="/admin/assignments/store" method="post">
+    <form action="<?php echo e(url('/admin/assignments/store')); ?>" method="post">
         <input type="hidden" name="webinar_id" value="<?php echo e(!empty($webinar) ? $webinar->id :''); ?>">
 
         <?php if(!empty(getGeneralSettings('content_translate'))): ?>

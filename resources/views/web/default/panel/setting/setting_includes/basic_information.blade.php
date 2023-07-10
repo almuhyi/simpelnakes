@@ -14,6 +14,16 @@
             </div>
 
             <div class="form-group">
+                <label class="input-label">NIK</label>
+                <input type="text" name="nik" value="{{ (!empty($user) and empty($new_user)) ? $user->nik : old('nik') }}" class="form-control @error('nik')  is-invalid @enderror" placeholder=""/>
+                @error('nik')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+
+            <div class="form-group">
                 <label class="input-label">Nama</label>
                 <input type="text" name="full_name" value="{{ (!empty($user) and empty($new_user)) ? $user->full_name : old('full_name') }}" class="form-control @error('full_name')  is-invalid @enderror" placeholder=""/>
                 @error('full_name')

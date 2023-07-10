@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.css">
 @endpush
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Edit komentar</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Edit komentar</div>
             </div>
@@ -22,7 +22,7 @@
                     <div class="card">
                         <div class="card-header"></div>
                         <div class="card-body ">
-                            <form action="/admin/comments/{{$page}}/{{ $comment->id }}/update" method="post">
+                            <form action="{{ url('') }}/admin/comments/{{$page}}/{{ $comment->id }}/update" method="post">
                                 {{ csrf_field() }}
 
                                 <div class="form-group mt-15">
@@ -47,6 +47,6 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.js"></script>
 
 @endpush

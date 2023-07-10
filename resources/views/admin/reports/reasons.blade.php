@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>Alasan laporan</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a></div>
                 <div class="breadcrumb-item">Alasan laporan</div>
             </div>
         </div>
@@ -17,7 +17,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form action="/admin/reports/reasons" method="post">
+                            <form action="{{ url('/admin/reports/reasons') }}" method="post">
                                 {{ csrf_field() }}
 
                                 <div class="row">
@@ -85,5 +85,5 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/js/admin/reports.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/reports.min.js"></script>
 @endpush

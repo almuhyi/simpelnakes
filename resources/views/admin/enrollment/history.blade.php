@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>Riwayat Pendaftaran</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Riwayat Pendaftaran</div>
             </div>
@@ -122,7 +122,7 @@
                     <div class="card">
                         <div class="card-header">
                             @can('admin_enrollment_export')
-                                <a href="/admin/enrollments/export" class="btn btn-primary">Export excel</a>
+                                <a href="{{ url('/admin/enrollments/export') }}" class="btn btn-primary">Export excel</a>
                             @endcan
                         </div>
 
@@ -186,7 +186,7 @@
                                             <td>
                                                 @can('admin_sales_invoice')
                                                     @if(!empty($sale->webinar_id))
-                                                        <a href="/admin/financial/sales/{{ $sale->id }}/invoice" target="_blank" title="Faktur"><i class="fa fa-print" aria-hidden="true"></i></a>
+                                                        <a href="{{ url('') }}/admin/financial/sales/{{ $sale->id }}/invoice" target="_blank" title="Faktur"><i class="fa fa-print" aria-hidden="true"></i></a>
                                                     @endif
                                                 @endcan
 

@@ -10,9 +10,9 @@
         <div class="section-header">
             <h1>{{!empty($role) ?'Edit': 'Baru' }} Role</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
-                <div class="breadcrumb-item active"><a href="/admin/roles">Role</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/roles') }}">Role</a>
                 </div>
                 <div class="breadcrumb-item">{{!empty($role) ?'Edit': 'Baru' }}</div>
             </div>
@@ -32,7 +32,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="/admin/roles/{{ !empty($role) ? $role->id.'/update' : 'store' }}" method="Post">
+                            <form action="{{ url('') }}/admin/roles/{{ !empty($role) ? $role->id.'/update' : 'store' }}" method="Post">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                 <div class="row">
@@ -128,5 +128,5 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/js/admin/roles.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/roles.min.js"></script>
 @endpush

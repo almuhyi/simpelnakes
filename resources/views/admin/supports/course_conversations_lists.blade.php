@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -210,15 +210,15 @@
                                             <td>{{ $support->title }}</td>
 
                                             <td class="text-left">
-                                                <a href="{{ $support->webinar->getUrl() }}" target="_blank">{{ $support->webinar->title }}</a>
+                                                <a href="{{ url($support->webinar->getUrl()) }}" target="_blank">{{ $support->webinar->title }}</a>
                                             </td>
 
                                             <td class="text-left">
-                                                <a href="{{ $support->webinar->teacher->getProfileUrl() }}" target="_blank">{{ $support->webinar->teacher->full_name }}</a>
+                                                <a href="{{ url($support->webinar->teacher->getProfileUrl()) }}" target="_blank">{{ $support->webinar->teacher->full_name }}</a>
                                             </td>
 
                                             <td class="text-left">
-                                                <a href="{{ $support->user->getProfileUrl() }}" target="_blank">{{ $support->user->full_name }}</a>
+                                                <a href="{{ url($support->user->getProfileUrl()) }}" target="_blank">{{ $support->user->full_name }}</a>
                                             </td>
 
                                             <td>{{ dateTimeFormat($support->created_at,'j M Y | H:i') }}</td>
@@ -235,7 +235,7 @@
 
                                             <td class="text-center" width="50">
                                                 @can('admin_supports_reply')
-                                                    <a href="/admin/supports/{{ $support->id }}/conversation" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Percakapan">
+                                                    <a href="{{ url('') }}/admin/supports/{{ $support->id }}/conversation" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Percakapan">
                                                         <i class="fa fa-reply" aria-hidden="true"></i>
                                                     </a>
                                                 @endcan

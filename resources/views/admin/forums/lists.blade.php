@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -114,9 +114,9 @@
                                             </td>
                                             <td class="text-left">
                                                 @if(!empty($forum->subForums) and count($forum->subForums))
-                                                    <a href="/admin/forums?subForums={{ $forum->id }}">{{ $forum->title }}</a>
+                                                    <a href="{{ url('') }}/admin/forums?subForums={{ $forum->id }}">{{ $forum->title }}</a>
                                                 @else
-                                                    <a href="/admin/forums/{{ $forum->id }}/topics">{{ $forum->title }}</a>
+                                                    <a href="{{ url('') }}/admin/forums/{{ $forum->id }}/topics">{{ $forum->title }}</a>
                                                 @endif
                                             </td>
                                             @if(empty(request()->get('subForums')))
@@ -142,7 +142,7 @@
                                             </td>
                                             <td>
                                                 @if(!empty($forum->subForums) and count($forum->subForums))
-                                                    <a href="/admin/forums?subForums={{ $forum->id }}"
+                                                    <a href="{{ url('') }}/admin/forums?subForums={{ $forum->id }}"
                                                        class="btn-transparent btn-sm text-primary mr-1"
                                                        data-toggle="tooltip" data-placement="top" title="Forum"
                                                     >
@@ -150,7 +150,7 @@
                                                     </a>
                                                 @else
                                                     @can('admin_forum_topics_lists')
-                                                        <a href="/admin/forums/{{ $forum->id }}/topics"
+                                                        <a href="{{ url('') }}/admin/forums/{{ $forum->id }}/topics"
                                                            class="btn-transparent btn-sm text-primary mr-1"
                                                            data-toggle="tooltip" data-placement="top" title="Topik"
                                                         >
@@ -160,7 +160,7 @@
                                                 @endif
 
                                                 @can('admin_forum_edit')
-                                                    <a href="/admin/forums/{{ $forum->id }}/edit"
+                                                    <a href="{{ url('') }}/admin/forums/{{ $forum->id }}/edit"
                                                        class="btn-transparent btn-sm text-primary">
                                                         <i class="fa fa-edit"></i>
                                                     </a>

@@ -6,16 +6,17 @@
     @endphp
 
     <div class="p-4 m-3">
-        <img src="{{ $siteGeneralSettings['logo'] ?? '' }}" alt="logo" width="40%" class="mb-5 mt-2">
+        <img src="{{ asset($siteGeneralSettings['logo'] ?? '') }}" alt="logo" width="40%" class="mb-5 mt-2">
 
-        <h4 class="text-dark font-weight-normal">{{ trans('admin/main.welcome') }} <span class="font-weight-bold">{{ $siteGeneralSettings['site_name'] ?? '' }}</span></h4>
+        <h4 class="text-dark font-weight-normal">Selamat datang <span class="font-weight-bold">{{ $siteGeneralSettings['site_name'] ?? '' }}</span></h4>
 
-        <p class="text-muted">{{ trans('auth.admin_tagline') }}</p>
+        <p class="text-muted">
+            Silakan masuk untuk mengontrol dan mengelola semuanya!</p>
 
         <form method="POST" action="{{url('/admin/login')}}" class="needs-validation" novalidate="">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
-                <label for="email">{{ trans('auth.email') }}</label>
+                <label for="email">Email</label>
                 <input id="email" type="email" value="{{ old('email') }}" class="form-control  @error('email')  is-invalid @enderror"
                        name="email" tabindex="1"
                        required autofocus>
@@ -27,7 +28,7 @@
             </div>
             <div class="form-group">
                 <div class="d-block">
-                    <label for="password" class="control-label">{{ trans('auth.password') }}</label>
+                    <label for="password" class="control-label">Kata sandi</label>
                 </div>
                 <input id="password" type="password" class="form-control  @error('password')  is-invalid @enderror"
                        name="password" tabindex="2" required>
@@ -42,16 +43,16 @@
                     <input type="checkbox" name="remember" class="custom-control-input" tabindex="3"
                            id="remember-me">
                     <label class="custom-control-label"
-                           for="remember-me">{{ trans('auth.remember_me') }}</label>
+                           for="remember-me">Ingat saya</label>
                 </div>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                    {{ trans('auth.login') }}
+                    Masuk
                 </button>
             </div>
         </form>
 
-        <a href="/admin/forget-password" class="">{{ trans('auth.forget_your_password') }}</a>
+        <a href="{{ url('/admin/forget-password') }}" class="">Lupa kata sandi</a>
     </div>
 @endsection

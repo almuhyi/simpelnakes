@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>Blog</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Blog</div>
             </div>
@@ -15,7 +15,7 @@
 
             <section class="card">
                 <div class="card-body">
-                    <form action="/admin/blog" method="get" class="mb-0">
+                    <form action="{{ url('/admin/blog') }}" method="get" class="mb-0">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -95,11 +95,11 @@
                     <div class="card">
                         <div class="card-header">
                             @can('admin_blog_create')
-                                <a href="/admin/blog/create" class="btn btn-success">posting blog baru</a>
+                                <a href="{{ url('/admin/blog/create') }}" class="btn btn-success">posting blog baru</a>
                             @endcan
 
                             @can('admin_blog_categories')
-                                <a href="/admin/blog/categories" class="btn btn-primary ml-2">Kategori baru</a>
+                                <a href="{{ url('/admin/blog/categories') }}" class="btn btn-primary ml-2">Kategori baru</a>
                             @endcan
                         </div>
 
@@ -118,7 +118,7 @@
                                     @foreach($blog as $post)
                                         <tr>
                                             <td>
-                                                <a href="{{ $post->getUrl() }}" target="_blank">{{ $post->title }}</a>
+                                                <a href="{{ url($post->getUrl()) }}" target="_blank">{{ $post->title }}</a>
                                             </td>
                                             <td>{{ $post->category->title }}</td>
                                             @if(!empty($post->author->full_name))
@@ -127,7 +127,7 @@
                                             <td class="text-danger">Deleted</td>
                                             @endif
                                             <td>
-                                                <a href="{{ $post->getUrl() }}" target="_blank">{{ $post->comments_count }}</a>
+                                                <a href="{{ url($post->getUrl()) }}" target="_blank">{{ $post->comments_count }}</a>
                                             </td>
                                             <td>{{ dateTimeFormat($post->created_at, 'j M Y | H:i') }}</td>
                                             <td>
@@ -138,7 +138,7 @@
 
                                             <td width="150px">
                                                 @can('admin_blog_edit')
-                                                    <a href="/admin/blog/{{ $post->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <a href="{{ url('') }}/admin/blog/{{ $post->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan

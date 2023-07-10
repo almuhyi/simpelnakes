@@ -1,4 +1,4 @@
-<div data-action="{{ !empty($quiz) ? '/admin/quizzes/'. $quiz->id .'/update' : '/admin/quizzes/store' }}" class="js-content-form quiz-form webinar-form">
+<div data-action="{{ url(!empty($quiz) ? '/admin/quizzes/'. $quiz->id .'/update' : '/admin/quizzes/store') }}" class="js-content-form quiz-form webinar-form">
     {{ csrf_field() }}
     <section>
 

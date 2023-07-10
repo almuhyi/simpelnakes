@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -174,7 +174,7 @@
 
                                 <td class="align-middle text-right">
                                     @can('admin_reviews_status_toggle')
-                                        <a href="/admin/assignments/{{ $assignment->id }}/students" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Peserta">
+                                        <a href="{{ url('') }}/admin/assignments/{{ $assignment->id }}/students" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Peserta">
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>
                                     @endcan

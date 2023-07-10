@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Testimoni</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Testimoni</div>
             </div>
@@ -22,7 +22,7 @@
                     <div class="card">
                         <div class="card-header">
                             @can('admin_testimonials_create')
-                                <a href="/admin/testimonials/create" class="btn btn-primary">Tambah baru</a>
+                                <a href="{{ url('/admin/testimonials/create') }}" class="btn btn-primary">Tambah baru</a>
                             @endcan
                         </div>
 
@@ -58,7 +58,7 @@
                                             <td width="150px">
 
                                                 @can('admin_supports_reply')
-                                                    <a href="/admin/testimonials/{{ $testimonial->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <a href="{{ url('') }}/admin/testimonials/{{ $testimonial->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan

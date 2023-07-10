@@ -37,7 +37,7 @@
                                         <div class="tab-pane mt-3 fade {{ $loop->iteration == 1 ? 'show active' : '' }}" id="{{ $type }}" role="tabpanel" aria-labelledby="{{ $type }}-tab">
                                             <div class="row">
                                                 <div class="col-12 col-md-6">
-                                                    <form action="/admin/users/badges/store" method="post">
+                                                    <form action="{{ url('/admin/users/badges/store') }}" method="post">
                                                         {{ csrf_field() }}
                                                         <input type="hidden" name="type" value="{{ $type }}">
 
@@ -192,7 +192,7 @@
                             @else
                                 <div class="row">
                                     <div class="col-12 col-md-6">
-                                        <form action="/admin/users/badges/{{ $badge->id }}/update" method="post">
+                                        <form action="{{ url('') }}/admin/users/badges/{{ $badge->id }}/update" method="post">
                                             {{ csrf_field() }}
 
                                             @if(!empty(getGeneralSettings('content_translate')))

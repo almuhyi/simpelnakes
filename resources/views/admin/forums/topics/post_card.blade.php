@@ -7,9 +7,9 @@
         <div class="col-12 col-md-3">
             <div class="position-relative bg-info-light d-flex flex-column align-items-center justify-content-start rounded-lg w-100 h-100 p-3">
                 <div class="user-avatar rounded-circle {{ ($cardUser->id == $topic->creator_id) ? 'green-ring' : '' }}">
-                    <img src="{{ $cardUser->getAvatar(72) }}" class="img-cover rounded-circle" alt="{{ $cardUser->full_name }}">
+                    <img src="{{ asset($cardUser->getAvatar(72)) }}" class="img-cover rounded-circle" alt="{{ $cardUser->full_name }}">
                 </div>
-                <a href="{{ $cardUser->getProfileUrl() }}">
+                <a href="{{ url($cardUser->getProfileUrl()) }}">
                     <h4 class="js-post-user-name font-14 text-dark mt-2 font-weight-bold w-100 text-center">{{ $cardUser->full_name }}</h4>
                 </a>
 
@@ -64,7 +64,7 @@
 
                 @if(!empty($post) and $post->pin)
                     <span class="pinned-icon d-flex align-items-center justify-content-center">
-                        <img src="/assets/default/img/learning/un_pin.svg" alt="pin icon" class="">
+                        <img src="{{ asset('') }}assets/default/img/learning/un_pin.svg" alt="pin icon" class="">
                     </span>
                 @endif
             </div>
@@ -77,7 +77,7 @@
                         <div class="post-quotation p-2 rounded-sm border mb-2">
                             <div class="d-flex align-items-center">
                                 <div class="post-quotation-icon rounded-circle">
-                                    <img src="/assets/default/img/icons/quote-right.svg" class="img-cover" alt="quote-right">
+                                    <img src="{{ asset('') }}assets/default/img/icons/quote-right.svg" class="img-cover" alt="quote-right">
                                 </div>
                                 <div class="ml-2">
                                     <span class="d-block">
@@ -94,7 +94,7 @@
 
                     @if(!empty($post) and !empty($post->attach))
                         <div class="mt-auto d-inline-flex">
-                            <a href="{{ $post->getAttachmentUrl($forum->slug,$topic->slug) }}" target="_blank" class="d-flex align-items-center text-gray bg-info-light border px-2 py-1 rounded-pill">
+                            <a href="{{ url($post->getAttachmentUrl($forum->slug,$topic->slug)) }}" target="_blank" class="d-flex align-items-center text-gray bg-info-light border px-2 py-1 rounded-pill">
                                 <i class="fa fa-download"></i>
                                 <span class="ml-1">{{ truncate($post->getAttachmentName(),24) }}</span>
                             </a>
@@ -102,7 +102,7 @@
                     @elseif(empty($post) and !empty($topic->attachments) and count($topic->attachments))
                         <div class="mt-auto d-inline-flex align-items-center">
                             @foreach($topic->attachments as $attachment)
-                                <a href="{{ $attachment->getDownloadUrl($forum->slug,$topic->slug) }}" target="_blank" class="d-flex align-items-center text-gray bg-info-light border px-2 py-1 rounded-pill mr-2">
+                                <a href="{{ url($attachment->getDownloadUrl($forum->slug,$topic->slug)) }}" target="_blank" class="d-flex align-items-center text-gray bg-info-light border px-2 py-1 rounded-pill mr-2">
                                     <i class="fa fa-download"></i>
                                     <span class="ml-1">{{ truncate($attachment->getName(),24) }}</span>
                                 </a>
@@ -131,16 +131,16 @@
 
                         @if(!$topic->close)
                             @if(!empty($post))
-                                <button type="button" data-action="/admin/forums/{{ $forum->id }}/topics/{{ $topic->id }}/posts/{{ $post->id }}/edit" class="js-post-edit btn-transparent mr-3 font-14 font-weight-500 text-gray">Edit</button>
+                                <button type="button" data-action="{{ url('') }}/admin/forums/{{ $forum->id }}/topics/{{ $topic->id }}/posts/{{ $post->id }}/edit" class="js-post-edit btn-transparent mr-3 font-14 font-weight-500 text-gray">Edit</button>
                             @else
-                                <a href="/admin/forums/{{ $forum->id }}/topics/{{ $topic->id }}/edit" target="_blank" class="mr-3 font-14 font-weight-500 text-gray">Edit</a>
+                                <a href="{{ url('') }}/admin/forums/{{ $forum->id }}/topics/{{ $topic->id }}/edit" target="_blank" class="mr-3 font-14 font-weight-500 text-gray">Edit</a>
                             @endif
 
                             @if(!empty($post))
                                 @if($post->pin)
-                                    <button type="button" data-action="/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/posts/{{ $post->id }}/un_pin" class="js-btn-post-un-pin btn-transparent font-14 font-weight-500 text-warning mr-3">Unpin</button>
+                                    <button type="button" data-action="{{ url('') }}/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/posts/{{ $post->id }}/un_pin" class="js-btn-post-un-pin btn-transparent font-14 font-weight-500 text-warning mr-3">Unpin</button>
                                 @else
-                                    <button type="button" data-action="/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/posts/{{ $post->id }}/pin" class="js-btn-post-pin btn-transparent font-14 font-weight-500 text-gray mr-3">Pin</button>
+                                    <button type="button" data-action="{{ url('') }}/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/posts/{{ $post->id }}/pin" class="js-btn-post-pin btn-transparent font-14 font-weight-500 text-gray mr-3">Pin</button>
                                 @endif
                             @endif
 

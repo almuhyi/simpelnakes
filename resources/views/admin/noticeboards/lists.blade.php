@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -114,7 +114,7 @@
                 <div class="card-header">
                     @can('admin_noticeboards_send')
                         <div class="text-right">
-                            <a href="/admin/{{ (!empty($isCourseNotice) and $isCourseNotice) ? 'course-noticeboards' : 'noticeboards' }}/send" class="btn btn-primary">Kirim pemberitahuan</a>
+                            <a href="{{ url('') }}/admin/{{ (!empty($isCourseNotice) and $isCourseNotice) ? 'course-noticeboards' : 'noticeboards' }}/send" class="btn btn-primary">Kirim pemberitahuan</a>
                         </div>
                     @endcan
                 </div>
@@ -153,7 +153,7 @@
                                     @if(!empty($isCourseNotice) and !empty($noticeboard->webinar))
                                         <td class="text-left">
                                             @if(!empty($noticeboard->webinar))
-                                                <a href="/admin/webinars/{{ $noticeboard->webinar->id }}/edit" target="_blank" class="font-14 d-block">{{ $noticeboard->webinar->id }}-{{ truncate($noticeboard->webinar->title,32) }}</a>
+                                                <a href="{{ url('') }}/admin/webinars/{{ $noticeboard->webinar->id }}/edit" target="_blank" class="font-14 d-block">{{ $noticeboard->webinar->id }}-{{ truncate($noticeboard->webinar->title,32) }}</a>
                                             @endif
                                         </td>
                                     @endif
@@ -182,7 +182,7 @@
 
                                     <td width="100">
                                         @can('admin_noticeboards_edit')
-                                            <a href="/admin/{{ (!empty($isCourseNotice) and $isCourseNotice) ? 'course-noticeboards' : 'noticeboards' }}/{{ $noticeboard->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                            <a href="{{ url('') }}/admin/{{ (!empty($isCourseNotice) and $isCourseNotice) ? 'course-noticeboards' : 'noticeboards' }}/{{ $noticeboard->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -227,5 +227,5 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/js/admin/noticeboards.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/noticeboards.min.js"></script>
 @endpush

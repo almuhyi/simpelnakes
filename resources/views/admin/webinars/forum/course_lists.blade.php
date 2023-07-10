@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Pelatihan</div>
 
@@ -38,7 +38,7 @@
                                         <tr class="text-center">
                                             <td>{{ $webinar->id }}</td>
                                             <td width="18%" class="text-left">
-                                                <a class="text-primary mt-0 mb-1 font-weight-bold" href="{{ $webinar->getUrl() }}">{{ $webinar->title }}</a>
+                                                <a class="text-primary mt-0 mb-1 font-weight-bold" href="{{ url($webinar->getUrl()) }}">{{ $webinar->title }}</a>
                                             </td>
 
                                             <td class="text-left">{{ $webinar->teacher->full_name }}</td>
@@ -48,7 +48,7 @@
 
                                             <td width="200" class="btn-sm">
                                                 @can('admin_course_question_forum_list')
-                                                    <a href="/admin/webinars/{{ $webinar->id }}/forums" target="_blank" class="btn-transparent btn-sm text-primary mt-1 mr-1" data-toggle="tooltip" data-placement="top" title="Pertanyaan">
+                                                    <a href="{{ url('') }}/admin/webinars/{{ $webinar->id }}/forums" target="_blank" class="btn-transparent btn-sm text-primary mt-1 mr-1" data-toggle="tooltip" data-placement="top" title="Pertanyaan">
                                                         <i class="fa fa-question"></i>
                                                     </a>
                                                 @endcan

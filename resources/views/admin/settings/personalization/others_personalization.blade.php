@@ -11,7 +11,7 @@
 
 <div class="mt-3" id="others_personalization">
 
-    <form action="/admin/settings/others_personalization" method="post">
+    <form action="{{ url('/admin/settings/others_personalization') }}" method="post">
         {{ csrf_field() }}
         <input type="hidden" name="page" value="personalization">
         <input type="hidden" name="others_personalization" value="others_personalization">

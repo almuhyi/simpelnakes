@@ -80,7 +80,7 @@
                             <td class="text-left">
                                 <div class="d-flex align-items-center">
                                     <figure class="avatar mr-2">
-                                        <img src="{{ $request->user->getAvatar() }}" alt="{{ $request->user->full_name }}">
+                                        <img src="{{ asset($request->user->getAvatar()) }}" alt="{{ $request->user->full_name }}">
                                     </figure>
                                     <div class="media-body ml-1">
                                         <div class="mt-0 mb-1 font-weight-bold">{{ $request->user->full_name }}</div>
@@ -109,13 +109,13 @@
 
                             <td class="text-center mb-2" width="120">
                                 @can('admin_users_impersonate')
-                                    <a href="/admin/users/{{ $request->user->id }}/impersonate" target="_blank" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Masuk">
+                                    <a href="{{ url('') }}/admin/users/{{ $request->user->id }}/impersonate" target="_blank" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Masuk">
                                         <i class="fa fa-user-shield"></i>
                                     </a>
                                 @endcan
 
                                 @can('admin_users_edit')
-                                    <a href="/admin/users/{{ $request->user->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <a href="{{ url('') }}/admin/users/{{ $request->user->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 @endcan

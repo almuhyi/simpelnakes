@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Filter</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Tag</div>
             </div>
@@ -34,7 +34,7 @@
                                             <td class="text-left">{{ $filter->category->title }}</td>
                                             <td>
                                                 @can('admin_filters_edit')
-                                                    <a href="/admin/filters/{{ $filter->id }}/edit"
+                                                    <a href="{{ url('') }}/admin/filters/{{ $filter->id }}/edit"
                                                        class="btn-transparent btn-sm text-primary">
                                                         <i class="fa fa-edit"></i>
                                                     </a>

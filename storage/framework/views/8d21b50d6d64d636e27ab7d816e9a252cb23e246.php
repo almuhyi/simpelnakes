@@ -1,11 +1,11 @@
 <?php $__env->startPush('styles_top'); ?>
-    <link rel="stylesheet" href="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="/assets/default/vendors/daterangepicker/daterangepicker.min.css">
-    <link rel="stylesheet" href="/assets/default/vendors/bootstrap-timepicker/bootstrap-timepicker.min.css">
-    <link rel="stylesheet" href="/assets/default/vendors/select2/select2.min.css">
-    <link rel="stylesheet" href="/assets/default/vendors/bootstrap-tagsinput/bootstrap-tagsinput.min.css">
-    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-bs4.min.css">
-    <link href="/assets/default/vendors/sortable/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="<?php echo e(asset('')); ?>assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="<?php echo e(asset('')); ?>assets/default/vendors/daterangepicker/daterangepicker.min.css">
+    <link rel="stylesheet" href="<?php echo e(asset('')); ?>assets/default/vendors/bootstrap-timepicker/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="<?php echo e(asset('')); ?>assets/default/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="<?php echo e(asset('')); ?>assets/default/vendors/bootstrap-tagsinput/bootstrap-tagsinput.min.css">
+    <link rel="stylesheet" href="<?php echo e(asset('')); ?>assets/vendors/summernote/summernote-bs4.min.css">
+    <link href="<?php echo e(asset('')); ?>assets/default/vendors/sortable/jquery-ui.min.css"/>
     <style>
         .bootstrap-timepicker-widget table td input {
             width: 35px !important;
@@ -22,10 +22,10 @@
         <div class="section-header">
             <h1><?php echo e(!empty($webinar) ?'Edit': 'Buat'); ?> Pelatihan</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="<?php echo e(url('/admin/')); ?>">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item active">
-                    <a href="/admin/webinars">Pelatihan</a>
+                    <a href="<?php echo e(url('/admin/webinars')); ?>">Pelatihan</a>
                 </div>
                 <div class="breadcrumb-item"><?php echo e(!empty($webinar) ?'Edit': 'Buat'); ?></div>
             </div>
@@ -38,7 +38,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form method="post" action="/admin/webinars/<?php echo e(!empty($webinar) ? $webinar->id.'/update' : 'store'); ?>" id="webinarForm" class="webinar-form">
+                            <form method="post" action="<?php echo e(url('')); ?>/admin/webinars/<?php echo e(!empty($webinar) ? $webinar->id.'/update' : 'store'); ?>" id="webinarForm" class="webinar-form">
                                 <?php echo e(csrf_field()); ?>
 
                                 <section>
@@ -754,55 +754,7 @@ unset($__errorArgs, $__bag); ?>
                                 </section>
 
                                 <?php if(!empty($webinar)): ?>
-                                    <section class="mt-30">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h2 class="section-title after-line">Paket Harga</h2>
-                                            <button id="webinarAddTicket" type="button" class="btn btn-primary btn-sm mt-3">Tambah paket harga</button>
-                                        </div>
-
-                                        <div class="row mt-10">
-                                            <div class="col-12">
-
-                                                <?php if(!empty($tickets) and !$tickets->isEmpty()): ?>
-                                                    <div class="table-responsive">
-                                                        <table class="table table-striped text-center font-14">
-
-                                                            <tr>
-                                                                <th>Judul</th>
-                                                                <th>Diskon</th>
-                                                                <th>Kapasitas</th>
-                                                                <th>Tanggal</th>
-                                                                <th></th>
-                                                            </tr>
-
-                                                            <?php $__currentLoopData = $tickets; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ticket): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                <tr>
-                                                                    <th scope="row"><?php echo e($ticket->title); ?></th>
-                                                                    <td><?php echo e($ticket->discount); ?>%</td>
-                                                                    <td><?php echo e($ticket->capacity); ?></td>
-                                                                    <td><?php echo e(dateTimeFormat($ticket->start_date,'j F Y')); ?> - <?php echo e((new DateTime())->setTimestamp($ticket->end_date)->format('j F Y')); ?></td>
-                                                                    <td>
-                                                                        <button type="button" data-ticket-id="<?php echo e($ticket->id); ?>" data-webinar-id="<?php echo e(!empty($webinar) ? $webinar->id : ''); ?>" class="edit-ticket btn-transparent text-primary mt-1" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                                            <i class="fa fa-edit"></i>
-                                                                        </button>
-
-                                                                        <?php echo $__env->make('admin.includes.delete_button',['url' => '/admin/tickets/'. $ticket->id .'/delete', 'btnClass' => ' mt-1'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                                                    </td>
-                                                                </tr>
-                                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                                                        </table>
-                                                    </div>
-                                                <?php else: ?>
-                                                    <?php echo $__env->make('admin.includes.no-result',[
-                                                        'file_name' => 'ticket.png',
-                                                        'title' => 'Tidak ada paket harga!',
-                                                        'hint' => 'Dengan membuat rencana harga, Anda dapat menambahkan waktu dan harga yang bergantung pada kapasitas untuk pelatihan Anda.',
-                                                    ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
-                                    </section>
+                                    
 
 
                                     <?php echo $__env->make('admin.webinars.create_includes.contents', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -941,7 +893,7 @@ unset($__errorArgs, $__bag); ?>
                                                                     <tr>
                                                                         <?php if($webinarExtraDescriptionType == \App\Models\WebinarExtraDescription::$COMPANY_LOGOS): ?>
                                                                             <td>
-                                                                                <img src="<?php echo e($extraDescription->value); ?>" class="webinar-extra-description-company-logos" alt="">
+                                                                                <img src="<?php echo e(asset($extraDescription->value)); ?>" class="webinar-extra-description-company-logos" alt="">
                                                                             </td>
                                                                         <?php else: ?>
                                                                             <td><?php echo e($extraDescription->value); ?></td>
@@ -1095,18 +1047,18 @@ unset($__errorArgs, $__bag); ?>
         }
     </script>
 
-    <script src="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
-    <script src="/assets/default/vendors/feather-icons/dist/feather.min.js"></script>
-    <script src="/assets/default/vendors/select2/select2.min.js"></script>
-    <script src="/assets/default/vendors/moment.min.js"></script>
-    <script src="/assets/default/vendors/daterangepicker/daterangepicker.min.js"></script>
-    <script src="/assets/default/vendors/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
-    <script src="/assets/default/vendors/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
-    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
-    <script src="/assets/default/vendors/sortable/jquery-ui.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/default/vendors/feather-icons/dist/feather.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/default/vendors/select2/select2.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/default/vendors/moment.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/default/vendors/daterangepicker/daterangepicker.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/default/vendors/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/default/vendors/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/default/vendors/sortable/jquery-ui.min.js"></script>
 
-    <script src="/assets/default/js/admin/quiz.min.js"></script>
-    <script src="/assets/admin/js/webinar.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/default/js/admin/quiz.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/admin/js/webinar.min.js"></script>
 <?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\simpelnakes\resources\views/admin/webinars/create.blade.php ENDPATH**/ ?>

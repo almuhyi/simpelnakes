@@ -2,7 +2,7 @@
 <div class="d-none" id="webinarFaqModal">
     <h3 class="section-title after-line font-20 text-dark-blue mb-25">Tambah FAQ</h3>
 
-    <div class="js-faq-form" data-action="/admin/faqs/store">
+    <div class="js-faq-form" data-action="<?php echo e(url('/admin/faqs/store')); ?>">
         <input type="hidden" name="webinar_id" value="<?php echo e(!empty($webinar) ? $webinar->id :''); ?>">
 
         <?php if(!empty(getGeneralSettings('content_translate'))): ?>

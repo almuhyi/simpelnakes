@@ -1,7 +1,7 @@
 <div class="tab-pane mt-3 fade" id="registrationPackage" role="tabpanel" aria-labelledby="registrationPackage-tab">
     <div class="row">
         <div class="col-12 col-md-6">
-            <form action="/admin/users/{{ $user->id }}/userRegistrationPackage" method="Post">
+            <form action="{{ url('') }}/admin/users/{{ $user->id }}/userRegistrationPackage" method="Post">
                 {{ csrf_field() }}
 
                 <div class="form-group custom-switches-stacked">

@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/default/vendors/chartjs/chart.min.css"/>
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/chartjs/chart.min.css"/>
 @endpush
 
 @section('content')
@@ -9,8 +9,8 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="/admin/webinars">Pelatihan</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a></div>
+                <div class="breadcrumb-item"><a href="{{ url('/admin/webinars') }}">Pelatihan</a></div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-6 col-md-3 d-flex align-items-center justify-content-center">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="/assets/default/img/activity/48.svg" width="64" height="64" alt="">
+                            <img src="{{ asset('') }}assets/default/img/activity/48.svg" width="64" height="64" alt="">
                             <strong class="font-30 font-weight-bold text-dark mt-1">{{ $studentsCount }}</strong>
                             <span class="font-16 text-gray font-weight-500">Peserta</span>
                         </div>
@@ -32,7 +32,7 @@
 
                     <div class="col-6 col-md-3 d-flex align-items-center justify-content-center">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="/assets/default/img/activity/125.svg" width="64" height="64" alt="">
+                            <img src="{{ asset('') }}assets/default/img/activity/125.svg" width="64" height="64" alt="">
                             <strong class="font-30 font-weight-bold text-dark mt-1">{{ $commentsCount }}</strong>
                             <span class="font-16 text-gray font-weight-500">Komentar</span>
                         </div>
@@ -40,7 +40,7 @@
 
                     <div class="col-6 col-md-3 d-flex align-items-center justify-content-center">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="/assets/default/img/activity/sales.svg" width="64" height="64" alt="">
+                            <img src="{{ asset('') }}assets/default/img/activity/sales.svg" width="64" height="64" alt="">
                             <strong class="font-30 font-weight-bold text-dark mt-1">{{ $salesCount }}</strong>
                             <span class="font-16 text-gray font-weight-500">Penjualan</span>
                         </div>
@@ -48,7 +48,7 @@
 
                     <div class="col-6 col-md-3 d-flex align-items-center justify-content-center">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="/assets/default/img/activity/33.png" width="64" height="64" alt="">
+                            <img src="{{ asset('') }}assets/default/img/activity/33.png" width="64" height="64" alt="">
                             <strong class="font-30 font-weight-bold text-dark mt-1">{{ handlePrice($salesAmount) }}</strong>
                             <span class="font-16 text-gray font-weight-500">Jumlah penjualan</span>
                         </div>
@@ -63,7 +63,7 @@
             <div class="col-6 col-md-3 mt-3">
                 <div class="dashboard-stats rounded-sm panel-shadow p-10 p-md-3 d-flex align-items-center">
                     <div class="stat-icon stat-icon-chapters">
-                        <img src="/assets/default/img/icons/course-statistics/1.svg" alt="">
+                        <img src="{{ asset('') }}assets/default/img/icons/course-statistics/1.svg" alt="">
                     </div>
                     <div class="d-flex flex-column ml-2">
                         <span class="font-30 font-weight-bold text-dark">{{ $chaptersCount }}</span>
@@ -75,7 +75,7 @@
             <div class="col-6 col-md-3 mt-3">
                 <div class="dashboard-stats rounded-sm panel-shadow p-10 p-md-3 d-flex align-items-center">
                     <div class="stat-icon stat-icon-sessions">
-                        <img src="/assets/default/img/icons/course-statistics/2.svg" alt="">
+                        <img src="{{ asset('') }}assets/default/img/icons/course-statistics/2.svg" alt="">
                     </div>
                     <div class="d-flex flex-column ml-2">
                         <span class="font-30 font-weight-bold text-dark">{{ $sessionsCount }}</span>
@@ -87,7 +87,7 @@
             <div class="col-6 col-md-3 mt-3">
                 <div class="dashboard-stats rounded-sm panel-shadow p-10 p-md-3 d-flex align-items-center">
                     <div class="stat-icon stat-icon-pending-quizzes">
-                        <img src="/assets/default/img/icons/course-statistics/3.svg" alt="">
+                        <img src="{{ asset('') }}assets/default/img/icons/course-statistics/3.svg" alt="">
                     </div>
                     <div class="d-flex flex-column ml-2">
                         <span class="font-30 font-weight-bold text-dark">{{ $pendingQuizzesCount }}</span>
@@ -99,7 +99,7 @@
             <div class="col-6 col-md-3 mt-3">
                 <div class="dashboard-stats rounded-sm panel-shadow p-10 p-md-3 d-flex align-items-center">
                     <div class="stat-icon stat-icon-pending-assignments">
-                        <img src="/assets/default/img/icons/course-statistics/4.svg" alt="">
+                        <img src="{{ asset('') }}assets/default/img/icons/course-statistics/4.svg" alt="">
                     </div>
                     <div class="d-flex flex-column ml-2">
                         <span class="font-30 font-weight-bold text-dark">{{ $pendingAssignmentsCount }}</span>
@@ -115,7 +115,7 @@
                 <div class="col-12 col-md-3 mt-3">
                     <div class="course-statistic-cards-shadow py-3 px-2 py-md-3 px-md-3 rounded-sm bg-white">
                         <div class="d-flex align-items-center flex-column">
-                            <img src="/assets/default/img/activity/33.png" width="64" height="64" alt="">
+                            <img src="{{ asset('') }}assets/default/img/activity/33.png" width="64" height="64" alt="">
 
                             <span class="font-30 text-dark mt-3 font-weight-bold">{{ $courseRate }}</span>
                             @include('admin.webinars.includes.rate',['rate' => $courseRate, 'className' => 'mt-2', 'dontShowRate' => true, 'showRateStars' => true])
@@ -131,7 +131,7 @@
                 <div class="col-12 col-md-3 mt-3">
                     <div class="course-statistic-cards-shadow py-3 px-2 py-md-3 px-md-3 rounded-sm bg-white">
                         <div class="d-flex align-items-center flex-column">
-                            <img src="/assets/default/img/activity/88.svg" width="64" height="64" alt="">
+                            <img src="{{ asset('') }}assets/default/img/activity/88.svg" width="64" height="64" alt="">
 
                             <span class="font-30 text-dark mt-3 font-weight-bold">{{ $webinar->quizzes->count() }}</span>
                             <span class="mt-2 font-16 font-weight-500 text-gray">Kuis</span>
@@ -147,7 +147,7 @@
                 <div class="col-12 col-md-3 mt-3">
                     <div class="course-statistic-cards-shadow py-3 px-2 py-md-3 px-md-3 rounded-sm bg-white">
                         <div class="d-flex align-items-center flex-column">
-                            <img src="/assets/default/img/activity/homework.svg" width="64" height="64" alt="">
+                            <img src="{{ asset('') }}assets/default/img/activity/homework.svg" width="64" height="64" alt="">
 
                             <span class="font-30 text-dark mt-3 font-weight-bold">{{ $webinar->assignments->count() }}</span>
                             <span class="mt-2 font-16 font-weight-500 text-gray">Tugas</span>
@@ -163,7 +163,7 @@
                 <div class="col-12 col-md-3 mt-3">
                     <div class="course-statistic-cards-shadow py-3 px-2 py-md-3 px-md-3 rounded-sm bg-white">
                         <div class="d-flex align-items-center flex-column">
-                            <img src="/assets/default/img/activity/39.svg" width="64" height="64" alt="">
+                            <img src="{{ asset('') }}assets/default/img/activity/39.svg" width="64" height="64" alt="">
 
                             <span class="font-30 text-dark mt-3 font-weight-bold">{{ $courseForumsMessagesCount }}</span>
                             <span class="mt-2 font-16 font-weight-500 text-gray">Pesan Forum</span>
@@ -322,8 +322,8 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/vendors/chartjs/chart.min.js"></script>
-    <script src="/assets/default/js/panel/course_statistics.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/chartjs/chart.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/panel/course_statistics.min.js"></script>
 
     <script>
         (function ($) {

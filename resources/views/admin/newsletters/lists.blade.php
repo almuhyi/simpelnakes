@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -21,7 +21,7 @@
                     <div class="card">
                 <div class="card-header">
                 @can('admin_users_export_excel')
-                    <a href="/admin/newsletters/excel" class="btn btn-primary">Export excel</a>
+                    <a href="{{ url('/admin/newsletters/excel') }}" class="btn btn-primary">Export excel</a>
                 @endcan
                 <div class="h-10"></div>
             </div>

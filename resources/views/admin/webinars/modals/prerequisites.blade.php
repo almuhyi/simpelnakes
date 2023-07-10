@@ -2,7 +2,7 @@
 <div class="d-none" id="webinarPrerequisitesModal">
     <h3 class="section-title after-line font-20 text-dark-blue mb-25">Prasyarat Baru</h3>
 
-    <div class="js-prerequisites-form" data-action="/admin/prerequisites/store" >
+    <div class="js-prerequisites-form" data-action="{{ url('/admin/prerequisites/store') }}" >
         <input type="hidden" name="webinar_id" value="{{  !empty($webinar) ? $webinar->id :''  }}">
 
         <div class="form-group mt-15">

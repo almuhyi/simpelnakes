@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
 @endpush
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Pelatihan</div>
 
@@ -27,7 +27,7 @@
 
                             {{-- Question Card --}}
                             <div class="d-flex align-items-start mb-3 border rounded-lg p-2">
-                                <img class="avatar mr-2" src="{{ $question->user->getAvatar() }}">
+                                <img class="avatar mr-2" src="{{ asset($question->user->getAvatar()) }}">
 
                                 <div class="ml-2">
                                     <div class="font-weight-bold">{{ $question->user->full_name }}</div>
@@ -39,10 +39,10 @@
                                         <span class="mr-2">{{ dateTimeFormat($question->created_at,'Y M j | H:i') }}</span>
 
                                         @if(!empty($question->attach))
-                                            <a href="{{ $course->getForumPageUrl() }}/{{ $question->id }}/downloadAttach" target="_blank" class="text-success"><i class="fa fa-paperclip"></i> Buka Lampiran</a>
+                                            <a href="{{ url($course->getForumPageUrl()) }}/{{ $question->id }}/downloadAttach" target="_blank" class="text-success"><i class="fa fa-paperclip"></i> Buka Lampiran</a>
                                         @endif
 
-                                        <button type="button" data-action="/admin/webinars/{{ $course->id }}/forums/{{ $question->id }}/edit" class="js-answer-edit btn-transparent ml-2 font-14 font-weight-500 text-gray">Edit</button>
+                                        <button type="button" data-action="{{ url('') }}/admin/webinars/{{ $course->id }}/forums/{{ $question->id }}/edit" class="js-answer-edit btn-transparent ml-2 font-14 font-weight-500 text-gray">Edit</button>
 
                                         @include('admin.includes.delete_button', [
                                             'url' => "/admin/webinars/$course->id/forums/$question->id/delete",
@@ -57,7 +57,7 @@
 
                             @foreach($answers as $answer)
                                 <div class="d-flex align-items-start mb-3 border rounded-lg p-2 {{ $answer->resolved ? 'border-danger' : '' }}">
-                                    <img src="{{ $answer->user->getAvatar() }}">
+                                    <img src="{{ asset($answer->user->getAvatar()) }}">
 
                                     <div class="ml-2">
 
@@ -76,7 +76,7 @@
                                                 <span class="text-success ml-2">Pin</span>
                                             @endif
 
-                                            <button type="button" data-action="/admin/webinars/{{ $course->id }}/forums/{{ $question->id }}/answers/{{ $answer->id }}/edit" class="js-answer-edit btn-transparent ml-2 font-14 font-weight-500 text-gray">Edit</button>
+                                            <button type="button" data-action="{{ url('') }}/admin/webinars/{{ $course->id }}/forums/{{ $question->id }}/answers/{{ $answer->id }}/edit" class="js-answer-edit btn-transparent ml-2 font-14 font-weight-500 text-gray">Edit</button>
 
                                             @include('admin.includes.delete_button', [
                                                 'url' => "/admin/webinars/$course->id/forums/$question->id/answers/$answer->id/delete",
@@ -107,6 +107,6 @@
         var editAttachmentLabelLang = '{{ ('Lampirkan file') }} ({{ ('Opsional') }})';
         var savedSuccessfullyLang = '{{ ('Perubahan berhasil disimpan.') }}'
     </script>
-    <script src="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
-    <script src="/assets/default/js/admin/course-forum-answers.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/course-forum-answers.min.js"></script>
 @endpush

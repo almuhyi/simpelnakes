@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="/assets/default/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/select2/select2.min.css">
 @endpush
 
 @section('content')
@@ -85,7 +85,7 @@
                             <td class="text-left">
                                 <div class="d-flex align-items-center">
                                     <figure class="avatar mr-2">
-                                        <img src="{{ $user->getAvatar() }}" alt="{{ $user->full_name }}">
+                                        <img src="{{ asset($user->getAvatar()) }}" alt="{{ $user->full_name }}">
                                     </figure>
                                     <div class="media-body ml-1">
                                         <div class="mt-0 mb-1 font-weight-bold">{{ $user->full_name }}</div>
@@ -118,19 +118,19 @@
 
                             <td class="text-center mb-2" width="120">
                                 @can('admin_users_impersonate')
-                                    <a href="/admin/users/{{ $user->id }}/impersonate" target="_blank" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Masuk">
+                                    <a href="{{ url('') }}/admin/users/{{ $user->id }}/impersonate" target="_blank" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Masuk">
                                         <i class="fa fa-user-shield"></i>
                                     </a>
                                 @endcan
 
                                 @can('admin_users_edit')
-                                    <a href="/admin/users/{{ $user->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <a href="{{ url('') }}/admin/users/{{ $user->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 @endcan
 
                                 @can('admin_users_not_access_content_toggle')
-                                    <a href="/admin/users/not-access-to-content/{{ $user->id }}/active" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Aktifkan">
+                                    <a href="{{ url('') }}/admin/users/not-access-to-content/{{ $user->id }}/active" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Aktifkan">
                                         <i class="fa fa-arrow-up"></i>
                                     </a>
                                 @endcan
@@ -187,7 +187,7 @@
     <div id="addUserToNotAccessModal" class="d-none">
         <h3 class="section-title after-line">Batasi Akses Konten</h3>
         <div class="mt-25">
-            <form action="/admin/users/not-access-to-content/store" method="post">
+            <form action="{{ url('/admin/users/not-access-to-content/store') }}" method="post">
 
                 <div class="form-group">
                     <label class="input-label d-block">Pengguna</label>
@@ -207,12 +207,12 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
-    <script src="/assets/default/vendors/select2/select2.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/select2/select2.min.js"></script>
 
     <script>
         var saveSuccessLang = '{{ ('Item berhasil ditambahkan.') }}';
     </script>
 
-    <script src="/assets/default/js/admin/not_access_to_content.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/not_access_to_content.min.js"></script>
 @endpush

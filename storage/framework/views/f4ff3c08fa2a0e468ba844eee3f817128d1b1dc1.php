@@ -3,7 +3,7 @@
         <div class="section-header">
             <h1><?php echo e($pageTitle); ?></h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/"><?php echo e(trans('admin/main.dashboard')); ?></a>
+                <div class="breadcrumb-item active"><a href="<?php echo e(url('/admin/')); ?>">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item"><?php echo e($pageTitle); ?></div>
             </div>
@@ -23,7 +23,7 @@
 
 
                                         <div class="form-group">
-                                            <label class="input-label"><?php echo e(trans('admin/main.title')); ?></label>
+                                            <label class="input-label">Judul</label>
                                             <input type="text" name="title" id="title" value="<?php echo e((!empty($recommended)) ? $recommended->title : old('title')); ?>" class="form-control <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -48,7 +48,7 @@ unset($__errorArgs, $__bag); ?>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="input-label"><?php echo e(trans('admin/main.icon')); ?></label>
+                                            <label class="input-label">Icon</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <button type="button" class="input-group-text admin-file-manager" data-input="icon" data-preview="holder">
@@ -81,7 +81,7 @@ unset($__errorArgs, $__bag); ?>
 
 
                                         <div class="form-group">
-                                            <label class="input-label d-block"><?php echo e(trans('update.topics')); ?></label>
+                                            <label class="input-label d-block">Topik</label>
                                             <select name="topic_ids[]" multiple="multiple" class="form-control search-forum-topic-select2 <?php $__errorArgs = ['topic_id'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -89,7 +89,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" data-placeholder="<?php echo e(trans('update.search_topic')); ?>">
+unset($__errorArgs, $__bag); ?>" data-placeholder="Cari topik">
                                                 <?php if(!empty($recommended) and !empty($recommended->topics) and count($recommended->topics)): ?>
                                                     <?php $__currentLoopData = $recommended->topics; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $topic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <option value="<?php echo e($topic->id); ?>" selected><?php echo e($topic->title); ?></option>
@@ -112,7 +112,7 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary"><?php echo e(trans('admin/main.submit')); ?></button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
                                     </form>
                                 </div>
                             </div>
@@ -126,19 +126,20 @@ unset($__errorArgs, $__bag); ?>
 
     <section class="card">
         <div class="card-body">
-            <div class="section-title ml-0 mt-0 mb-3"><h5><?php echo e(trans('admin/main.hints')); ?></h5></div>
+            <div class="section-title ml-0 mt-0 mb-3"><h5>Petunjuk</h5></div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="media-body">
-                        <div class="text-primary mt-0 mb-1 font-weight-bold"><?php echo e(trans('update.recommended_topics_hint_title1')); ?></div>
-                        <div class=" text-small font-600-bold mb-2"><?php echo e(trans('update.recommended_topics_hint_description1')); ?></div>
+                        <div class="text-primary mt-0 mb-1 font-weight-bold">Topik yang Direkomendasikan</div>
+                        <div class=" text-small font-600-bold mb-2">
+                            Anda dapat menetapkan beberapa topik untuk setiap "Topik yang Direkomendasikan".</div>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="media-body">
-                        <div class="text-primary mt-0 mb-1 font-weight-bold"><?php echo e(trans('update.recommended_topics_hint_title2')); ?></div>
-                        <div class=" text-small font-600-bold mb-2"><?php echo e(trans('update.recommended_topics_hint_description1')); ?></div>
+                        <div class="text-primary mt-0 mb-1 font-weight-bold">Posisi Tampilan</div>
+                        <div class=" text-small font-600-bold mb-2">Anda dapat menetapkan beberapa topik untuk setiap "Topik yang Direkomendasikan".</div>
                     </div>
                 </div>
             </div>

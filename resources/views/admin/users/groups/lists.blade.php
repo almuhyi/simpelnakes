@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>Grup pengguna</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Grup pengguna</div>
             </div>
@@ -43,7 +43,7 @@
                                             </td>
                                             <td>
                                                 @can('admin_group_edit')
-                                                    <a href="/admin/users/groups/{{ $group->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <a href="{{ url('') }}/admin/users/groups/{{ $group->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan

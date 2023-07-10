@@ -184,7 +184,7 @@
     <div class="card">
         <div class="card-header">
             @can('admin_users_export_excel')
-                <a href="/admin/students/excel?{{ http_build_query(request()->all()) }}" class="btn btn-primary">Export excel</a>
+                <a href="{{ url('') }}/admin/students/excel?{{ http_build_query(request()->all()) }}" class="btn btn-primary">Export excel</a>
             @endcan
             <div class="h-10"></div>
         </div>
@@ -211,7 +211,7 @@
                             <td class="text-left">
                                 <div class="d-flex align-items-center">
                                     <figure class="avatar mr-2">
-                                        <img src="{{ $user->getAvatar() }}" alt="{{ $user->full_name }}">
+                                        <img src="{{ asset($user->getAvatar()) }}" alt="{{ $user->full_name }}">
                                     </figure>
                                     <div class="media-body ml-1">
                                         <div class="mt-0 mb-1 font-weight-bold">{{ $user->full_name }}</div>
@@ -260,13 +260,13 @@
 
                             <td class="text-center mb-2" width="120">
                                 @can('admin_users_impersonate')
-                                    <a href="/admin/users/{{ $user->id }}/impersonate" target="_blank" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Masuk">
+                                    <a href="{{ url('') }}/admin/users/{{ $user->id }}/impersonate" target="_blank" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Masuk">
                                         <i class="fa fa-user-shield"></i>
                                     </a>
                                 @endcan
 
                                 @can('admin_users_edit')
-                                    <a href="/admin/users/{{ $user->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <a href="{{ url('') }}/admin/users/{{ $user->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 @endcan

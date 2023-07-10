@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="d-none" id="webinarFileModal">
     <h3 class="section-title after-line font-20 text-dark-blue mb-25">Tambah file</h3>
-    <form action="/admin/files/store" method="post" enctype="multipart/form-data">
+    <form action="<?php echo e(url('/admin/files/store')); ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="webinar_id" value="<?php echo e(!empty($webinar) ? $webinar->id :''); ?>">
 
         <?php if(!empty(getGeneralSettings('content_translate'))): ?>
@@ -69,7 +69,7 @@ unset($__errorArgs, $__bag); ?>
                 <div class="form-group">
                     <label class="input-label">Aksesibilitas</label>
                     <select class="custom-select" name="accessibility" required>
-                        <option selected disabled><?php echo e(trans('public.choose_accessibility')); ?></option>
+                        <option selected disabled>Pilih Aksesibiltas</option>
                         <option value="free">Gratis</option>
                         <option value="paid">Berbayar</option>
                     </select>

@@ -29,7 +29,7 @@
             <i data-feather="move" class="move-icon mr-10 cursor-pointer" height="20"></i>
 
             <?php if(!empty($session)): ?>
-                <a href="/admin/sessions/<?php echo e($session->id); ?>/delete" class="delete-action btn btn-sm btn-transparent text-gray">
+                <a href="<?php echo e(url('')); ?>/admin/sessions/<?php echo e($session->id); ?>/delete" class="delete-action btn btn-sm btn-transparent text-gray">
                     <i data-feather="trash-2" class="mr-10 cursor-pointer" height="20"></i>
                 </a>
             <?php endif; ?>
@@ -40,7 +40,7 @@
 
     <div id="collapseSession<?php echo e(!empty($session) ? $session->id :'record'); ?>" aria-labelledby="session_<?php echo e(!empty($session) ? $session->id :'record'); ?>" class=" collapse <?php if(empty($session)): ?> show <?php endif; ?>" role="tabpanel">
         <div class="panel-collapse text-gray">
-            <div class="js-content-form session-form" data-action="/admin/sessions/<?php echo e(!empty($session) ? $session->id . '/update' : 'store'); ?>">
+            <div class="js-content-form session-form" data-action="<?php echo e(url('')); ?>/admin/sessions/<?php echo e(!empty($session) ? $session->id . '/update' : 'store'); ?>">
                 <input type="hidden" name="ajax[<?php echo e(!empty($session) ? $session->id : 'new'); ?>][webinar_id]" value="<?php echo e(!empty($webinar) ? $webinar->id :''); ?>">
                 <input type="hidden" name="ajax[<?php echo e(!empty($session) ? $session->id : 'new'); ?>][chapter_id]" value="<?php echo e(!empty($chapter) ? $chapter->id :''); ?>" class="chapter-input">
 
@@ -225,7 +225,7 @@
 
                     <?php if(!empty($session)): ?>
                         <?php if(!$session->isFinished()): ?>
-                            <a href="<?php echo e($session->getJoinLink(true)); ?>" target="_blank" class="ml-10 btn btn-sm btn-secondary">Gabung</a>
+                            <a href="<?php echo e(url($session->getJoinLink(true))); ?>" target="_blank" class="ml-10 btn btn-sm btn-secondary">Gabung</a>
                         <?php else: ?>
                             <button type="button" class="js-session-has-ended ml-10 btn btn-sm btn-secondary disabled">Gabung</button>
                         <?php endif; ?>

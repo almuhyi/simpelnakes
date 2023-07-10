@@ -5,7 +5,7 @@
             <div class="col-12 col-md-6">
                 <h5 class="section-title after-line">Tambah ke dalam pelatihan</h5>
 
-                <form action="/admin/enrollments/store" method="Post">
+                <form action="{{ url('/admin/enrollments/store') }}" method="Post">
 
                     <input type="hidden" name="user_id" value="{{ $user->id }}">
 
@@ -46,7 +46,7 @@
 
                                 <tr>
                                     <td width="25%">
-                                        <a href="{{ !empty($manualAddedClass->webinar) ? $manualAddedClass->webinar->getUrl() : '#1' }}" target="_blank" class="">{{ !empty($manualAddedClass->webinar) ? $manualAddedClass->webinar->title : 'Hapus' }}</a>
+                                        <a href="{{ url(!empty($manualAddedClass->webinar) ? $manualAddedClass->webinar->getUrl() : '#1') }}" target="_blank" class="">{{ !empty($manualAddedClass->webinar) ? $manualAddedClass->webinar->title : 'Hapus' }}</a>
                                     </td>
 
                                     <td>
@@ -110,7 +110,7 @@
 
                                 <tr>
                                     <td width="25%">
-                                        <a href="{{ !empty($manualDisabledClass->webinar) ? $manualDisabledClass->webinar->getUrl() : '#1' }}" target="_blank" class="">{{ !empty($manualDisabledClass->webinar) ? $manualDisabledClass->webinar->title : 'Hapus' }}</a>
+                                        <a href="{{ url(!empty($manualDisabledClass->webinar) ? $manualDisabledClass->webinar->getUrl() : '#1') }}" target="_blank" class="">{{ !empty($manualDisabledClass->webinar) ? $manualDisabledClass->webinar->title : 'Hapus' }}</a>
                                     </td>
 
                                     <td>
@@ -174,7 +174,7 @@
 
                                 <tr>
                                     <td width="25%">
-                                        <a href="{{ !empty($purchasedClass->webinar) ? $purchasedClass->webinar->getUrl() : '#1' }}" target="_blank" class="">{{ !empty($purchasedClass->webinar) ? $purchasedClass->webinar->title : 'Hapus' }}</a>
+                                        <a href="{{ url(!empty($purchasedClass->webinar) ? $purchasedClass->webinar->getUrl() : '#1') }}" target="_blank" class="">{{ !empty($purchasedClass->webinar) ? $purchasedClass->webinar->title : 'Hapus' }}</a>
                                     </td>
 
                                     <td>

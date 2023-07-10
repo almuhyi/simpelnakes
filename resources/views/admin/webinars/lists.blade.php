@@ -10,7 +10,7 @@
         <div class="section-header">
             <h1>Daftar Pelatihan</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Pelatihan</div>
 
@@ -231,7 +231,7 @@
                         <div class="card-header">
                             @can('admin_webinars_export_excel')
                                 <div class="text-right">
-                                    <a href="/admin/webinars/excel?{{ http_build_query(request()->all()) }}" class="btn btn-primary">Export</a>
+                                    <a href="{{ url('') }}/admin/webinars/excel?{{ http_build_query(request()->all()) }}" class="btn btn-primary">Export</a>
                                 </div>
                             @endcan
                         </div>
@@ -249,7 +249,7 @@
                                         <th>Peserta</th>
                                         <th>Dibuat</th>
                                         @if($classesType == 'webinar')
-                                            <th>Dibuat</th>
+                                            <th>Tanggal pelaksanaan</th>
                                         @else
                                             <th>Diupdate</th>
                                         @endif
@@ -261,7 +261,7 @@
                                         <tr class="text-center">
                                             <td>{{ $webinar->id }}</td>
                                             <td width="18%" class="text-left">
-                                                <a class="text-primary mt-0 mb-1 font-weight-bold" href="{{ $webinar->getUrl() }}">{{ $webinar->title }}</a>
+                                                <a class="text-primary mt-0 mb-1 font-weight-bold" href="{{ url($webinar->getUrl()) }}">{{ $webinar->title }}</a>
                                                 @if(!empty($webinar->category->title))
                                                     <div class="text-small">{{ $webinar->category->title }}</div>
                                                 @else
@@ -297,7 +297,7 @@
                                             <td>{{ addCurrencyToPrice($webinar->sales->sum('total_amount')) }}</td>
 
                                             <td class="font-12">
-                                                <a href="/admin/webinars/{{ $webinar->id }}/students" target="_blank" class="">{{ $webinar->sales->count() }}</a>
+                                                <a href="{{ url('') }}/admin/webinars/{{ $webinar->id }}/students" target="_blank" class="">{{ $webinar->sales->count() }}</a>
                                             </td>
 
                                             <td class="font-12">{{ dateTimeFormat($webinar->created_at, 'j M Y | H:i') }}</td>
@@ -340,35 +340,35 @@
                                                     </button>
                                                     <div class="dropdown-menu text-left webinars-lists-dropdown">
                                                         @can('admin_webinar_notification_to_students')
-                                                            <a href="/admin/webinars/{{ $webinar->id }}/sendNotification" target="_blank" class="d-flex align-items-center text-dark text-decoration-none btn-transparent btn-sm text-primary mt-1 ">
+                                                            <a href="{{ url('') }}/admin/webinars/{{ $webinar->id }}/sendNotification" target="_blank" class="d-flex align-items-center text-dark text-decoration-none btn-transparent btn-sm text-primary mt-1 ">
                                                                 <i class="fa fa-bell"></i>
                                                                 <span class="ml-2">Kirim Pemberitahuan</span>
                                                             </a>
                                                         @endcan
 
                                                         @can('admin_webinar_students_lists')
-                                                            <a href="/admin/webinars/{{ $webinar->id }}/students" target="_blank" class="d-flex align-items-center text-dark text-decoration-none btn-transparent btn-sm text-primary mt-1 " title="peserta">
+                                                            <a href="{{ url('') }}/admin/webinars/{{ $webinar->id }}/students" target="_blank" class="d-flex align-items-center text-dark text-decoration-none btn-transparent btn-sm text-primary mt-1 " title="peserta">
                                                                 <i class="fa fa-users"></i>
                                                                 <span class="ml-2">Peserta</span>
                                                             </a>
                                                         @endcan
 
                                                         @can('admin_webinar_statistics')
-                                                            <a href="/admin/webinars/{{ $webinar->id }}/statistics" target="_blank" class="d-flex align-items-center text-dark text-decoration-none btn-transparent btn-sm text-primary mt-1 " title="peserta">
+                                                            <a href="{{ url('') }}/admin/webinars/{{ $webinar->id }}/statistics" target="_blank" class="d-flex align-items-center text-dark text-decoration-none btn-transparent btn-sm text-primary mt-1 " title="peserta">
                                                                 <i class="fa fa-chart-pie"></i>
                                                                 <span class="ml-2">Statistik</span>
                                                             </a>
                                                         @endcan
 
                                                         @can('admin_support_send')
-                                                            <a href="/admin/supports/create?user_id={{ $webinar->teacher->id }}" target="_blank" class="d-flex align-items-center text-dark text-decoration-none btn-transparent btn-sm text-primary mt-1" title="kirim pesan ke instruktur">
+                                                            <a href="{{ url('') }}/admin/supports/create?user_id={{ $webinar->teacher->id }}" target="_blank" class="d-flex align-items-center text-dark text-decoration-none btn-transparent btn-sm text-primary mt-1" title="kirim pesan ke instruktur">
                                                                 <i class="fa fa-comment"></i>
                                                                 <span class="ml-2">Kirim Pesan</span>
                                                             </a>
                                                         @endcan
 
                                                         @can('admin_webinars_edit')
-                                                            <a href="/admin/webinars/{{ $webinar->id }}/edit" target="_blank" class="d-flex align-items-center text-dark text-decoration-none btn-transparent btn-sm text-primary mt-1 " title="edit">
+                                                            <a href="{{ url('') }}/admin/webinars/{{ $webinar->id }}/edit" target="_blank" class="d-flex align-items-center text-dark text-decoration-none btn-transparent btn-sm text-primary mt-1 " title="edit">
                                                                 <i class="fa fa-edit"></i>
                                                                 <span class="ml-2">Edit</span>
                                                             </a>

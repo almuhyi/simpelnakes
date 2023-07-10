@@ -6,7 +6,7 @@
             <h1>
                 Laporan Komentar</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">
                     Laporan Komentar</div>
@@ -32,7 +32,7 @@
                                         <tr>
                                             <td>{{ $report->user->id .' - '.$report->user->full_name }}</td>
                                             <td class="text-left" width="20%">
-                                                <a href="{{ $report->$itemRelation->getUrl() }}" target="_blank">
+                                                <a href="{{ url($report->$itemRelation->getUrl()) }}" target="_blank">
                                                     {{ $report->$itemRelation->title }}
                                                 </a>
                                             </td>
@@ -42,7 +42,7 @@
                                             <td width="150px">
 
 
-                                                <a href="/admin/comments/{{ $page }}/{{ $report->comment_id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Lihat">
+                                                <a href="{{ url('') }}/admin/comments/{{ $page }}/{{ $report->comment_id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Lihat">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
 

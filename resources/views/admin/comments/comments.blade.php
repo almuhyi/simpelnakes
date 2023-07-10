@@ -6,7 +6,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Komentar</div>
             </div>
@@ -209,11 +209,11 @@
                                             </td>
                                             <td>{{ dateTimeFormat($comment->created_at, 'j M Y | H:i') }}</td>
                                             <td class="text-left">
-                                                <a href="{{ $comment->user->getProfileUrl() }}" target="_blank" class="">{{ $comment->user->full_name }}</a>
+                                                <a href="{{ url($comment->user->getProfileUrl()) }}" target="_blank" class="">{{ $comment->user->full_name }}</a>
                                             </td>
 
                                             <td class="text-left">
-                                                <a href="{{ $comment->$itemRelation->getUrl() }}" target="_blank">
+                                                <a href="{{ url($comment->$itemRelation->getUrl()) }}" target="_blank">
                                                     {{ $comment->$itemRelation->title }}
                                                 </a>
                                             </td>
@@ -233,7 +233,7 @@
                                             <td width="150px" class="text-center">
 
                                                 @can('admin_'. $itemRelation .'_comments_status')
-                                                    <a href="/admin/comments/{{ $page }}/{{ $comment->id }}/toggle" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="{{ (($comment->status == 'pending') ? 'publish' : 'pending') }}">
+                                                    <a href="{{ url('') }}/admin/comments/{{ $page }}/{{ $comment->id }}/toggle" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="{{ (($comment->status == 'pending') ? 'publish' : 'pending') }}">
                                                         @if($comment->status == 'pending')
                                                             <i class="fa fa-eye"></i>
                                                         @else
@@ -243,13 +243,13 @@
                                                 @endcan
 
                                                 @can('admin_'. $itemRelation .'_comments_reply')
-                                                    <a href="/admin/comments/{{ $page }}/{{ !empty($comment->reply_id) ? $comment->reply_id : $comment->id }}/reply" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Balas">
+                                                    <a href="{{ url('') }}/admin/comments/{{ $page }}/{{ !empty($comment->reply_id) ? $comment->reply_id : $comment->id }}/reply" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Balas">
                                                         <i class="fa fa-reply"></i>
                                                     </a>
                                                 @endcan
 
                                                 @can('admin_'. $itemRelation .'_comments_edit')
-                                                    <a href="/admin/comments/{{ $page }}/{{ $comment->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <a href="{{ url('') }}/admin/comments/{{ $page }}/{{ $comment->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan
@@ -295,5 +295,5 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/js/admin/comments.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/comments.min.js"></script>
 @endpush

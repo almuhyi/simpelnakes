@@ -3,7 +3,7 @@
 <div class="tab-pane mt-3 fade " id="instructors" role="tabpanel" aria-labelledby="instructors-tab">
     <div class="row">
         <div class="col-12 col-md-6">
-            <form action="/admin/settings/main" method="post">
+            <form action="{{ url('/admin/settings/main') }}" method="post">
                 {{ csrf_field() }}
                 <input type="hidden" name="page" value="financial">
                 <input type="hidden" name="name" value="{{ \App\Models\Setting::$registrationPackagesInstructorsName }}">

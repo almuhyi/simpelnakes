@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/default/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/select2/select2.min.css">
 @endpush
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Pengaturan SaaS</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a></div>
                 <div class="breadcrumb-item active"><a href="{{ route('adminRegistrationPackagesLists') }}">Paket SaaS</a></div>
                 <div class="breadcrumb-item ">Pengaturan</div>
             </div>
@@ -51,7 +51,7 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/vendors/select2/select2.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/select2/select2.min.js"></script>
 
-    <script src="/assets/default/js/admin/registration_packages_settings.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/registration_packages_settings.min.js"></script>
 @endpush

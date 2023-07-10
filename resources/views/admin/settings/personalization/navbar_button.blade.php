@@ -1,7 +1,7 @@
 <div class=" mt-3">
     <div class="row">
         <div class="col-12 col-md-6">
-            <form action="/admin/settings/personalization/navbar_button" method="post">
+            <form action="{{ url('/admin/settings/personalization/navbar_button') }}" method="post">
                 {{ csrf_field() }}
                 @if(!empty($navbarButton))
                     <input type="hidden" name="item_id" value="{{ $navbarButton->id }}">
@@ -89,7 +89,7 @@
                         <td>{{ !empty($row->role) ? $row->role->caption : '' }}</td>
                         <td>
                             @can('admin_settings_personalization')
-                                <a href="/admin/settings/personalization/navbar_button/{{ $row->id }}/edit" class="btn-sm" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/main.edit') }}">
+                                <a href="{{ url('') }}/admin/settings/personalization/navbar_button/{{ $row->id }}/edit" class="btn-sm" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/main.edit') }}">
                                     <i class="fa fa-edit"></i>
                                 </a>
                             @endcan

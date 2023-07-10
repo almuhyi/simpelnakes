@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-bs4.min.css">
-    <link rel="stylesheet" href="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
 @endpush
 
 @section('content')
@@ -15,9 +15,9 @@
             </div>
 
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="/admin/forums">Forum</a></div>
-                <div class="breadcrumb-item"><a href="/admin/forums/{{ $topic->forum_id }}/topics">Topik</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a></div>
+                <div class="breadcrumb-item"><a href="{{ url('/admin/forums') }}">Forum</a></div>
+                <div class="breadcrumb-item"><a href="{{ url('') }}/admin/forums/{{ $topic->forum_id }}/topics">Topik</a></div>
                 <div class="breadcrumb-item">Post</div>
             </div>
         </div>
@@ -43,7 +43,7 @@
                                 <h3 class="font-16 font-weight-bold text-dark">Balas ke topik</h3>
 
                                 <div class="p-2 rounded-lg border bg-white mt-2">
-                                    <form action="/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/posts" method="post">
+                                    <form action="{{ url('') }}/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/posts" method="post">
                                         {{ csrf_field() }}
 
                                         <div class="topic-posts-reply-card d-none position-relative px-2 py-2 rounded-sm bg-info-light mb-2">
@@ -94,7 +94,7 @@
                                 <h3 class="font-16 font-weight-bold">Tindakan untuk topik</h3>
 
                                 <div class=" mt-2">
-                                    <form action="/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/closeToggle" method="post">
+                                    <form action="{{ url('') }}/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/closeToggle" method="post">
                                         {{ csrf_field() }}
 
                                         <div class="row">
@@ -142,9 +142,9 @@
         var editPostLang = '{{ ('Edit post') }}';
     </script>
 
-    <script src="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
-    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
-    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
-    <script src="/assets/default/js/parts/topic_posts.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="{{ asset('') }}vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+    <script src="{{ asset('') }}assets/default/js/parts/topic_posts.min.js"></script>
 
 @endpush

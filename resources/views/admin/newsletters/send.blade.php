@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.css">
 @endpush
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">{{trans('admin/main.dashboard')}}</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -33,7 +33,7 @@
                 <div class="col-12 col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="/admin/newsletters/send" method="post" enctype="multipart/form-data">
+                            <form action="{{ url('/admin/newsletters/send') }}" method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
 
                                 <div class="row">
@@ -107,6 +107,6 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
-    <script src="/assets/default/js/admin/newsletter.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/newsletter.min.js"></script>
 @endpush

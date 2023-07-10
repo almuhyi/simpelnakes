@@ -2,7 +2,7 @@
 <div class="d-none" id="webinarSessionModal">
     <h3 class="section-title after-line font-20 text-dark-blue mb-25">Sesi baru</h3>
 
-    <form action="/admin/sessions/store" method="post" class="session-form">
+    <form action="{{ url('/admin/sessions/store') }}" method="post" class="session-form">
         <input type="hidden" name="webinar_id" value="{{ !empty($webinar) ? $webinar->id :''  }}">
 
         @if(!empty(getGeneralSettings('content_translate')))

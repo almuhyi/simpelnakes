@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -22,7 +22,7 @@
                     <div class="card">
                         <div class="card-header">
                             @can('admin_pages_create')
-                                <a href="/admin/pages/create" class="btn btn-primary">Tambah baru</a>
+                                <a href="{{ url('/admin/pages/create') }}" class="btn btn-primary">Tambah baru</a>
                             @endcan
                         </div>
 
@@ -60,13 +60,13 @@
                                             <td width="150px">
 
                                                 @can('admin_pages_edit')
-                                                    <a href="/admin/pages/{{ $page->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <a href="{{ url('') }}/admin/pages/{{ $page->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan
 
                                                 @can('admin_pages_toggle')
-                                                    <a href="/admin/pages/{{ $page->id }}/toggle" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="{{ ($page->status == 'draft') ? 'Publish' : 'Draft' }}">
+                                                    <a href="{{ url('') }}/admin/pages/{{ $page->id }}/toggle" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="{{ ($page->status == 'draft') ? 'Publish' : 'Draft' }}">
                                                         @if($page->status == 'draft')
                                                             <i class="fa fa-arrow-up"></i>
                                                         @else

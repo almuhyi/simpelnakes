@@ -8,14 +8,14 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>{{!empty($tag) ?trans('/admin/main.edit'): trans('admin/main.new') }} {{ trans('admin/main.tag') }}</h1>
+            <h1>{{!empty($tag) ?'Edit': 'Baru' }} Tag</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">{{ trans('admin/main.dashboard') }}</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
-                <div class="breadcrumb-item active"><a href="/admin/tags">{{ trans('admin/main.tags') }}</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/tags') }}">Tag</a>
                 </div>
                 <div
-                    class="breadcrumb-item">{{!empty($tag) ?trans('/admin/main.edit'): trans('admin/main.new') }}</div>
+                    class="breadcrumb-item">{{!empty($tag) ?'Edit': 'Baru' }}</div>
             </div>
         </div>
 
@@ -24,15 +24,15 @@
                 <div class="col-12 col-md-6 col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <form action="/admin/tags/{{ !empty($tag) ? $tag->id.'/update' : 'store' }}"
+                            <form action="{{ url('') }}/admin/tags/{{ !empty($tag) ? $tag->id.'/update' : 'store' }}"
                                   method="Post">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label>{{ trans('/admin/main.title') }}</label>
+                                    <label>Judul</label>
                                     <input type="text" name="title"
                                            class="form-control  @error('title') is-invalid @enderror"
                                            value="{{ !empty($tag) ? $tag->title : old('title') }}"
-                                           placeholder="{{ trans('admin/main.create_field_title_placeholder') }}"/>
+                                           placeholder="Tag akan ditampilkan di halaman pelatihan"/>
                                     @error('title')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class=" mt-4">
-                                    <button class="btn btn-primary">{{ trans('admin/main.submit') }}</button>
+                                    <button class="btn btn-primary">Simpan</button>
                                 </div>
                             </form>
                         </div>

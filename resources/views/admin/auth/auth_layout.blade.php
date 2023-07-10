@@ -6,12 +6,12 @@
     <title>{{ $pageTitle ?? '' }}</title>
 
     <!-- General CSS File -->
-    <link rel="stylesheet" href="/assets/admin/vendor/bootstrap/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/assets/admin/vendor/fontawesome/css/all.min.css"/>
+    <link rel="stylesheet" href="{{ asset('') }}assets/admin/vendor/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{ asset('') }}assets/admin/vendor/fontawesome/css/all.min.css"/>
 
-    <link rel="stylesheet" href="/assets/admin/css/style.css">
-    <link rel="stylesheet" href="/assets/admin/css/components.css">
-    <link rel="stylesheet" href="/assets/default/vendors/toast/jquery.toast.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/admin/css/style.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/admin/css/components.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/toast/jquery.toast.min.css">
 </head>
 <body>
 
@@ -44,14 +44,14 @@
     </section>
 </div>
 <!-- General JS Scripts -->
-<script src="/assets/admin/vendor/jquery/jquery-3.3.1.min.js"></script>
-<script src="/assets/admin/vendor/poper/popper.min.js"></script>
-<script src="/assets/admin/vendor/bootstrap/bootstrap.min.js"></script>
-<script src="/assets/admin/vendor/nicescroll/jquery.nicescroll.min.js"></script>
-<script src="/assets/admin/vendor/moment/moment.min.js"></script>
-<script src="/assets/admin/js/stisla.js"></script>
+<script src="{{ asset('') }}assets/admin/vendor/jquery/jquery-3.3.1.min.js"></script>
+<script src="{{ asset('') }}assets/admin/vendor/poper/popper.min.js"></script>
+<script src="{{ asset('') }}assets/admin/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="{{ asset('') }}assets/admin/vendor/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="{{ asset('') }}assets/admin/vendor/moment/moment.min.js"></script>
+<script src="{{ asset('') }}assets/admin/js/stisla.js"></script>
 
-<script src="/assets/default/vendors/toast/jquery.toast.min.js"></script>
+<script src="{{ asset('') }}assets/default/vendors/toast/jquery.toast.min.js"></script>
 
 <script>
     (function () {
@@ -72,8 +72,8 @@
 </script>
 
 <!-- Template JS File -->
-<script src="/assets/admin/js/scripts.js"></script>
-<script src="/assets/admin/js/custom.js"></script>
+<script src="{{ asset('') }}assets/admin/js/scripts.js"></script>
+<script src="{{ asset('') }}assets/admin/js/custom.js"></script>
 
 </body>
 </html>

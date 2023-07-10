@@ -2,7 +2,7 @@
     <div class="custom-modal-body">
         <h2 class="section-title after-line">Ubah Bab</h2>
 
-        <div class="js-content-form change-chapter-form mt-20" data-action="/panel/chapters/change">
+        <div class="js-content-form change-chapter-form mt-20" data-action="{{ url('/panel/chapters/change') }}">
 
             <input type="hidden" name="ajax[webinar_id]" class="" value="{{ $webinar->id }}">
             <input type="hidden" name="ajax[item_id]" class="js-item-id" value="">

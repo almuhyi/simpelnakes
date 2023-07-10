@@ -22,7 +22,7 @@
             <i data-feather="move" class="move-icon mr-10 cursor-pointer" height="20"></i>
 
             <?php if(!empty($file)): ?>
-                <a href="/admin/files/<?php echo e($file->id); ?>/delete" class="delete-action btn btn-sm btn-transparent text-gray">
+                <a href="<?php echo e(url('')); ?>/admin/files/<?php echo e($file->id); ?>/delete" class="delete-action btn btn-sm btn-transparent text-gray">
                     <i data-feather="trash-2" class="mr-10 cursor-pointer" height="20"></i>
                 </a>
             <?php endif; ?>
@@ -33,7 +33,7 @@
 
     <div id="collapseFile<?php echo e(!empty($file) ? $file->id :'record'); ?>" aria-labelledby="file_<?php echo e(!empty($file) ? $file->id :'record'); ?>" class=" collapse <?php if(empty($file)): ?> show <?php endif; ?>" role="tabpanel">
         <div class="panel-collapse text-gray">
-            <div class="js-content-form file-form" data-action="/admin/files/<?php echo e(!empty($file) ? $file->id . '/update' : 'store'); ?>">
+            <div class="js-content-form file-form" data-action="<?php echo e(url('')); ?>/admin/files/<?php echo e(!empty($file) ? $file->id . '/update' : 'store'); ?>">
                 <input type="hidden" name="ajax[<?php echo e(!empty($file) ? $file->id : 'new'); ?>][webinar_id]" value="<?php echo e(!empty($webinar) ? $webinar->id :''); ?>">
                 <input type="hidden" name="ajax[<?php echo e(!empty($file) ? $file->id : 'new'); ?>][chapter_id]" value="<?php echo e(!empty($chapter) ? $chapter->id :''); ?>" class="chapter-input">
                 <input type="hidden" name="ajax[<?php echo e(!empty($file) ? $file->id : 'new'); ?>][storage]" value="upload_archive" class="">

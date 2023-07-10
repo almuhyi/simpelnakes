@@ -1,6 +1,6 @@
 <section class="mt-30">
     <h2 class="section-title after-line">
-        Identitas & keuangan</h2>
+        Identitas</h2>
     <div class="mt-15">
         @if($user->financial_approval)
             <p class="font-14 text-primary">Identitas & informasi keuangan Anda disetujui sehingga Anda tidak dapat mengubahnya. Jika Anda ingin mengubah, silakan hubungi dukungan.</p>
@@ -12,7 +12,7 @@
     <div class="row mt-20">
         <div class="col-12 col-lg-4">
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label class="input-label">Pilih jenis akun</label>
                 <select name="account_type" class="form-control" {{ ($user->financial_approval) ? 'disabled' : '' }}>
                     <option selected disabled>Pilih jenis akun</option>
@@ -50,7 +50,7 @@
                     {{ $message }}
                 </div>
                 @enderror
-            </div>
+            </div> --}}
 
             <div class="form-group">
                 <label class="input-label">

@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ !empty($group) ? 'Edit' : '' }} Grup pengguna</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Grup pengguna baru</div>
             </div>

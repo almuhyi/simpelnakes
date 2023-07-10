@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -99,5 +99,5 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/js/admin/webinar_reports.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/webinar_reports.min.js"></script>
 @endpush

@@ -6,16 +6,17 @@
     <div class="p-4 m-3">
         <img src="<?php echo e($siteGeneralSettings['logo'] ?? ''); ?>" alt="logo" width="40%" class="mb-5 mt-2">
 
-        <h4><?php echo e(trans('auth.forget_password')); ?></h4>
+        <h4>Lupa kata sandi</h4>
 
-        <p class="text-muted"><?php echo e(trans('update.we_will_send_a_link_to_reset_your_password')); ?></p>
+        <p class="text-muted">
+            Kami akan mengirimkan tautan untuk mengatur ulang kata sandi Anda</p>
 
-        <form method="POST" action="/admin/forget-password">
+        <form method="POST" action="<?php echo e(url('/admin/forget-password')); ?>">
             <?php echo e(csrf_field()); ?>
 
 
             <div class="form-group">
-                <label for="email"><?php echo e(trans('auth.email')); ?></label>
+                <label for="email">Email</label>
                 <input id="email" type="email" value="<?php echo e(old('email')); ?>" class="form-control  <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -41,16 +42,16 @@ endif;
 unset($__errorArgs, $__bag); ?>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block mt-20"><?php echo e(trans('auth.reset_password')); ?></button>
+            <button type="submit" class="btn btn-primary btn-block mt-20">Atur ulang kata sandi</button>
         </form>
 
-        <div class="text-center mt-3">
-            <span class=" d-inline-flex align-items-center justify-content-center">or</span>
+        <div class="text-center mt-2">
+            <span class=" d-inline-flex align-items-center justify-content-center">atau</span>
         </div>
 
         <div class="text-center mt-20">
             <span class="text-secondary">
-                <a href="/admin/login" class="font-weight-bold"><?php echo e(trans('auth.login')); ?></a>
+                <a href="<?php echo e(url('/admin/login')); ?>" class="font-weight-bold">Masuk</a>
             </span>
         </div>
     </div>

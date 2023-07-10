@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.css">
 @endpush
 
 @section('content')
@@ -31,7 +31,7 @@
             </div>
 
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a></div>
                 <div class="breadcrumb-item">Percakapan</div>
             </div>
         </div>
@@ -75,7 +75,7 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <form action="/admin/supports/{{ $support->id }}/conversation" method="post">
+                            <form action="{{ url('') }}/admin/supports/{{ $support->id }}/conversation" method="post">
                                 {{ csrf_field() }}
 
                                 <div class="form-group mt-15">
@@ -112,7 +112,7 @@
                                         <button type="submit" class="btn btn-primary">Kirim pesan</button>
 
                                         @if($support->status != 'close')
-                                            <a href="/admin/supports/{{ $support->id }}/close" class="btn btn-danger ml-1">Tutup percakapan</a>
+                                            <a href="{{ url('') }}/admin/supports/{{ $support->id }}/close" class="btn btn-danger ml-1">Tutup percakapan</a>
                                         @endif
                                     </div>
                                 </div>
@@ -126,6 +126,6 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.js"></script>
 
 @endpush

@@ -9,5 +9,5 @@
         eventLag: false, // disabled
     };
 </script>
-<script src="/assets/default/vendors/pace-loading/pace.min.js"></script>
+<script src="<?php echo e(asset('')); ?>assets/default/vendors/pace-loading/pace.min.js"></script>
 <?php /**PATH C:\laragon\www\simpelnakes\resources\views/admin/includes/preloading.blade.php ENDPATH**/ ?>

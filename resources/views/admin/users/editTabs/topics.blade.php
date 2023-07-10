@@ -21,7 +21,7 @@
 
                             <tr>
                                 <td width="25%">
-                                    <a href="{{ $topic->getPostsUrl() }}" target="_blank" class="">{{ $topic->title }}</a>
+                                    <a href="{{ url($topic->getPostsUrl()) }}" target="_blank" class="">{{ $topic->title }}</a>
                                 </td>
 
                                 <td>
@@ -51,7 +51,7 @@
                                     @endcan
 
                                     @can('admin_forum_topics_posts')
-                                        <a href="/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/posts"
+                                        <a href="{{ url('') }}/admin/forums/{{ $topic->forum_id }}/topics/{{ $topic->id }}/posts"
                                            class="btn-transparent btn-sm text-primary mr-1"
                                            data-toggle="tooltip" data-placement="top" title="Post"
                                         >

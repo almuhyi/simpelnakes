@@ -29,6 +29,31 @@ unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="form-group">
+                <label class="input-label">NIK</label>
+                <input type="text" name="nik" value="<?php echo e((!empty($user) and empty($new_user)) ? $user->nik : old('nik')); ?>" class="form-control <?php $__errorArgs = ['nik'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>  is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" placeholder=""/>
+                <?php $__errorArgs = ['nik'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                <div class="invalid-feedback">
+                    <?php echo e($message); ?>
+
+                </div>
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+            </div>
+
+            <div class="form-group">
                 <label class="input-label">Nama</label>
                 <input type="text" name="full_name" value="<?php echo e((!empty($user) and empty($new_user)) ? $user->full_name : old('full_name')); ?>" class="form-control <?php $__errorArgs = ['full_name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

@@ -6,12 +6,12 @@
 @endphp
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.css">
 @endpush
 
 <div class="mt-3" id="mobile_app">
 
-    <form action="/admin/settings/mobile_app" method="post">
+    <form action="{{ url('/admin/settings/mobile_app') }}" method="post">
         {{ csrf_field() }}
         <input type="hidden" name="page" value="personalization">
         <input type="hidden" name="mobile_app" value="mobile_app">
@@ -178,6 +178,6 @@
 </div>
 
 @push('scripts_bottom')
-    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
-    <script src="/assets/default/js/admin/settings/cookie_settings.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/settings/cookie_settings.min.js"></script>
 @endpush

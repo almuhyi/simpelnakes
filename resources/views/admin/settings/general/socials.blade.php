@@ -1,7 +1,7 @@
 <div class="tab-pane mt-3 fade @if(!empty($social)) show active @endif" id="socials" role="tabpanel" aria-labelledby="socials-tab">
     <div class="row">
         <div class="col-12 col-md-8 col-lg-6">
-            <form action="/admin/settings/socials/store" method="post">
+            <form action="{{ url('/admin/settings/socials/store') }}" method="post">
                 {{ csrf_field() }}
 
                 <input type="hidden" name="page" value="general">
@@ -79,12 +79,12 @@
                     @foreach($itemValue as $key => $val)
                         <tr>
                             <td>
-                                <img src="{{ $val['image'] }}" width="24"/>
+                                <img src="{{ asset($val['image']) }}" width="24"/>
                             </td>
                             <td>{{ $val['title'] }}</td>
-                            <td><a href="{{ $val['link'] }}" target="_blank">{{ trans('public.view') }}</a></td>
+                            <td><a href="{{ url($val['link']) }}" target="_blank">{{ trans('public.view') }}</a></td>
                             <td>
-                                <a href="/admin/settings/socials/{{ $key }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/main.edit') }}">
+                                <a href="{{ url('') }}/admin/settings/socials/{{ $key }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/main.edit') }}">
                                     <i class="fa fa-edit"></i>
                                 </a>
 

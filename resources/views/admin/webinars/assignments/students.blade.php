@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -144,7 +144,7 @@
                                 <td class="text-left">
                                     <div class="user-inline-avatar d-flex align-items-center">
                                         <div class="avatar bg-gray200">
-                                            <img src="{{ $history->student->getAvatar() }}" class="img-cover" alt="">
+                                            <img src="{{ asset($history->student->getAvatar()) }}" class="img-cover" alt="">
                                         </div>
                                         <div class="ml-1">
                                             <span class="d-block font-weight-500">{{ $history->student->full_name }}</span>
@@ -193,7 +193,7 @@
 
                                 <td class="align-middle text-right">
                                     @can('admin_webinar_assignments_conversations')
-                                        <a href="/admin/assignments/{{ $assignment->id }}/history/{{ $history->id }}/conversations" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Percakapan">
+                                        <a href="{{ url('') }}/admin/assignments/{{ $assignment->id }}/history/{{ $history->id }}/conversations" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Percakapan">
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>
                                     @endcan

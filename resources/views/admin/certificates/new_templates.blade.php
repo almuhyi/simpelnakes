@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Template baru</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Template baru</div>
             </div>
@@ -156,8 +156,8 @@
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button class="btn btn-success pull-left" id="submiter" type="button" data-action="{{ !empty($template) ? '/admin/certificates/templates/'. $template->id .'/update' : '/admin/certificates/templates/store' }}">Simpan</button>
-                                <button class="btn btn-info pull-left" id="preview" type="button" data-action="/admin/certificates/templates/preview">Lihat</button>
+                                <button class="btn btn-success pull-left" id="submiter" type="button" data-action="{{ url(!empty($template) ? '/admin/certificates/templates/'. $template->id .'/update' : '/admin/certificates/templates/store') }}">Simpan</button>
+                                <button class="btn btn-info pull-left" id="preview" type="button" data-action="{{ url('/admin/certificates/templates/preview') }}">Lihat</button>
                             </div>
                         </div>
 
@@ -171,5 +171,5 @@
 @push('scripts_bottom')
 
 
-    <script src="/assets/default/js/admin/certificates.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/certificates.min.js"></script>
 @endpush

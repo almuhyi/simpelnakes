@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="d-none" id="webinarChapterModal">
     <h3 class="section-title after-line font-20 text-dark-blue mb-25">Tambah Bagian Baru</h3>
-    <form action="/admin/chapters/store" method="post">
+    <form action="{{ url('/admin/chapters/store') }}" method="post">
         <input type="hidden" name="webinar_id" value="{{  !empty($webinar) ? $webinar->id :''  }}">
 
         @if(!empty(getGeneralSettings('content_translate')))

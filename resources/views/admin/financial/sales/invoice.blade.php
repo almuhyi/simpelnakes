@@ -5,13 +5,13 @@
     <title>{{ $pageTitle ?? '' }} </title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- General CSS File -->
-    <link rel="stylesheet" href="/assets/admin/vendor/bootstrap/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/assets/vendors/fontawesome/css/all.min.css"/>
+    <link rel="stylesheet" href="{{ asset('') }}assets/admin/vendor/bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/fontawesome/css/all.min.css"/>
 
 
-    <link rel="stylesheet" href="/assets/admin/css/style.css">
-    <link rel="stylesheet" href="/assets/admin/css/custom.css">
-    <link rel="stylesheet" href="/assets/admin/css/components.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/admin/css/style.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/admin/css/custom.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/admin/css/components.css">
 
     <style>
         {!! !empty(getCustomCssAndJs('css')) ? getCustomCssAndJs('css') : '' !!}

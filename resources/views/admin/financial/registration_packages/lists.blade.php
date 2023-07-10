@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>Paket SaaS</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Paket SaaS</div>
             </div>
@@ -93,7 +93,7 @@
                                             <td class="text-center">{{ dateTimeFormat($package->created_at, 'Y M j | H:i') }}</td>
                                             <td>
                                                 @can('admin_registration_packages_edit')
-                                                    <a href="/admin/financial/registration-packages/{{ $package->id }}/edit" class="btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <a href="{{ url('') }}/admin/financial/registration-packages/{{ $package->id }}/edit" class="btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan

@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
 @endpush
 
 @section('content')
@@ -10,7 +10,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="col-12 col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" action="/admin/quizzes/store" id="webinarForm" class="webinar-form">
+                            <form method="post" action="{{ url('/admin/quizzes/store') }}" id="webinarForm" class="webinar-form">
                                 {{ csrf_field() }}
                                 <section>
 
@@ -133,11 +133,11 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <script>
         var saveSuccessLang = '{{ ('Item berhasil ditambahkan.') }}';
     </script>
 
-    <script src="/assets/default/js/admin/quiz.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/quiz.min.js"></script>
 @endpush

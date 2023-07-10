@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/vendors/leaflet/leaflet.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/leaflet/leaflet.css">
 @endpush
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">{{trans('admin/main.dashboard')}}</a>
+                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -18,7 +18,7 @@
         <div class="section-body">
             <section class="card">
                 <div class="card-body">
-                    <form action="{{ !empty($region) ? '/admin/regions/'.$region->id.'/update' : '/admin/regions/store' }}" method="post">
+                    <form action="{{ url(!empty($region) ? '/admin/regions/'.$region->id.'/update' : '/admin/regions/store') }}" method="post">
                         {{ csrf_field() }}
 
                         <input type="hidden" name="type" value="{{ !empty($region) ? $region->type : request()->get('type', \App\Models\Region::$country) }}">
@@ -27,11 +27,11 @@
                             <div class="col-12 col-lg-6">
 
                                 <div id="countrySelectBox" class="form-group {{ !empty($countries) ? '' : 'd-none' }}">
-                                    <label class="input-label">{{ trans('update.countries') }}</label>
-                                    <select name="country_id" class="form-control search-region-select2 @error('country_id') is-invalid @enderror" data-type="{{ \App\Models\Region::$country }}" data-placeholder="{{ trans('admin/main.search') }} {{ trans('update.countries') }}">
+                                    <label class="input-label">Negara</label>
+                                    <select name="country_id" class="form-control search-region-select2 @error('country_id') is-invalid @enderror" data-type="{{ \App\Models\Region::$country }}" data-placeholder="Cari negara">
 
                                         @if(!empty($countries))
-                                            <option value="">{{ trans('admin/main.select') }} {{ trans('update.country') }}</option>
+                                            <option value="">Pilih negara</option>
 
                                             @foreach($countries as $country)
                                                 <option value="{{ $country->id }}" data-center="{{ implode(',', $country->geo_center) }}" {{ ((!empty($region) and $region->country_id == $country->id) or old('country_id') == $country->id) ? 'selected' : '' }}>{{ $country->title }}</option>
@@ -46,10 +46,10 @@
                                 </div>
 
                                 <div id="provinceSelectBox" class="form-group {{ ((!empty($region) and ($region->type == \App\Models\Region::$city or $region->type == \App\Models\Region::$district)) or (!empty(request()->get('type')) and (request()->get('type') == \App\Models\Region::$city or request()->get('type') == \App\Models\Region::$district))) ? '' : 'd-none'}}">
-                                    <label class="input-label">{{ trans('update.provinces') }}</label>
+                                    <label class="input-label">Provinsi</label>
 
                                     <select name="province_id" {{ empty($provinces) ? 'disabled' : '' }} class="form-control @error('province_id') is-invalid @enderror">
-                                        <option value="">{{ trans('admin/main.select') }} {{ trans('update.province') }}</option>
+                                        <option value="">Pilih provinsi</option>
 
                                         @if(!empty($provinces))
                                             @foreach($provinces as $province)
@@ -66,10 +66,10 @@
                                 </div>
 
                                 <div id="citySelectBox" class="form-group {{ ((!empty($region) and $region->type == \App\Models\Region::$district) or (!empty(request()->get('type')) and request()->get('type') == \App\Models\Region::$district)) ? '' : 'd-none'}}">
-                                    <label class="input-label">{{ trans('update.city') }}</label>
+                                    <label class="input-label">Kota</label>
 
                                     <select name="city_id" {{ empty($cities) ? 'disabled' : '' }} class="form-control @error('city_id') is-invalid @enderror">
-                                        <option value="">{{ trans('admin/main.select') }} {{ trans('update.city') }}</option>
+                                        <option value="">Pilih kota</option>
 
                                         @if(!empty($cities))
                                             @foreach($cities as $city)
@@ -86,8 +86,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="" class="input-label">{{ trans('admin/main.title') }}</label>
-                                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ !empty($region) ? $region->title : '' }}" placeholder="{{ trans('admin/main.title') }}">
+                                    <label for="" class="input-label">Judul</label>
+                                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ !empty($region) ? $region->title : '' }}" placeholder="Judul">
                                     @error('title')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -101,21 +101,22 @@
                                     <input type="hidden" id="LocationLatitude" name="latitude" value="{{ $latitude }}">
                                     <input type="hidden" id="LocationLongitude" name="longitude" value="{{ $longitude }}">
 
-                                    <label class="input-label">{{ trans('update.select_location') }}</label>
-                                    <span class="d-block">{{ trans('update.select_location_hint') }}</span>
+                                    <label class="input-label">Pilih lokasi</label>
+                                    <span class="d-block">
+                                        Pilih lokasi Anda di peta. Lokasi ini akan ditampilkan di halaman pencari tutor.</span>
 
                                     <div class="region-map mt-2" id="mapBox"
                                          data-latitude="{{ $latitude }}"
                                          data-longitude="{{ $longitude }}"
                                          data-zoom="{{ (!empty($region) and $region->type !== \App\Models\Region::$country and $region->type !== \App\Models\Region::$province and !empty($region->geo_center)) ? 12 : 5 }}"
                                     >
-                                        <img src="/assets/default/img/location.png" class="marker">
+                                        <img src="{{ asset('') }}assets/default/img/location.png" class="marker">
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success mt-4">{{ trans('admin/main.save') }}</button>
+                        <button type="submit" class="btn btn-success mt-4">Simpan</button>
                     </form>
                 </div>
             </section>
@@ -124,11 +125,11 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/vendors/leaflet/leaflet.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/leaflet/leaflet.min.js"></script>
 
     <script>
-        var selectProvinceLang = '{{ trans('update.select_province') }}';
-        var selectCityLang = '{{ trans('update.select_city') }}';
+        var selectProvinceLang = '{{ ('Pilih provinsi') }}';
+        var selectCityLang = '{{ ('Pilih kota') }}';
     </script>
-    <script src="/assets/default/js/admin/regions_create.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/regions_create.min.js"></script>
 @endpush

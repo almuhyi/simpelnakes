@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Template</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Template</div>
             </div>
@@ -31,7 +31,7 @@
 
                                 <td width="100">
                                     @can('admin_notifications_template_edit')
-                                        <a href="/admin/notifications/templates/{{ $template->id }}/edit" class="btn-transparent btn-sm text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                        <a href="{{ url('') }}/admin/notifications/templates/{{ $template->id }}/edit" class="btn-transparent btn-sm text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                     @endcan

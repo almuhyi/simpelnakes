@@ -9,8 +9,8 @@
         <div class="section-header">
             <h1>{{ trans('admin/main.personalization') }} {{ trans('admin/main.settings') }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">{{ trans('admin/main.dashboard') }}</a></div>
-                <div class="breadcrumb-item active"><a href="/admin/settings">{{ trans('admin/main.settings') }}</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">{{ trans('admin/main.dashboard') }}</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/settings') }}">{{ trans('admin/main.settings') }}</a></div>
                 <div class="breadcrumb-item ">{{ trans('admin/main.personalization') }}</div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link
                                         {{ ($item == $name) ? 'active' : '' }}
-                                        " href="/admin/settings/personalization/{{ $item }}">{{ trans('admin/main.'.$item) }}</a>
+                                        " href="{{ url('') }}/admin/settings/personalization/{{ $item }}">{{ trans('admin/main.'.$item) }}</a>
                                     </li>
                                 @endforeach
                             </ul>

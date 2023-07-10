@@ -22,7 +22,7 @@
             <i data-feather="move" class="move-icon mr-10 cursor-pointer" height="20"></i>
 
             @if(!empty($file))
-                <a href="/admin/files/{{ $file->id }}/delete" class="delete-action btn btn-sm btn-transparent text-gray">
+                <a href="{{ url('') }}/admin/files/{{ $file->id }}/delete" class="delete-action btn btn-sm btn-transparent text-gray">
                     <i data-feather="trash-2" class="mr-10 cursor-pointer" height="20"></i>
                 </a>
             @endif
@@ -33,7 +33,7 @@
 
     <div id="collapseFile{{ !empty($file) ? $file->id :'record' }}" aria-labelledby="file_{{ !empty($file) ? $file->id :'record' }}" class=" collapse @if(empty($file)) show @endif" role="tabpanel">
         <div class="panel-collapse text-gray">
-            <div class="js-content-form file-form" data-action="/admin/files/{{ !empty($file) ? $file->id . '/update' : 'store' }}">
+            <div class="js-content-form file-form" data-action="{{ url('') }}/admin/files/{{ !empty($file) ? $file->id . '/update' : 'store' }}">
                 <input type="hidden" name="ajax[{{ !empty($file) ? $file->id : 'new' }}][webinar_id]" value="{{ !empty($webinar) ? $webinar->id :'' }}">
                 <input type="hidden" name="ajax[{{ !empty($file) ? $file->id : 'new' }}][chapter_id]" value="{{ !empty($chapter) ? $chapter->id :'' }}" class="chapter-input">
                 <input type="hidden" name="ajax[{{ !empty($file) ? $file->id : 'new' }}][storage]" value="upload_archive" class="">

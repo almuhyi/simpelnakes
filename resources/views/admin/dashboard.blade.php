@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 
 @push('libraries_top')
-    <link rel="stylesheet" href="/assets/admin/vendor/owl.carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="/assets/admin/vendor/owl.carousel/owl.theme.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/admin/vendor/owl.carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/admin/vendor/owl.carousel/owl.theme.min.css">
 
 @endpush
 
@@ -12,7 +12,7 @@
     <section class="section">
         <div class="row">
             <div class="col-12 mb-4">
-                <div class="hero text-white hero-bg-image hero-bg" data-background="{{ !empty(getPageBackgroundSettings('admin_dashboard')) ? getPageBackgroundSettings('admin_dashboard') : '' }}">
+                <div class="hero text-white hero-bg-image hero-bg" data-background="{{ asset(!empty(getPageBackgroundSettings('admin_dashboard')) ? getPageBackgroundSettings('admin_dashboard') : '') }}">
                     <div class="hero-inner">
                         <h2>Selamat Datang, {{ $authUser->full_name }}!</h2>
 
@@ -22,9 +22,9 @@
                                     <p class="lead">Gunakan tombol akses dibawah untuk memudahkan mengatur relasi.</p>
 
                                     <div class="mt-2 mb-2 d-flex flex-column flex-md-row">
-                                        <a href="/admin/comments/webinars" class="mt-2 mt-md-0 btn btn-outline-white btn-lg btn-icon icon-left ml-0 ml-md-2"><i class="far fa-comment"></i>Komentar </a>
-                                        <a href="/admin/supports" class="mt-2 mt-md-0 btn btn-outline-white btn-lg btn-icon icon-left ml-0 ml-md-2"><i class="far fa-envelope"></i>Pengajuan Bantuan</a>
-                                        <a href="/admin/reports/webinars" class="mt-2 mt-md-0 btn btn-outline-white btn-lg btn-icon icon-left ml-0 ml-md-2"><i class="fas fa-info"></i>Laporan</a>
+                                        <a href="{{ url('/admin/comments/webinars') }}" class="mt-2 mt-md-0 btn btn-outline-white btn-lg btn-icon icon-left ml-0 ml-md-2"><i class="far fa-comment"></i>Komentar </a>
+                                        <a href="{{ url('/admin/supports') }}" class="mt-2 mt-md-0 btn btn-outline-white btn-lg btn-icon icon-left ml-0 ml-md-2"><i class="far fa-envelope"></i>Pengajuan Bantuan</a>
+                                        <a href="{{ url('/admin/reports/webinars') }}" class="mt-2 mt-md-0 btn btn-outline-white btn-lg btn-icon icon-left ml-0 ml-md-2"><i class="fas fa-info"></i>Laporan</a>
                                     </div>
                                 </div>
                             @endcan
@@ -174,7 +174,7 @@
 
             @can('admin_general_dashboard_new_sales')
                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                    <a href="/admin/financial/sales" class="card card-statistic-1">
+                    <a href="{{ url('/admin/financial/sales') }}" class="card card-statistic-1">
                         <div class="card-icon bg-primary">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
@@ -192,7 +192,7 @@
 
             @can('admin_general_dashboard_new_comments')
                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                    <a href="/admin/comments/webinars" class="card card-statistic-1">
+                    <a href="{{ url('/admin/comments/webinars') }}" class="card card-statistic-1">
                         <div class="card-icon bg-danger">
                             <i class="fas fa-comment"></i></div>
                         <div class="card-wrap">
@@ -209,7 +209,7 @@
 
             @can('admin_general_dashboard_new_tickets')
                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                    <a href="/admin/supports" class="card card-statistic-1">
+                    <a href="{{ url('/admin/supports') }}" class="card card-statistic-1">
                         <div class="card-icon bg-warning">
                             <i class="far fa-envelope"></i></div>
                         <div class="card-wrap">
@@ -346,7 +346,7 @@
                             <ul class="list-unstyled list-unstyled-border">
                                 @foreach($recentComments as $recentComment)
                                     <li class="media">
-                                        <img class="mr-3 rounded-circle" width="50" height="50" src="{{ $recentComment->user->getAvatar() }}" alt="avatar">
+                                        <img class="mr-3 rounded-circle" width="50" height="50" src="{{ asset($recentComment->user->getAvatar()) }}" alt="avatar">
                                         <div class="media-body">
                                             <div class="float-right text-primary font-12">{{ dateTimeFormat($recentComment->created_at, 'j M Y | H:i') }}</div>
                                             <div class="media-title">{{ $recentComment->user->full_name }}</div>
@@ -357,7 +357,7 @@
                             </ul>
 
                             <div class="text-center pt-1 pb-1">
-                                <a href="/admin/comments/webinars" class="btn btn-primary btn-lg btn-round ">
+                                <a href="{{ url('/admin/comments/webinars') }}" class="btn btn-primary btn-lg btn-round ">
                                     Lihat Semua
                                 </a>
                             </div>
@@ -386,7 +386,7 @@
                                 <div class="tickets-list">
 
                                     @foreach($recentTickets['tickets'] as $ticket)
-                                        <a href="/admin/supports/{{ $ticket->id }}/conversation" class="ticket-item">
+                                        <a href="{{ url('') }}/admin/supports/{{ $ticket->id }}/conversation" class="ticket-item">
                                             <div class="ticket-title">
                                                 <h4>{{ $ticket->title }}</h4>
                                             </div>
@@ -404,7 +404,7 @@
                                         </a>
                                     @endforeach
 
-                                    <a href="/admin/supports" class="ticket-item ticket-more">
+                                    <a href="{{ url('/admin/supports') }}" class="ticket-item ticket-more">
                                         Lihat semua <i class="fas fa-chevron-right"></i>
                                     </a>
                                 </div>
@@ -428,7 +428,7 @@
                             <div class="card-body p-0">
                                 <div class="tickets-list">
                                     @foreach($recentWebinars['webinars'] as $webinar)
-                                        <a href="/admin/webinars/{{ $webinar->id }}/edit" class="ticket-item">
+                                        <a href="{{ url('') }}/admin/webinars/{{ $webinar->id }}/edit" class="ticket-item">
                                             <div class="ticket-title">
                                                 <h4>{{ $webinar->title }}</h4>
                                             </div>
@@ -461,7 +461,7 @@
                                         </a>
                                     @endforeach
 
-                                    <a href="/admin/webinars?type=webinar" class="ticket-item ticket-more">
+                                    <a href="{{ url('/admin/webinars?type=webinar') }}" class="ticket-item ticket-more">
                                         Lihat semua <i class="fas fa-chevron-right"></i>
                                     </a>
                                 </div>
@@ -487,7 +487,7 @@
 
 
                                     @foreach($recentCourses['courses'] as $course)
-                                        <a href="/admin/webinars/{{ $course->id }}/edit" class="ticket-item">
+                                        <a href="{{ url('') }}/admin/webinars/{{ $course->id }}/edit" class="ticket-item">
                                             <div class="ticket-title">
                                                 <h4>{{ $course->title }}</h4>
                                             </div>
@@ -521,7 +521,7 @@
                                     @endforeach
 
 
-                                    <a href="/admin/webinars?type=course" class="ticket-item ticket-more">
+                                    <a href="{{ url('/admin/webinars?type=course') }}" class="ticket-item ticket-more">
                                         Lihat semua <i class="fas fa-chevron-right"></i>
                                     </a>
                                 </div>
@@ -562,10 +562,10 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/vendors/chartjs/chart.min.js"></script>
-    <script src="/assets/admin/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/chartjs/chart.min.js"></script>
+    <script src="{{ asset('') }}assets/admin/vendor/owl.carousel/owl.carousel.min.js"></script>
 
-    <script src="/assets/admin/js/dashboard.min.js"></script>
+    <script src="{{ asset('') }}assets/admin/js/dashboard.min.js"></script>
 
     <script>
         (function ($) {

@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Kategori profesi</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Kategori</div>
             </div>
@@ -43,7 +43,7 @@
                                             <td>{{ count($category->getCategoryInstructorsIdsHasMeeting()) }}</td>
                                             <td>
                                                 @can('admin_categories_edit')
-                                                    <a href="/admin/categories/{{ $category->id }}/edit"
+                                                    <a href="{{ url('') }}/admin/categories/{{ $category->id }}/edit"
                                                        class="btn-transparent btn-sm text-primary">
                                                         <i class="fa fa-edit"></i>
                                                     </a>

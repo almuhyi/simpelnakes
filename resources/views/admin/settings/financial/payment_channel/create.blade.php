@@ -7,7 +7,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">{{trans('admin/main.dashboard')}}</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">{{trans('admin/main.dashboard')}}</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -21,7 +21,7 @@
 
                         <div class="card-body">
 
-                            <form action="/admin/settings/payment_channels/{{ (!empty($paymentChannel) ? $paymentChannel->id.'/update':'store') }}" method="post">
+                            <form action="{{ url('') }}/admin/settings/payment_channels/{{ (!empty($paymentChannel) ? $paymentChannel->id.'/update':'store') }}" method="post">
                                 {{ csrf_field() }}
 
                                 <div class="row">

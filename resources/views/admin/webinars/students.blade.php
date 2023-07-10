@@ -1,8 +1,8 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="/assets/default/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/select2/select2.min.css">
     <style>
         .select2-container {
             z-index: 1212 !important;
@@ -15,7 +15,7 @@
         <div class="section-header">
             <h1>{{ $webinar->title }} - {{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a></div>
                 <div class="breadcrumb-item"><a>{{ $pageTitle }}</a></div>
             </div>
         </div>
@@ -174,7 +174,7 @@
     <div class="card">
         <div class="card-header">
             @can('admin_webinar_notification_to_students')
-                <a href="/admin/webinars/{{ $webinar->id }}/sendNotification" class="btn btn-primary mr-2">Kirim notifikasi</a>
+                <a href="{{ url('') }}/admin/webinars/{{ $webinar->id }}/sendNotification" class="btn btn-primary mr-2">Kirim notifikasi</a>
             @endcan
 
             @can('admin_enrollment_add_student_to_items')
@@ -204,7 +204,7 @@
                             <td class="text-left">
                                 <div class="d-flex align-items-center">
                                     <figure class="avatar mr-2">
-                                        <img src="{{ $student->getAvatar() }}" alt="{{ $student->full_name }}">
+                                        <img src="{{ asset($student->getAvatar()) }}" alt="{{ $student->full_name }}">
                                     </figure>
                                     <div class="media-body ml-1">
                                         <div class="mt-0 mb-1 font-weight-bold">{{ $student->full_name }}</div>
@@ -250,13 +250,13 @@
 
                             <td class="text-center mb-2" width="120">
                                 @can('admin_users_impersonate')
-                                    <a href="/admin/users/{{ $student->id }}/impersonate" target="_blank" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Masuk">
+                                    <a href="{{ url('') }}/admin/users/{{ $student->id }}/impersonate" target="_blank" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Masuk">
                                         <i class="fa fa-user-shield"></i>
                                     </a>
                                 @endcan
 
                                 @can('admin_users_edit')
-                                    <a href="/admin/users/{{ $student->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                    <a href="{{ url('') }}/admin/users/{{ $student->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 @endcan
@@ -325,7 +325,7 @@
     <div id="addStudentToCourseModal" class="d-none">
         <h3 class="section-title after-line">Menambahkan peserta ke pelatihan</h3>
         <div class="mt-25">
-            <form action="/admin/enrollments/store" method="post">
+            <form action="{{ url('/admin/enrollments/store') }}" method="post">
                 <input type="hidden" name="webinar_id" value="{{ $webinar->id }}">
 
                 <div class="form-group">
@@ -347,12 +347,12 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
-    <script src="/assets/default/vendors/select2/select2.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/select2/select2.min.js"></script>
 
     <script>
         var saveSuccessLang = '{{ ('Item berhasil ditambahkan.') }}';
     </script>
 
-    <script src="/assets/default/js/admin/webinar_students.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/webinar_students.min.js"></script>
 @endpush

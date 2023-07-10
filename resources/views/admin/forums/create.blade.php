@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link href="/assets/default/vendors/sortable/jquery-ui.min.css"/>
+    <link href="{{ asset('') }}assets/default/vendors/sortable/jquery-ui.min.css"/>
 @endpush
 
 @section('content')
@@ -9,10 +9,10 @@
         <div class="section-header">
             <h1>{{!empty($forum) ?'Edit': 'Baru' }} Forum</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item active">
-                    <a href="/admin/forums">Forum</a>
+                    <a href="{{ url('/admin/forums') }}">Forum</a>
                 </div>
                 <div class="breadcrumb-item">{{!empty($forum) ?'Edit': 'Baru' }}</div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="col-12 col-md-6 col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="/admin/forums/{{ !empty($forum) ? $forum->id.'/update' : 'store' }}"
+                            <form action="{{ url('') }}/admin/forums/{{ !empty($forum) ? $forum->id.'/update' : 'store' }}"
                                   method="Post">
                                 {{ csrf_field() }}
 
@@ -315,7 +315,7 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/vendors/sortable/jquery-ui.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/sortable/jquery-ui.min.js"></script>
 
-    <script src="/assets/default/js/admin/categories.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/categories.min.js"></script>
 @endpush

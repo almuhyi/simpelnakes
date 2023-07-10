@@ -1,13 +1,13 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="/assets/default/vendors/daterangepicker/daterangepicker.min.css">
-    <link rel="stylesheet" href="/assets/default/vendors/bootstrap-timepicker/bootstrap-timepicker.min.css">
-    <link rel="stylesheet" href="/assets/default/vendors/select2/select2.min.css">
-    <link rel="stylesheet" href="/assets/default/vendors/bootstrap-tagsinput/bootstrap-tagsinput.min.css">
-    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-bs4.min.css">
-    <link href="/assets/default/vendors/sortable/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/daterangepicker/daterangepicker.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/bootstrap-timepicker/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/bootstrap-tagsinput/bootstrap-tagsinput.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.css">
+    <link href="{{ asset('') }}assets/default/vendors/sortable/jquery-ui.min.css"/>
     <style>
         .bootstrap-timepicker-widget table td input {
             width: 35px !important;
@@ -24,10 +24,10 @@
         <div class="section-header">
             <h1>{{!empty($webinar) ?'Edit': 'Buat' }} Pelatihan</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item active">
-                    <a href="/admin/webinars">Pelatihan</a>
+                    <a href="{{ url('/admin/webinars') }}">Pelatihan</a>
                 </div>
                 <div class="breadcrumb-item">{{!empty($webinar) ?'Edit': 'Buat' }}</div>
             </div>
@@ -40,7 +40,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form method="post" action="/admin/webinars/{{ !empty($webinar) ? $webinar->id.'/update' : 'store' }}" id="webinarForm" class="webinar-form">
+                            <form method="post" action="{{ url('') }}/admin/webinars/{{ !empty($webinar) ? $webinar->id.'/update' : 'store' }}" id="webinarForm" class="webinar-form">
                                 {{ csrf_field() }}
                                 <section>
                                     <h2 class="section-title after-line">Informasi Awal</h2>
@@ -506,7 +506,7 @@
                                 </section>
 
                                 @if(!empty($webinar))
-                                    <section class="mt-30">
+                                    {{-- <section class="mt-30">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <h2 class="section-title after-line">Paket Harga</h2>
                                             <button id="webinarAddTicket" type="button" class="btn btn-primary btn-sm mt-3">Tambah paket harga</button>
@@ -554,7 +554,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                    </section>
+                                    </section> --}}
 
 
                                     @include('admin.webinars.create_includes.contents')
@@ -693,7 +693,7 @@
                                                                     <tr>
                                                                         @if($webinarExtraDescriptionType == \App\Models\WebinarExtraDescription::$COMPANY_LOGOS)
                                                                             <td>
-                                                                                <img src="{{ $extraDescription->value }}" class="webinar-extra-description-company-logos" alt="">
+                                                                                <img src="{{ asset($extraDescription->value) }}" class="webinar-extra-description-company-logos" alt="">
                                                                             </td>
                                                                         @else
                                                                             <td>{{ $extraDescription->value }}</td>
@@ -847,16 +847,16 @@
         }
     </script>
 
-    <script src="/assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
-    <script src="/assets/default/vendors/feather-icons/dist/feather.min.js"></script>
-    <script src="/assets/default/vendors/select2/select2.min.js"></script>
-    <script src="/assets/default/vendors/moment.min.js"></script>
-    <script src="/assets/default/vendors/daterangepicker/daterangepicker.min.js"></script>
-    <script src="/assets/default/vendors/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
-    <script src="/assets/default/vendors/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
-    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
-    <script src="/assets/default/vendors/sortable/jquery-ui.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/feather-icons/dist/feather.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/select2/select2.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/moment.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/daterangepicker/daterangepicker.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/sortable/jquery-ui.min.js"></script>
 
-    <script src="/assets/default/js/admin/quiz.min.js"></script>
-    <script src="/assets/admin/js/webinar.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/quiz.min.js"></script>
+    <script src="{{ asset('') }}assets/admin/js/webinar.min.js"></script>
 @endpush

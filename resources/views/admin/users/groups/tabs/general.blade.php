@@ -1,7 +1,7 @@
 <div class="tab-pane mt-3 fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
     <div class="row">
         <div class="col-12 col-md-8 col-lg-6">
-            <form action="/admin/users/groups/{{ !empty($group) ? $group->id.'/update' : 'store' }}" method="Post">
+            <form action="{{ url('') }}/admin/users/groups/{{ !empty($group) ? $group->id.'/update' : 'store' }}" method="Post">
                 {{ csrf_field() }}
 
                 <div class="form-group">

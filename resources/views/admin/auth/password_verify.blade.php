@@ -7,12 +7,14 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">{{ trans('auth.verify_your_email_address') }}</div>
+                        <div class="card-header">
+                            Verifikasi alamat email Anda</div>
                         <div class="card-body">
                             <div class="alert alert-success" role="alert">
-                                {{ trans('auth.verification_link_has_been_sent_to_your_email') }}
+
+                                Tautan verifikasi baru telah dikirim ke alamat email Anda.
                             </div>
-                            <a href="{{ url('/admin/reset-password/'.$token.'?email='.$email) }}">{{ trans('auth.click_here') }}</a>
+                            <a href="{{ url('/admin/reset-password/' . $token . '?email=' . $email) }}">klik disini</a>
                         </div>
                     </div>
                 </div>

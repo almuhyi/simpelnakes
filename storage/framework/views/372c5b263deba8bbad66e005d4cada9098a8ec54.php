@@ -25,7 +25,7 @@
             <?php endif; ?>
 
             <?php if(!empty($quizInfo)): ?>
-                <a href="/admin/quizzes/<?php echo e($quizInfo->id); ?>/delete" class="delete-action btn btn-sm btn-transparent text-gray">
+                <a href="<?php echo e(url('')); ?>/admin/quizzes/<?php echo e($quizInfo->id); ?>/delete" class="delete-action btn btn-sm btn-transparent text-gray">
                     <i data-feather="trash-2" class="mr-10 cursor-pointer" height="20"></i>
                 </a>
             <?php endif; ?>

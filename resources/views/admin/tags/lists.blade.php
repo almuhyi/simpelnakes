@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Tag</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Tag</div>
             </div>
@@ -35,7 +35,7 @@
 
                                             <td>
                                                 @can('admin_tags_edit')
-                                                    <a href="/admin/tags/{{ $tag->id }}/edit"
+                                                    <a href="{{ url('') }}/admin/tags/{{ $tag->id }}/edit"
                                                        class="btn-transparent btn-sm text-primary">
                                                         <i class="fa fa-edit"></i>
                                                     </a>

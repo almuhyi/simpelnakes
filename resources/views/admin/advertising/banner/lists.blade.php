@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle}}</div>
             </div>
@@ -18,7 +18,7 @@
                     <div class="card">
                         <div class="card-header">
                             @can('admin_advertising_banners_create')
-                                <a href="/admin/advertising/banners/new" class="btn btn-primary">Banner baru</a>
+                                <a href="{{ url('/admin/advertising/banners/new') }}" class="btn btn-primary">Banner baru</a>
                             @endcan
                         </div>
 
@@ -49,7 +49,7 @@
                                             <td class="text-center">{{ dateTimeFormat($banner->created_at, 'Y M j | H:i') }}</td>
                                             <td>
                                                 @can('admin_advertising_banners_edit')
-                                                    <a href="/admin/advertising/banners/{{ $banner->id }}/edit" class="btn-sm btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <a href="{{ url('') }}/admin/advertising/banners/{{ $banner->id }}/edit" class="btn-sm btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan

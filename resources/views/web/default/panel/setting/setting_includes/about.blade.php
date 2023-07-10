@@ -15,7 +15,7 @@
             </div>
 
             <div class="form-group">
-                <label class="input-label">Judul pekerjaan</label>
+                <label class="input-label">Pekerjaan</label>
                 <textarea name="bio" rows="3" class="form-control @error('bio') is-invalid @enderror">{{ $user->bio }}</textarea>
                 @error('bio')
                 <div class="invalid-feedback">

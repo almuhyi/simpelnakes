@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1> Daftar Kuis</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Kuis</div>
             </div>
@@ -79,7 +79,7 @@
 
             <section class="card">
                 <div class="card-body">
-                    <form action="/admin/quizzes" method="get" class="row mb-0">
+                    <form action="{{ url('/admin/quizzes') }}" method="get" class="row mb-0">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="input-label">Cari</label>
@@ -177,13 +177,13 @@
                         <div class="card-header">
                             @can('admin_quizzes_lists_excel')
                                 <div class="text-right">
-                                    <a href="/admin/quizzes/excel?{{ http_build_query(request()->all()) }}" class="btn btn-primary">Export excel</a>
+                                    <a href="{{ url('') }}/admin/quizzes/excel?{{ http_build_query(request()->all()) }}" class="btn btn-primary">Export excel</a>
                                 </div>
                             @endcan
 
                             @can('admin_quizzes_create')
                                 <div class="text-right">
-                                    <a href="/admin/quizzes/create" class="btn btn-primary ml-2">Kuis baru</a>
+                                    <a href="{{ url('/admin/quizzes/create') }}" class="btn btn-primary ml-2">Kuis baru</a>
                                 </div>
                             @endcan
                         </div>
@@ -242,13 +242,13 @@
 
                                             <td>
                                                 @can('admin_quizzes_results')
-                                                    <a href="/admin/quizzes/{{ $quiz->id }}/results" class="btn-transparent btn-sm text-primary" data-toggle="tooltip" title="Hasil">
+                                                    <a href="{{ url('') }}/admin/quizzes/{{ $quiz->id }}/results" class="btn-transparent btn-sm text-primary" data-toggle="tooltip" title="Hasil">
                                                         <i class="fa fa-poll fa-1x"></i>
                                                     </a>
                                                 @endcan
 
                                                 @can('admin_quizzes_edit')
-                                                    <a href="/admin/quizzes/{{ $quiz->id }}/edit" class="btn-transparent btn-sm text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <a href="{{ url('') }}/admin/quizzes/{{ $quiz->id }}/edit" class="btn-transparent btn-sm text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan
@@ -267,7 +267,7 @@
                         <div class="card-footer text-center">
                             {{ $quizzes->appends(request()->input())->links('vendor.pagination.bootstrap-4') }}
                         </div>
-                    </div>a
+                    </div>
             </div>
         </div>
     </section>

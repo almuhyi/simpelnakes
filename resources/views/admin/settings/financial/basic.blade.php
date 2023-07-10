@@ -8,7 +8,7 @@
 <div class="tab-pane mt-3 fade @if(empty(request()->get('page'))) active show @endif" id="basic" role="tabpanel" aria-labelledby="basic-tab">
     <div class="row">
         <div class="col-12 col-md-6">
-            <form action="/admin/settings/main" method="post">
+            <form action="{{ url('/admin/settings/main') }}" method="post">
                 {{ csrf_field() }}
                 <input type="hidden" name="page" value="financial">
                 <input type="hidden" name="name" value="financial">

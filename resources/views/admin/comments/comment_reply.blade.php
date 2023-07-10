@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.css">
 @endpush
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Balas ke komentar</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Balas ke komentar</div>
             </div>
@@ -63,7 +63,7 @@
                                                     <td>
 
                                                         @can('admin_'. $itemRelation .'_comments_status')
-                                                            <a href="/admin/comments/{{ $page }}/{{ $reply->id }}/toggle" class="btn-transparent text-primary">
+                                                            <a href="{{ url('') }}/admin/comments/{{ $page }}/{{ $reply->id }}/toggle" class="btn-transparent text-primary">
                                                                 @if($reply->status == 'pending')
                                                                     <i class="fa fa-arrow-up"></i>
                                                                 @else
@@ -73,7 +73,7 @@
                                                         @endcan
 
                                                         @can('admin_'. $itemRelation .'_comments_edit')
-                                                            <a href="/admin/comments/{{ $page }}/{{ $reply->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                            <a href="{{ url('') }}/admin/comments/{{ $page }}/{{ $reply->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                                 <i class="fa fa-edit"></i>
                                                             </a>
                                                         @endcan
@@ -91,7 +91,7 @@
                         </div>
 
                         <div class="card-body ">
-                            <form action="/admin/comments/{{ $page }}/{{ $comment->id }}/reply" method="post">
+                            <form action="{{ url('') }}/admin/comments/{{ $page }}/{{ $comment->id }}/reply" method="post">
                                 {{ csrf_field() }}
 
                                 <div class="form-group mt-15">
@@ -136,6 +136,6 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
-    <script src="/assets/default/js/admin/comments.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/comments.min.js"></script>
 @endpush

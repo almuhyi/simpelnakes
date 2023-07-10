@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="d-none" id="interactiveFileModal">
     <h3 class="section-title after-line font-20 text-dark-blue mb-25">SCROM baru</h3>
-    <form action="/admin/files/store" method="post" enctype="multipart/form-data">
+    <form action="{{ url('/admin/files/store') }}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="webinar_id" value="{{  !empty($webinar) ? $webinar->id :''  }}">
         <input type="hidden" name="storage" value="upload_archive" class="">
         <input type="hidden" name="file_type" value="archive" class="">

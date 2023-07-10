@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -31,7 +31,7 @@
 
                                         <tr>
                                             <td>
-                                                <img src="{{ $feature->icon }}" alt="" width="48" height="48" class="">
+                                                <img src="{{ asset($feature->icon) }}" alt="" width="48" height="48" class="">
                                             </td>
 
                                             <td class="text-center">{{ $feature->topic->title }}</td>
@@ -41,7 +41,7 @@
                                             <td width="150">
 
                                                 @can('admin_featured_topics_edit')
-                                                    <a href="/admin/featured-topics/{{ $feature->id }}/edit" class="btn-sm" data-toggle="tooltip" data-placement="top" title="Edit}">
+                                                    <a href="{{ url('') }}/admin/featured-topics/{{ $feature->id }}/edit" class="btn-sm" data-toggle="tooltip" data-placement="top" title="Edit}">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan

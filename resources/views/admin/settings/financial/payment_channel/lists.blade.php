@@ -23,13 +23,13 @@
 
                             <td>
                                 @can('admin_payment_channel_edit')
-                                    <a href="/admin/settings/payment_channels/{{ $paymentChannel->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/main.edit') }}">
+                                    <a href="{{ url('') }}/admin/settings/payment_channels/{{ $paymentChannel->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/main.edit') }}">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 @endcan
 
                                 @can('admin_payment_channel_toggle_status')
-                                    <a href="/admin/settings/payment_channels/{{ $paymentChannel->id }}/toggleStatus" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/main.'.(($paymentChannel->status == 'active') ? 'inactive' : 'active')) }}">
+                                    <a href="{{ url('') }}/admin/settings/payment_channels/{{ $paymentChannel->id }}/toggleStatus" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/main.'.(($paymentChannel->status == 'active') ? 'inactive' : 'active')) }}">
                                         @if($paymentChannel->status == 'inactive')
                                             <i class="fa fa-arrow-up"></i>
                                         @else

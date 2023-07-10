@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -58,7 +58,7 @@
 
                                     <td width="100">
                                         @can('admin_contacts_reply')
-                                            <a href="/admin/contacts/{{ $contact->id }}/reply" class="btn-transparent btn-sm text-primary" data-toggle="tooltip" data-placement="top" title="Balas">
+                                            <a href="{{ url('') }}/admin/contacts/{{ $contact->id }}/reply" class="btn-transparent btn-sm text-primary" data-toggle="tooltip" data-placement="top" title="Balas">
                                                 <i class="fa fa-reply"></i>
                                             </a>
                                         @endcan
@@ -104,5 +104,5 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/js/admin/contacts.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/contacts.min.js"></script>
 @endpush

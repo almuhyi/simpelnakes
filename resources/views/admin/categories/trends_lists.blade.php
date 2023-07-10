@@ -6,7 +6,7 @@
         <div class="section-header">
             <h1>Trending kategori</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Trending kategori</div>
             </div>
@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-body">
                            @can('admin_create_trending_categories')
-                                <a href="/admin/categories/trends/create" class="text-right btn btn-sm btn-success mb-3">Trend kategori baru</a>
+                                <a href="{{ url('/admin/categories/trends/create') }}" class="text-right btn btn-sm btn-success mb-3">Trend kategori baru</a>
                             @endcan
                             <div class="table-responsive">
                                 <table class="table table-striped font-14">
@@ -39,7 +39,7 @@
                                             </td>
                                             <td>
                                                 @can('admin_edit_trending_categories')
-                                                    <a href="/admin/categories/trends/{{ $trend->id }}/edit" class="btn-transparent btn-sm text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <a href="{{ url('') }}/admin/categories/trends/{{ $trend->id }}/edit" class="btn-transparent btn-sm text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan

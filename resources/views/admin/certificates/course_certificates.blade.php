@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Sertifikat Penyelesaian</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Sertifikat Penyelesaian</div>
             </div>
@@ -18,7 +18,7 @@
         <div class="section-body">
             <section class="card">
                 <div class="card-body">
-                    <form action="/admin/certificates/course-competition" method="get" class="row mb-0">
+                    <form action="{{ url('/admin/certificates/course-competition') }}" method="get" class="row mb-0">
 
                         <div class="col-12 col-md-3">
                             <div class="form-group">
@@ -101,7 +101,7 @@
                                             <td class="text-center">{{ dateTimeFormat($certificate->created_at, 'j M Y') }}</td>
 
                                             <td>
-                                                <a href="/admin/certificates/{{ $certificate->id }}/download" target="_blank" class="btn-transparent text-primary" data-toggle="tooltip" title="Unduh sertifikat">
+                                                <a href="{{ url('') }}/admin/certificates/{{ $certificate->id }}/download" target="_blank" class="btn-transparent text-primary" data-toggle="tooltip" title="Unduh sertifikat">
                                                     <i class="fa fa-download" aria-hidden="true"></i>
                                                 </a>
                                             </td>

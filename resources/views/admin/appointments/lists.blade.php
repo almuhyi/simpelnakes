@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -201,11 +201,11 @@
                             @foreach($appointments as $appointment)
                                 <tr>
                                     <td class="text-left">
-                                        <a href="{{ $appointment->meeting->creator->getProfileUrl() }}" target="_blank">{{ $appointment->meeting->creator->full_name }}</a>
+                                        <a href="{{ url($appointment->meeting->creator->getProfileUrl()) }}" target="_blank">{{ $appointment->meeting->creator->full_name }}</a>
                                     </td>
 
                                     <td class="text-left">
-                                        <a href="{{ $appointment->user->getProfileUrl() }}" target="_blank">{{ $appointment->user->full_name }}</a>
+                                        <a href="{{ url($appointment->user->getProfileUrl()) }}" target="_blank">{{ $appointment->user->full_name }}</a>
                                     </td>
 
                                     <td class="text-center">
@@ -392,5 +392,5 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/js/admin/appointments.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/appointments.min.js"></script>
 @endpush

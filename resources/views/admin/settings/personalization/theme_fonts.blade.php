@@ -1,11 +1,11 @@
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/admin/vendor/bootstrap-colorpicker/bootstrap-colorpicker.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/admin/vendor/bootstrap-colorpicker/bootstrap-colorpicker.min.css">
 @endpush
 
 <div class=" mt-3">
     <div class="row">
         <div class="col-12 col-md-6">
-            <form action="/admin/settings/main" method="post">
+            <form action="{{ url('/admin/settings/main') }}" method="post">
                 {{ csrf_field() }}
                 <input type="hidden" name="name" value="theme_fonts">
                 <input type="hidden" name="page" value="personalization">
@@ -63,5 +63,5 @@
 </div>
 
 @push('scripts_bottom')
-    <script src="/assets/admin/vendor/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="{{ asset('') }}assets/admin/vendor/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
 @endpush

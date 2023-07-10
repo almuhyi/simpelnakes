@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <form action="/admin/settings/site_bank_accounts" method="post">
+                    <form action="{{ url('/admin/settings/site_bank_accounts') }}" method="post">
                         {{ csrf_field() }}
 
                         <input type="hidden" name="page" value="financial">
@@ -138,5 +138,5 @@
 </div>
 
 @push('scripts_bottom')
-    <script src="/assets/default/js/admin/settings/site_bank_accounts.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/settings/site_bank_accounts.min.js"></script>
 @endpush

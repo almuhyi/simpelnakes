@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Hasil</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Hasil</div>
             </div>
@@ -23,7 +23,7 @@
                         <div class="card-header">
                             @can('admin_quiz_result_export_excel')
                                 <div class="text-right">
-                                    <a href="/admin/quizzes/{{ $quiz_id}}/results/excel" class="btn btn-primary">Export excel</a>
+                                    <a href="{{ url('') }}/admin/quizzes/{{ $quiz_id}}/results/excel" class="btn btn-primary">Export excel</a>
                                 </div>
                             @endcan
                         </div>

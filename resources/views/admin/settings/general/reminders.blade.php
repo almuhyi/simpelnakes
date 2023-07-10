@@ -10,7 +10,7 @@
 
 <div class="tab-pane mt-3 fade" id="reminders" role="tabpanel" aria-labelledby="reminders-tab">
 
-    <form action="/admin/settings/reminders" method="post">
+    <form action="{{ url('/admin/settings/reminders') }}" method="post">
         {{ csrf_field() }}
         <input type="hidden" name="page" value="general">
         <input type="hidden" name="reminders" value="reminders">

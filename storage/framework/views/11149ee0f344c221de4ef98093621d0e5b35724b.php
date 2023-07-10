@@ -23,7 +23,7 @@
             <i data-feather="move" class="move-icon mr-10 cursor-pointer" height="20"></i>
 
             <?php if(!empty($textLesson)): ?>
-                <a href="/admin/text-lesson/<?php echo e($textLesson->id); ?>/delete" class="delete-action btn btn-sm btn-transparent text-gray">
+                <a href="<?php echo e(url('')); ?>/admin/text-lesson/<?php echo e($textLesson->id); ?>/delete" class="delete-action btn btn-sm btn-transparent text-gray">
                     <i data-feather="trash-2" class="mr-10 cursor-pointer" height="20"></i>
                 </a>
             <?php endif; ?>
@@ -34,7 +34,7 @@
 
     <div id="collapseTextLesson<?php echo e(!empty($textLesson) ? $textLesson->id :'record'); ?>" aria-labelledby="text_lesson_<?php echo e(!empty($textLesson) ? $textLesson->id :'record'); ?>" class=" collapse <?php if(empty($textLesson)): ?> show <?php endif; ?>" role="tabpanel">
         <div class="panel-collapse text-gray">
-            <div class="js-content-form text_lesson-form" data-action="/admin/text-lesson/<?php echo e(!empty($textLesson) ? $textLesson->id . '/update' : 'store'); ?>">
+            <div class="js-content-form text_lesson-form" data-action="<?php echo e(url('')); ?>/admin/text-lesson/<?php echo e(!empty($textLesson) ? $textLesson->id . '/update' : 'store'); ?>">
                 <input type="hidden" name="ajax[<?php echo e(!empty($textLesson) ? $textLesson->id : 'new'); ?>][webinar_id]" value="<?php echo e(!empty($webinar) ? $webinar->id :''); ?>">
                 <input type="hidden" name="ajax[<?php echo e(!empty($textLesson) ? $textLesson->id : 'new'); ?>][chapter_id]" value="<?php echo e(!empty($chapter) ? $chapter->id :''); ?>" class="chapter-input">
 

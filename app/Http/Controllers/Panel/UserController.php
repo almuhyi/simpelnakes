@@ -135,6 +135,7 @@ class UserController extends Controller
                 'full_name' => 'required|string',
                 'email' => 'required|email|unique:users,email,' . $user->id,
                 'mobile' => 'required|numeric|unique:users,mobile,' . $user->id,
+                'nik' => 'required|numeric|unique:users,nik,' . $user->id,
             ]);
         }
 
@@ -161,6 +162,7 @@ class UserController extends Controller
                     'email' => $data['email'],
                     'full_name' => $data['full_name'],
                     'mobile' => $data['mobile'],
+                    'nik' => $data['nik'],
                     'language' => $data['language'],
                     'timezone' => $data['timezone'] ?? null,
                     'newsletter' => $joinNewsletter,
@@ -550,6 +552,7 @@ class UserController extends Controller
                 'email' => 'required|string|email|max:255|unique:users',
                 'full_name' => 'required|string',
                 'mobile' => 'required|numeric',
+                'nik' => 'required|numeric',
                 'password' => 'required|confirmed|min:6',
             ]);
 
@@ -568,6 +571,7 @@ class UserController extends Controller
                 'password' => Hash::make($data['password']),
                 'full_name' => $data['full_name'],
                 'mobile' => $data['mobile'],
+                'nik' => $data['nik'],
                 'language' => $data['language'],
                 'affiliate' => $usersAffiliateStatus,
                 'newsletter' => (!empty($data['join_newsletter']) and $data['join_newsletter'] == 'on'),

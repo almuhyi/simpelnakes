@@ -1,5 +1,5 @@
 @push('styles_top')
-    <link href="/assets/default/vendors/sortable/jquery-ui.min.css"/>
+    <link href="{{ asset('') }}assets/default/vendors/sortable/jquery-ui.min.css"/>
 @endpush
 
 <div class=" mt-3 ">
@@ -10,7 +10,7 @@
 
                     <div class="row">
                         <div class="col-12 col-md-6">
-                            <form action="/admin/settings/personalization/home_sections" method="post">
+                            <form action="{{ url('/admin/settings/personalization/home_sections') }}" method="post">
                                 {{ csrf_field() }}
                                 <select name="name" class="form-control @error('name') is-invalid @enderror">
                                     <option value="">{{ trans('admin/main.select') }}</option>
@@ -65,7 +65,7 @@
 </div>
 
 @push('scripts_bottom')
-    <script src="/assets/default/vendors/sortable/jquery-ui.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/sortable/jquery-ui.min.js"></script>
 
-    <script src="/assets/default/js/admin/home_sections.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/home_sections.min.js"></script>
 @endpush

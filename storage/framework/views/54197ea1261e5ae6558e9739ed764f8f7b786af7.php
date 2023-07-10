@@ -1,6 +1,6 @@
 <?php $__env->startPush('libraries_top'); ?>
-    <link rel="stylesheet" href="/assets/admin/vendor/owl.carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="/assets/admin/vendor/owl.carousel/owl.theme.min.css">
+    <link rel="stylesheet" href="<?php echo e(asset('')); ?>assets/admin/vendor/owl.carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?php echo e(asset('')); ?>assets/admin/vendor/owl.carousel/owl.theme.min.css">
 
 <?php $__env->stopPush(); ?>
 
@@ -10,7 +10,7 @@
     <section class="section">
         <div class="row">
             <div class="col-12 mb-4">
-                <div class="hero text-white hero-bg-image hero-bg" data-background="<?php echo e(!empty(getPageBackgroundSettings('admin_dashboard')) ? getPageBackgroundSettings('admin_dashboard') : ''); ?>">
+                <div class="hero text-white hero-bg-image hero-bg" data-background="<?php echo e(asset(!empty(getPageBackgroundSettings('admin_dashboard')) ? getPageBackgroundSettings('admin_dashboard') : '')); ?>">
                     <div class="hero-inner">
                         <h2>Selamat Datang, <?php echo e($authUser->full_name); ?>!</h2>
 
@@ -20,9 +20,9 @@
                                     <p class="lead">Gunakan tombol akses dibawah untuk memudahkan mengatur relasi.</p>
 
                                     <div class="mt-2 mb-2 d-flex flex-column flex-md-row">
-                                        <a href="/admin/comments/webinars" class="mt-2 mt-md-0 btn btn-outline-white btn-lg btn-icon icon-left ml-0 ml-md-2"><i class="far fa-comment"></i>Komentar </a>
-                                        <a href="/admin/supports" class="mt-2 mt-md-0 btn btn-outline-white btn-lg btn-icon icon-left ml-0 ml-md-2"><i class="far fa-envelope"></i>Pengajuan Bantuan</a>
-                                        <a href="/admin/reports/webinars" class="mt-2 mt-md-0 btn btn-outline-white btn-lg btn-icon icon-left ml-0 ml-md-2"><i class="fas fa-info"></i>Laporan</a>
+                                        <a href="<?php echo e(url('/admin/comments/webinars')); ?>" class="mt-2 mt-md-0 btn btn-outline-white btn-lg btn-icon icon-left ml-0 ml-md-2"><i class="far fa-comment"></i>Komentar </a>
+                                        <a href="<?php echo e(url('/admin/supports')); ?>" class="mt-2 mt-md-0 btn btn-outline-white btn-lg btn-icon icon-left ml-0 ml-md-2"><i class="far fa-envelope"></i>Pengajuan Bantuan</a>
+                                        <a href="<?php echo e(url('/admin/reports/webinars')); ?>" class="mt-2 mt-md-0 btn btn-outline-white btn-lg btn-icon icon-left ml-0 ml-md-2"><i class="fas fa-info"></i>Laporan</a>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -51,7 +51,7 @@
 
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin_general_dashboard_new_sales')): ?>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                    <a href="/admin/financial/sales" class="card card-statistic-1">
+                    <a href="<?php echo e(url('/admin/financial/sales')); ?>" class="card card-statistic-1">
                         <div class="card-icon bg-primary">
                             <i class="fas fa-shopping-cart"></i>
                         </div>
@@ -70,7 +70,7 @@
 
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin_general_dashboard_new_comments')): ?>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                    <a href="/admin/comments/webinars" class="card card-statistic-1">
+                    <a href="<?php echo e(url('/admin/comments/webinars')); ?>" class="card card-statistic-1">
                         <div class="card-icon bg-danger">
                             <i class="fas fa-comment"></i></div>
                         <div class="card-wrap">
@@ -88,7 +88,7 @@
 
             <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('admin_general_dashboard_new_tickets')): ?>
                 <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                    <a href="/admin/supports" class="card card-statistic-1">
+                    <a href="<?php echo e(url('/admin/supports')); ?>" class="card card-statistic-1">
                         <div class="card-icon bg-warning">
                             <i class="far fa-envelope"></i></div>
                         <div class="card-wrap">
@@ -123,7 +123,7 @@
                             <ul class="list-unstyled list-unstyled-border">
                                 <?php $__currentLoopData = $recentComments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $recentComment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <li class="media">
-                                        <img class="mr-3 rounded-circle" width="50" height="50" src="<?php echo e($recentComment->user->getAvatar()); ?>" alt="avatar">
+                                        <img class="mr-3 rounded-circle" width="50" height="50" src="<?php echo e(asset($recentComment->user->getAvatar())); ?>" alt="avatar">
                                         <div class="media-body">
                                             <div class="float-right text-primary font-12"><?php echo e(dateTimeFormat($recentComment->created_at, 'j M Y | H:i')); ?></div>
                                             <div class="media-title"><?php echo e($recentComment->user->full_name); ?></div>
@@ -134,7 +134,7 @@
                             </ul>
 
                             <div class="text-center pt-1 pb-1">
-                                <a href="/admin/comments/webinars" class="btn btn-primary btn-lg btn-round ">
+                                <a href="<?php echo e(url('/admin/comments/webinars')); ?>" class="btn btn-primary btn-lg btn-round ">
                                     Lihat Semua
                                 </a>
                             </div>
@@ -163,7 +163,7 @@
                                 <div class="tickets-list">
 
                                     <?php $__currentLoopData = $recentTickets['tickets']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ticket): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <a href="/admin/supports/<?php echo e($ticket->id); ?>/conversation" class="ticket-item">
+                                        <a href="<?php echo e(url('')); ?>/admin/supports/<?php echo e($ticket->id); ?>/conversation" class="ticket-item">
                                             <div class="ticket-title">
                                                 <h4><?php echo e($ticket->title); ?></h4>
                                             </div>
@@ -181,7 +181,7 @@
                                         </a>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                                    <a href="/admin/supports" class="ticket-item ticket-more">
+                                    <a href="<?php echo e(url('/admin/supports')); ?>" class="ticket-item ticket-more">
                                         Lihat semua <i class="fas fa-chevron-right"></i>
                                     </a>
                                 </div>
@@ -205,7 +205,7 @@
                             <div class="card-body p-0">
                                 <div class="tickets-list">
                                     <?php $__currentLoopData = $recentWebinars['webinars']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $webinar): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <a href="/admin/webinars/<?php echo e($webinar->id); ?>/edit" class="ticket-item">
+                                        <a href="<?php echo e(url('')); ?>/admin/webinars/<?php echo e($webinar->id); ?>/edit" class="ticket-item">
                                             <div class="ticket-title">
                                                 <h4><?php echo e($webinar->title); ?></h4>
                                             </div>
@@ -238,7 +238,7 @@
                                         </a>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                                    <a href="/admin/webinars?type=webinar" class="ticket-item ticket-more">
+                                    <a href="<?php echo e(url('/admin/webinars?type=webinar')); ?>" class="ticket-item ticket-more">
                                         Lihat semua <i class="fas fa-chevron-right"></i>
                                     </a>
                                 </div>
@@ -264,7 +264,7 @@
 
 
                                     <?php $__currentLoopData = $recentCourses['courses']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $course): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <a href="/admin/webinars/<?php echo e($course->id); ?>/edit" class="ticket-item">
+                                        <a href="<?php echo e(url('')); ?>/admin/webinars/<?php echo e($course->id); ?>/edit" class="ticket-item">
                                             <div class="ticket-title">
                                                 <h4><?php echo e($course->title); ?></h4>
                                             </div>
@@ -298,7 +298,7 @@
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
-                                    <a href="/admin/webinars?type=course" class="ticket-item ticket-more">
+                                    <a href="<?php echo e(url('/admin/webinars?type=course')); ?>" class="ticket-item ticket-more">
                                         Lihat semua <i class="fas fa-chevron-right"></i>
                                     </a>
                                 </div>
@@ -314,10 +314,10 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('scripts_bottom'); ?>
-    <script src="/assets/default/vendors/chartjs/chart.min.js"></script>
-    <script src="/assets/admin/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/default/vendors/chartjs/chart.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/admin/vendor/owl.carousel/owl.carousel.min.js"></script>
 
-    <script src="/assets/admin/js/dashboard.min.js"></script>
+    <script src="<?php echo e(asset('')); ?>assets/admin/js/dashboard.min.js"></script>
 
     <script>
         (function ($) {

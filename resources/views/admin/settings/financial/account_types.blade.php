@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>{{ trans('admin/main.account_types') }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">{{ trans('admin/main.dashboard') }}</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">{{ trans('admin/main.dashboard') }}</a></div>
                 <div class="breadcrumb-item">{{ trans('admin/main.account_types') }}</div>
             </div>
         </div>
@@ -17,7 +17,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <form action="/admin/settings/account_types" method="post">
+                            <form action="{{ url('/admin/settings/account_types') }}" method="post">
                                 {{ csrf_field() }}
 
                                 <div class="row">
@@ -68,5 +68,5 @@
         var removeLang = '{{ trans('admin/main.remove') }}';
     </script>
 
-    <script src="/assets/default/js/admin/settings/account_types.min.js"></script>
+    <script src="{{ asset('') }}assets/default/js/admin/settings/account_types.min.js"></script>
 @endpush

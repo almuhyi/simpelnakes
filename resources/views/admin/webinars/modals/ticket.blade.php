@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="d-none" id="webinarTicketModal">
     <h3 class="section-title after-line font-20 text-dark-blue mb-25">Tiket baru</h3>
-    <div class="js-form" data-action="/admin/tickets/store">
+    <div class="js-form" data-action="{{ url('/admin/tickets/store') }}">
         <input type="hidden" name="webinar_id" value="{{ !empty($webinar) ? $webinar->id :'' }}">
 
         @if(!empty(getGeneralSettings('content_translate')))

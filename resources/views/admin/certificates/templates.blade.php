@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Template sertifikat</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Template sertifikat</div>
             </div>
@@ -50,7 +50,7 @@
 
                                             <td>
                                                 @can('admin_certificate_template_edit')
-                                                    <a href="/admin/certificates/templates/{{ $template->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <a href="{{ url('') }}/admin/certificates/templates/{{ $template->id }}/edit" class="btn-transparent text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                 @endcan

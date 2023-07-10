@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>Daftar konsultan</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Konsultan</div>
             </div>
@@ -175,7 +175,7 @@
             <div class="card">
                 <div class="card-header">
                     @can('admin_consultants_export_excel')
-                        <a href="/admin/consultants/excel?{{ http_build_query(request()->all()) }}" class="btn btn-primary">Export excel</a>
+                        <a href="{{ url('') }}/admin/consultants/excel?{{ http_build_query(request()->all()) }}" class="btn btn-primary">Export excel</a>
                     @endcan
 
                     <div class="h-10"></div>
@@ -249,13 +249,13 @@
 
                                     <td class="text-center mb-2" width="120">
                                         @can('admin_users_impersonate')
-                                            <a href="/admin/users/{{ $consultant->id }}/impersonate" target="_blank" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Masuk">
+                                            <a href="{{ url('') }}/admin/users/{{ $consultant->id }}/impersonate" target="_blank" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Masuk">
                                                 <i class="fa fa-user-shield"></i>
                                             </a>
                                         @endcan
 
                                         @can('admin_users_edit')
-                                            <a href="/admin/users/{{ $consultant->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
+                                            <a href="{{ url('') }}/admin/users/{{ $consultant->id }}/edit" class="btn-transparent  text-primary" data-toggle="tooltip" data-placement="top" title="Edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan

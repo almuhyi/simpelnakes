@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/default/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/default/vendors/select2/select2.min.css">
 @endpush
 
 @section('content')
@@ -9,8 +9,8 @@
         <div class="section-header">
             <h1>{{ trans('admin/main.main_general') }} {{ trans('admin/main.settings') }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">{{ trans('admin/main.dashboard') }}</a></div>
-                <div class="breadcrumb-item active"><a href="/admin/settings">{{ trans('admin/main.settings') }}</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">{{ trans('admin/main.dashboard') }}</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/settings') }}">{{ trans('admin/main.settings') }}</a></div>
                 <div class="breadcrumb-item ">{{ trans('admin/main.main_general') }}</div>
             </div>
         </div>
@@ -56,5 +56,5 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/default/vendors/select2/select2.min.js"></script>
+    <script src="{{ asset('') }}assets/default/vendors/select2/select2.min.js"></script>
 @endpush

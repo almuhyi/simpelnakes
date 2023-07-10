@@ -6,7 +6,7 @@
         <div class="section-header">
             <h1>Tautan Navbar Teratas</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a></div>
                 <div class="breadcrumb-item">Tautan Navbar Teratas</div>
             </div>
         </div>
@@ -20,7 +20,7 @@
 
                             <div class="row">
                                 <div class="col-12 col-md-8 col-lg-6">
-                                    <form action="/admin/additional_page/navbar_links/store" method="post">
+                                    <form action="{{ url('/admin/additional_page/navbar_links/store') }}" method="post">
                                         {{ csrf_field() }}
 
                                         <input type="hidden" name="navbar_link" value="{{ !empty($navbarLinkKey) ? $navbarLinkKey : 'newLink' }}">
@@ -95,7 +95,7 @@
                                                 <td>{{ $val['link'] }}</td>
                                                 <td>{{ $val['order'] }}</td>
                                                 <td>
-                                                    <a href="/admin/additional_page/navbar_links/{{ $key }}/edit" class="btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <a href="{{ url('') }}/admin/additional_page/navbar_links/{{ $key }}/edit" class="btn-sm" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
 

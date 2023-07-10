@@ -4,16 +4,17 @@
     ?>
 
     <div class="p-4 m-3">
-        <img src="<?php echo e($siteGeneralSettings['logo'] ?? ''); ?>" alt="logo" width="40%" class="mb-5 mt-2">
+        <img src="<?php echo e(asset($siteGeneralSettings['logo'] ?? '')); ?>" alt="logo" width="40%" class="mb-5 mt-2">
 
-        <h4 class="text-dark font-weight-normal"><?php echo e(trans('admin/main.welcome')); ?> <span class="font-weight-bold"><?php echo e($siteGeneralSettings['site_name'] ?? ''); ?></span></h4>
+        <h4 class="text-dark font-weight-normal">Selamat datang <span class="font-weight-bold"><?php echo e($siteGeneralSettings['site_name'] ?? ''); ?></span></h4>
 
-        <p class="text-muted"><?php echo e(trans('auth.admin_tagline')); ?></p>
+        <p class="text-muted">
+            Silakan masuk untuk mengontrol dan mengelola semuanya!</p>
 
         <form method="POST" action="<?php echo e(url('/admin/login')); ?>" class="needs-validation" novalidate="">
             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
             <div class="form-group">
-                <label for="email"><?php echo e(trans('auth.email')); ?></label>
+                <label for="email">Email</label>
                 <input id="email" type="email" value="<?php echo e(old('email')); ?>" class="form-control  <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -40,7 +41,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
             <div class="form-group">
                 <div class="d-block">
-                    <label for="password" class="control-label"><?php echo e(trans('auth.password')); ?></label>
+                    <label for="password" class="control-label">Kata sandi</label>
                 </div>
                 <input id="password" type="password" class="form-control  <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -70,18 +71,17 @@ unset($__errorArgs, $__bag); ?>
                     <input type="checkbox" name="remember" class="custom-control-input" tabindex="3"
                            id="remember-me">
                     <label class="custom-control-label"
-                           for="remember-me"><?php echo e(trans('auth.remember_me')); ?></label>
+                           for="remember-me">Ingat saya</label>
                 </div>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                    <?php echo e(trans('auth.login')); ?>
-
+                    Masuk
                 </button>
             </div>
         </form>
 
-        <a href="/admin/forget-password" class=""><?php echo e(trans('auth.forget_your_password')); ?></a>
+        <a href="<?php echo e(url('/admin/forget-password')); ?>" class="">Lupa kata sandi</a>
     </div>
 <?php $__env->stopSection(); ?>
 

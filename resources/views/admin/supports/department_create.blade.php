@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Departemen baru</div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="col-12 col-md-8 col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <form action="/admin/supports/departments/{{ !empty($department) ? $department->id.'/update' : 'store' }}"
+                            <form action="{{ url('') }}/admin/supports/departments/{{ !empty($department) ? $department->id.'/update' : 'store' }}"
                                   method="Post">
                                 {{ csrf_field() }}
 

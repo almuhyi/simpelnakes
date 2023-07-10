@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('styles_top')
-    <link rel="stylesheet" href="/assets/vendors/summernote/summernote-bs4.min.css">
+    <link rel="stylesheet" href="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.css">
 @endpush
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Testimoni</div>
             </div>
@@ -29,7 +29,7 @@
                         <h2 class="section-title ml-4">{{ !empty($testimonial) ? 'Edit' : 'Baru' }}</h2>
 
                         <div class="card-body">
-                            <form action="/admin/testimonials/{{ !empty($testimonial) ? $testimonial->id.'/update' : 'store' }}" method="Post">
+                            <form action="{{ url('') }}/admin/testimonials/{{ !empty($testimonial) ? $testimonial->id.'/update' : 'store' }}" method="Post">
                                 {{ csrf_field() }}
 
                                 <div class="row">
@@ -147,6 +147,6 @@
 @endsection
 
 @push('scripts_bottom')
-    <script src="/assets/vendors/summernote/summernote-bs4.min.js"></script>
+    <script src="{{ asset('') }}assets/vendors/summernote/summernote-bs4.min.js"></script>
 
 @endpush

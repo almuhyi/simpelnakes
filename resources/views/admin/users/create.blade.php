@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1> {{!empty($user) ?'Edit': 'Baru' }} Pengguna</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item"><a>Pengguna</a>
                 </div>
@@ -24,7 +24,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12 col-md-6 col-lg-6">
-                                    <form action="/admin/users/store" method="Post">
+                                    <form action="{{ url('/admin/users/store') }}" method="Post">
                                         {{ csrf_field() }}
 
                                         <div class="form-group">

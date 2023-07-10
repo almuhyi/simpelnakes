@@ -10,9 +10,9 @@
             <h1>{{ $pageTitle }}</h1>
 
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="/admin/assignments">Tugas</a></div>
-                <div class="breadcrumb-item"><a href="/admin/assignments/{{ $assignment->id }}/students">Peserta</a></div>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a></div>
+                <div class="breadcrumb-item"><a href="{{ url('/admin/assignments') }}">Tugas</a></div>
+                <div class="breadcrumb-item"><a href="{{ url('') }}/admin/assignments/{{ $assignment->id }}/students">Peserta</a></div>
                 <div class="breadcrumb-item">Percakapan</div>
             </div>
         </div>
@@ -28,7 +28,7 @@
 
                             @foreach($conversations as $conversation)
                                 <div class="chat-item chat-{{ !empty($conversation->sender_id == $assignment->creator_id) ? 'right' : 'left' }}">
-                                    <img src="{{ $conversation->sender->getAvatar(50) }}">
+                                    <img src="{{ asset($conversation->sender->getAvatar(50)) }}">
 
                                     <div class="chat-details">
 

@@ -9,7 +9,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">Dashboard</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">Dashboard</a>
                 </div>
                 <div class="breadcrumb-item">Pelatihan</div>
 
@@ -187,7 +187,7 @@
 
                                             <td width="200" class="btn-sm">
                                                 @can('admin_course_question_forum_answers')
-                                                    <a href="/admin/webinars/{{ $forum->webinar_id }}/forums/{{ $forum->id }}/answers" target="_blank" class="btn-transparent btn-sm text-primary mt-1 mr-1" data-toggle="tooltip" data-placement="top" title="Jawaban">
+                                                    <a href="{{ url('') }}/admin/webinars/{{ $forum->webinar_id }}/forums/{{ $forum->id }}/answers" target="_blank" class="btn-transparent btn-sm text-primary mt-1 mr-1" data-toggle="tooltip" data-placement="top" title="Jawaban">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                 @endcan

@@ -2,7 +2,7 @@
 <div class="d-none" id="extraDescriptionForm">
     <h3 class="section-title after-line font-20 text-dark-blue mb-25">Tambahkan item</h3>
 
-    <div class="js-form" data-action="/admin/webinar-extra-description/store">
+    <div class="js-form" data-action="<?php echo e(url('/admin/webinar-extra-description/store')); ?>">
         <input type="hidden" name="webinar_id" value="<?php echo e(!empty($webinar) ? $webinar->id :''); ?>">
         <input type="hidden" name="type">
 

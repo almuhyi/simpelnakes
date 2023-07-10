@@ -1,7 +1,7 @@
 <div class="tab-pane mt-3 fade" id="images" role="tabpanel" aria-labelledby="images-tab">
     <div class="row">
         <div class="col-12 col-md-6">
-            <form action="/admin/users/{{ $user->id .'/updateImage' }}" method="Post">
+            <form action="{{ url('') }}/admin/users/{{ $user->id .'/updateImage' }}" method="Post">
                 {{ csrf_field() }}
 
                 <div class="form-group mt-15">

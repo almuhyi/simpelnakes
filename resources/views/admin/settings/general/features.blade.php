@@ -7,7 +7,7 @@
 <div class="tab-pane mt-3 fade" id="features" role="tabpanel" aria-labelledby="features-tab">
     <div class="row">
         <div class="col-12 col-md-6">
-            <form action="/admin/settings/features" method="post">
+            <form action="{{ url('/admin/settings/features') }}" method="post">
                 {{ csrf_field() }}
                 <input type="hidden" name="page" value="general">
                 <input type="hidden" name="features" value="features">

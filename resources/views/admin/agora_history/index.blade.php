@@ -5,7 +5,7 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item active"><a href="/admin/">{{trans('admin/main.dashboard')}}</a>
+                <div class="breadcrumb-item active"><a href="{{ url('/admin/') }}">{{trans('admin/main.dashboard')}}</a>
                 </div>
                 <div class="breadcrumb-item">{{ $pageTitle }}</div>
             </div>
@@ -16,7 +16,7 @@
                 <div class="card-header">
                     @can('admin_agora_history_export')
                         <div class="text-right">
-                            <a href="/admin/agora_history/excel" class="btn btn-primary">{{ trans('admin/main.export_xls') }}</a>
+                            <a href="{{ url('/admin/agora_history/excel') }}" class="btn btn-primary">Export</a>
                         </div>
                     @endcan
                 </div>
@@ -26,12 +26,12 @@
                         <table class="table table-striped text-center font-14">
 
                             <tr>
-                                <th class="text-left">{{ trans('admin/main.course') }}</th>
-                                <th class="text-left">{{ trans('admin/main.session') }}</th>
-                                <th class="text-center">{{ trans('update.session_duration') }}</th>
-                                <th class="text-center">{{ trans('admin/main.start_date') }}</th>
-                                <th class="text-center">{{ trans('admin/main.end_date') }}</th>
-                                <th class="text-center">{{ trans('update.meeting_duration') }}</th>
+                                <th class="text-left">Pelatihan</th>
+                                <th class="text-left">Sesi live</th>
+                                <th class="text-center">Durasi waktu</th>
+                                <th class="text-center">Tanggal mulai</th>
+                                <th class="text-center">Tanggal akhir</th>
+                                <th class="text-center">Durasi pertemuan</th>
                             </tr>
 
                             @foreach($agoraHistories as $agoraHistory)
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="card-footer text-center">
-                    {{ $agoraHistories->links() }}
+                    {{ $agoraHistories->links('vendor.pagination.bootstrap-4') }}
                 </div>
             </section>
         </div>
