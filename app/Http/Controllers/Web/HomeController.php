@@ -8,7 +8,6 @@ use App\Models\Blog;
 use App\Models\Bundle;
 use App\Models\FeatureWebinar;
 use App\Models\HomeSection;
-use App\Models\Product;
 use App\Models\Role;
 use App\Models\Sale;
 use App\Models\SpecialOffer;
@@ -199,17 +198,7 @@ class HomeController extends Controller
                 ->get();
         }
 
-        if (in_array(HomeSection::$store_products, $selectedSectionsName)) {
-            $newProducts = Product::where('status', Product::$active)
-                ->orderBy('updated_at', 'desc')
-                ->with([
-                    'creator' => function ($qu) {
-                        $qu->select('id', 'full_name', 'avatar');
-                    },
-                ])
-                ->limit(6)
-                ->get();
-        }
+
 
         if (in_array(HomeSection::$trend_categories, $selectedSectionsName)) {
             $trendCategories = TrendCategory::with([
@@ -354,7 +343,7 @@ class HomeController extends Controller
             'hasDiscountWebinars' => $hasDiscountWebinars ?? [],
             'bestRateWebinars' => $bestRateWebinars ?? [],
             'freeWebinars' => $freeWebinars ?? [],
-            'newProducts' => $newProducts ?? [],
+
             'trendCategories' => $trendCategories ?? [],
             'instructors' => $instructors ?? [],
             'testimonials' => $testimonials ?? [],

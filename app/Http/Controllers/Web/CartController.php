@@ -9,8 +9,6 @@ use App\Models\DiscountUser;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PaymentChannel;
-use App\Models\Product;
-use App\Models\ProductOrder;
 use App\Models\Region;
 use App\Models\ReserveMeeting;
 use App\Models\Setting;
@@ -37,31 +35,12 @@ class CartController extends Controller
                     ]);
                 },
                 'ticket',
-                'productOrder' => function ($query) {
-                    $query->whereHas('product');
-                    $query->with(['product']);
-                }
             ])
             ->get();
 
         if (!empty($carts) and !$carts->isEmpty()) {
             $calculate = $this->calculatePrice($carts, $user);
 
-            $hasPhysicalProduct = $carts->where('productOrder.product.type', Product::$physical);
-
-            $deliveryEstimateTime = 0;
-
-            if (!empty($hasPhysicalProduct) and count($hasPhysicalProduct)) {
-                foreach ($hasPhysicalProduct as $physicalProductCart) {
-                    if (!empty($physicalProductCart->productOrder) and
-                        !empty($physicalProductCart->productOrder->product) and
-                        !empty($physicalProductCart->productOrder->product->delivery_estimated_time) and
-                        $physicalProductCart->productOrder->product->delivery_estimated_time > $deliveryEstimateTime
-                    ) {
-                        $deliveryEstimateTime = $physicalProductCart->productOrder->product->delivery_estimated_time;
-                    }
-                }
-            }
 
             if (!empty($calculate)) {
 
@@ -74,11 +53,9 @@ class CartController extends Controller
                     'tax' => $calculate["tax"],
                     'taxPrice' => $calculate["tax_price"],
                     'total' => $calculate["total"],
-                    'productDeliveryFee' => $calculate["product_delivery_fee"],
                     'taxIsDifferent' => $calculate["tax_is_different"],
                     'userGroup' => !empty($user->userGroup) ? $user->userGroup->group : null,
-                    'hasPhysicalProduct' => (count($hasPhysicalProduct) > 0),
-                    'deliveryEstimateTime' => $deliveryEstimateTime,
+
                 ];
 
                 $data = array_merge($data, $this->getUserLocationsData($user));
@@ -198,30 +175,6 @@ class CartController extends Controller
             } else {
                 $totalDiscount = ($totalWebinarsAmount > 0) ? $totalWebinarsAmount * $percent / 100 : 0;
             }
-        } elseif ($discount->source == Discount::$discountSourceProduct) {
-            $totalProductsAmount = 0;
-            $productOtherDiscounts = 0;
-
-            foreach ($carts as $cart) {
-                if (!empty($cart->productOrder)) {
-                    $product = $cart->productOrder->product;
-
-                    if (!empty($product) and ($discount->product_type == 'all' or $discount->product_type == $product->type)) {
-                        $totalProductsAmount += ($product->price * $cart->productOrder->quantity);
-                        $productOtherDiscounts += $product->getDiscountPrice();
-                    }
-                }
-            }
-
-            if ($discount->discount_type == Discount::$discountTypeFixedAmount) {
-                $totalDiscount = ($totalProductsAmount > $discount->amount) ? $discount->amount : $totalProductsAmount;
-
-                if (!empty($productOtherDiscounts)) {
-                    $totalDiscount = $totalDiscount - (int)$productOtherDiscounts;
-                }
-            } else {
-                $totalDiscount = ($totalProductsAmount > 0) ? $totalProductsAmount * $percent / 100 : 0;
-            }
         } elseif ($discount->source == Discount::$discountSourceMeeting) {
             $totalMeetingAmount = 0;
             $meetingOtherDiscounts = 0;
@@ -305,60 +258,6 @@ class CartController extends Controller
         return $totalDiscount;
     }
 
-    private function productDeliveryFeeBySeller($carts)
-    {
-        $productFee = [];
-
-        foreach ($carts as $cart) {
-            if (!empty($cart->productOrder) and !empty($cart->productOrder->product)) {
-                $product = $cart->productOrder->product;
-
-                if (!empty($product->delivery_fee)) {
-                    if (!empty($productFee[$product->creator_id]) and $productFee[$product->creator_id] < $product->delivery_fee) {
-                        $productFee[$product->creator_id] = $product->delivery_fee;
-                    } else if (empty($productFee[$product->creator_id])) {
-                        $productFee[$product->creator_id] = $product->delivery_fee;
-                    }
-                }
-            }
-        }
-
-        return $productFee;
-    }
-
-    private function productCountBySeller($carts)
-    {
-        $productCount = [];
-
-        foreach ($carts as $cart) {
-            if (!empty($cart->productOrder) and !empty($cart->productOrder->product)) {
-                $product = $cart->productOrder->product;
-
-                if (!empty($productCount[$product->creator_id])) {
-                    $productCount[$product->creator_id] += 1;
-                } else {
-                    $productCount[$product->creator_id] = 1;
-                }
-            }
-        }
-
-        return $productCount;
-    }
-
-    private function calculateProductDeliveryFee($carts)
-    {
-        $fee = 0;
-
-        if (!empty($carts)) {
-            $productsFee = $this->productDeliveryFeeBySeller($carts);
-
-            if (!empty($productsFee) and count($productsFee)) {
-                $fee = array_sum($productsFee);
-            }
-        }
-
-        return $fee;
-    }
 
     private function calculatePrice($carts, $user, $discountCoupon = null)
     {
@@ -397,9 +296,7 @@ class CartController extends Controller
         }
 
         $subTotalWithoutDiscount = $subTotal - $totalDiscount;
-        $productDeliveryFee = $this->calculateProductDeliveryFee($carts);
 
-        $total = $subTotalWithoutDiscount + $taxPrice + $productDeliveryFee;
 
         if ($total < 0) {
             $total = 0;
@@ -413,7 +310,6 @@ class CartController extends Controller
             'commission' => $commission,
             'commission_price' => round($commissionPrice, 2),
             'total' => round($total, 2),
-            'product_delivery_fee' => round($productDeliveryFee, 2),
             'tax_is_different' => $taxIsDifferent
         ];
     }
@@ -426,16 +322,6 @@ class CartController extends Controller
             $carts = Cart::where('creator_id', $user->id)
                 ->get();
         }
-
-        $hasPhysicalProduct = $carts->where('productOrder.product.type', Product::$physical);
-
-        $this->validate($request, [
-            'country_id' => Rule::requiredIf(count($hasPhysicalProduct) > 0),
-            'province_id' => Rule::requiredIf(count($hasPhysicalProduct) > 0),
-            'city_id' => Rule::requiredIf(count($hasPhysicalProduct) > 0),
-            'district_id' => Rule::requiredIf(count($hasPhysicalProduct) > 0),
-            'address' => Rule::requiredIf(count($hasPhysicalProduct) > 0),
-        ]);
 
         $discountId = $request->input('discount_id');
 
@@ -451,10 +337,6 @@ class CartController extends Controller
             $calculate = $this->calculatePrice($carts, $user, $discountCoupon);
 
             $order = $this->createOrderAndOrderItems($carts, $calculate, $user, $discountCoupon);
-
-            if (count($hasPhysicalProduct) > 0) {
-                $this->updateProductOrders($request, $carts, $user);
-            }
 
             if (!empty($order) and $order->total_amount > 0) {
                 $razorpay = false;
@@ -489,28 +371,6 @@ class CartController extends Controller
         return redirect('/cart');
     }
 
-    private function updateProductOrders(Request $request, $carts, $user)
-    {
-        $data = $request->all();
-
-        foreach ($carts as $cart) {
-            if (!empty($cart->product_order_id)) {
-                ProductOrder::where('id', $cart->product_order_id)
-                    ->where('buyer_id', $user->id)
-                    ->update([
-                        'message_to_seller' => $data['message_to_seller'],
-                    ]);
-            }
-        }
-
-        $user->update([
-            'country_id' => $data['country_id'] ?? $user->country_id,
-            'province_id' => $data['province_id'] ?? $user->province_id,
-            'city_id' => $data['city_id'] ?? $user->city_id,
-            'district_id' => $data['district_id'] ?? $user->district_id,
-            'address' => $data['address'] ?? $user->address,
-        ]);
-    }
 
     public function createOrderAndOrderItems($carts, $calculate, $user, $discountCoupon = null)
     {
@@ -521,12 +381,9 @@ class CartController extends Controller
             'tax' => $calculate["tax_price"],
             'total_discount' => $calculate["total_discount"],
             'total_amount' => $calculate["total"],
-            'product_delivery_fee' => $calculate["product_delivery_fee"] ?? null,
             'created_at' => time(),
         ]);
 
-        $productsFee = $this->productDeliveryFeeBySeller($carts);
-        $sellersProductsCount = $this->productCountBySeller($carts);
 
         foreach ($carts as $cart) {
 
@@ -539,18 +396,6 @@ class CartController extends Controller
             $commissionPrice = $orderPrices['commission_price'];
             $discountCouponPrice = 0;
 
-            $productDeliveryFee = 0;
-            if (!empty($cart->product_order_id)) {
-                $product = $cart->productOrder->product;
-
-                if (!empty($product) and !empty($productsFee[$product->creator_id])) {
-                    $productDeliveryFee = $productsFee[$product->creator_id];
-                }
-
-                $sellerProductCount = !empty($sellersProductsCount[$product->creator_id]) ? $sellersProductsCount[$product->creator_id] : 1;
-
-                $productDeliveryFee = $productDeliveryFee > 0 ? $productDeliveryFee / $sellerProductCount : 0;
-            }
 
             if (!empty($discountCoupon)) {
                 $couponAmount = $price * $discountCoupon->percent / 100;
@@ -565,7 +410,7 @@ class CartController extends Controller
             $allDiscountPrice = $totalDiscount + $discountCouponPrice;
 
             $subTotalWithoutDiscount = $price - $allDiscountPrice;
-            $totalAmount = $subTotalWithoutDiscount + $taxPrice + $productDeliveryFee;
+
 
             $ticket = $cart->ticket;
             if (!empty($ticket) and !$ticket->isValid()) {
@@ -577,8 +422,6 @@ class CartController extends Controller
                 'order_id' => $order->id,
                 'webinar_id' => $cart->webinar_id ?? null,
                 'bundle_id' => $cart->bundle_id ?? null,
-                'product_id' => (!empty($cart->product_order_id) and !empty($cart->productOrder->product)) ? $cart->productOrder->product->id : null,
-                'product_order_id' => (!empty($cart->product_order_id)) ? $cart->product_order_id : null,
                 'reserve_meeting_id' => $cart->reserve_meeting_id ?? null,
                 'subscribe_id' => $cart->subscribe_id ?? null,
                 'promotion_id' => $cart->promotion_id ?? null,
@@ -590,7 +433,6 @@ class CartController extends Controller
                 'tax_price' => $taxPrice,
                 'commission' => $commission,
                 'commission_price' => $commissionPrice,
-                'product_delivery_fee' => $productDeliveryFee,
                 'discount' => $allDiscountPrice,
                 'created_at' => time(),
             ]);
@@ -607,8 +449,6 @@ class CartController extends Controller
             $user = $cart->webinar_id ? $cart->webinar->creator : $cart->bundle->creator;
         } elseif (!empty($cart->reserve_meeting_id)) {
             $user = $cart->reserveMeeting->meeting->creator;
-        } elseif (!empty($cart->product_order_id)) {
-            $user = $cart->productOrder->seller;
         }
 
         return $user;
@@ -659,32 +499,6 @@ class CartController extends Controller
 
             $totalDiscount += $discount;
             $subTotal += $price;
-        } elseif (!empty($cart->product_order_id)) {
-            $product = $cart->productOrder->product;
-
-            if (!empty($product)) {
-                $price = ($product->price * $cart->productOrder->quantity);
-                $discount = $product->getDiscountPrice();
-
-                $commission = $product->getCommission();
-                $productTax = $product->getTax();
-
-                $priceWithoutDiscount = $price - $discount;
-
-                $taxIsDifferent = ($taxIsDifferent and $tax != $productTax);
-
-                $tax = $productTax;
-                if ($productTax > 0 and $priceWithoutDiscount > 0) {
-                    $taxPrice += $priceWithoutDiscount * $productTax / 100;
-                }
-
-                if ($commission > 0) {
-                    $commissionPrice += $priceWithoutDiscount > 0 ? $priceWithoutDiscount * $commission / 100 : 0;
-                }
-
-                $totalDiscount += $discount;
-                $subTotal += $price;
-            }
         }
 
         if ($totalDiscount > $subTotal) {

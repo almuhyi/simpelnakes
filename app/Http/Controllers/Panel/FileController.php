@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Models\File;
-use App\Models\Translation\FileTranslation;
 use App\Models\Webinar;
 use App\Models\WebinarChapterItem;
 use Illuminate\Http\Request;
@@ -140,17 +139,12 @@ class FileController extends Controller
                 'check_previous_parts' => $data['check_previous_parts'],
                 'access_after_day' => $data['access_after_day'],
                 'status' => (!empty($data['status']) and $data['status'] == 'on') ? File::$Active : File::$Inactive,
-                'created_at' => time()
+                'created_at' => time(),
+                'title' => $data['title'],
+                'description' => $data['description'],
             ]);
 
             if (!empty($file)) {
-                FileTranslation::updateOrCreate([
-                    'file_id' => $file->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
-                    'title' => $data['title'],
-                    'description' => $data['description'],
-                ]);
 
                 WebinarChapterItem::makeItem($user->id, $file->chapter_id, $file->id, WebinarChapterItem::$chapterFile);
             }
@@ -327,16 +321,11 @@ class FileController extends Controller
                     'check_previous_parts' => $data['check_previous_parts'],
                     'access_after_day' => $data['access_after_day'],
                     'status' => (!empty($data['status']) and $data['status'] == 'on') ? File::$Active : File::$Inactive,
-                    'updated_at' => time()
-                ]);
-
-                FileTranslation::updateOrCreate([
-                    'file_id' => $file->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
+                    'updated_at' => time(),
                     'title' => $data['title'],
                     'description' => $data['description'],
                 ]);
+
 
                 return response()->json([
                     'code' => 200,

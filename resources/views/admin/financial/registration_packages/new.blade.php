@@ -26,24 +26,6 @@
                         <form action="{{ url('') }}/admin/financial/registration-packages/{{ !empty($package) ? $package->id.'/update' : 'store' }}" method="Post">
                             {{ csrf_field() }}
 
-                            @if(!empty(getGeneralSettings('content_translate')))
-                                <div class="form-group">
-                                    <label class="input-label">Bahasa</label>
-                                    <select name="locale" class="form-control {{ !empty($package) ? 'js-edit-content-locale' : '' }}">
-                                        @foreach($userLanguages as $lang => $language)
-                                            <option value="{{ $lang }}" @if(mb_strtolower(request()->get('locale', app()->getLocale())) == mb_strtolower($lang)) selected @endif>{{ $language }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('locale')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            @else
-                                <input type="hidden" name="locale" value="{{ getDefaultLocale() }}">
-                            @endif
-
 
                             <div class="form-group">
                                 <label>Judul</label>
@@ -191,17 +173,6 @@
                                 @enderror
                             </div>
 
-                            {{-- <div class="form-group js-organization-inputs js-instructor-inputs {{ ((!empty($package) and in_array($package->role, ['instructors', 'organizations'])) or in_array(old('role'), ['instructors', 'organizations'])) ? '' : 'd-none' }}">
-                                <label>{{ trans('update.product_count') }}</label>
-                                <input type="text" name="product_count"
-                                       class="form-control  @error('product_count') is-invalid @enderror"
-                                       value="{{ !empty($package) ? $package->product_count : old('product_count') }}"/>
-                                @error('product_count')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div> --}}
 
                             <div class="form-group custom-switches-stacked">
                                 <label class="custom-switch pl-0">

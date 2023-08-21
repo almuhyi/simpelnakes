@@ -114,28 +114,7 @@
         </section>
     @endif
 
-    {{-- @if(!empty($forums) and count($forums))
-        <section class="container forums-categories-section mt-30">
-            <div class="text-center">
-                <h2 class="font-30 text-secondary font-weight-bold">{{ trans('update.forums') }}</h2>
-                <p class="font-14 text-gray mt-5">{{ trans('update.forums_categories_hints') }}</p>
-            </div>
 
-            @foreach($forums as $forum)
-                <div class="forums-categories-card mt-30 rounded-lg border bg-white p-15">
-                    <h3 class="forums-categories-card__title text-dark font-16 font-weight-bold mb-15">{{ $forum->title }}</h3>
-
-                    @if(!empty($forum->subForums) and count($forum->subForums))
-                        @foreach($forum->subForums as $subForum)
-                            @include('web.default.forum.forum_card',['forum' => $subForum])
-                        @endforeach
-                    @else
-                        @include('web.default.forum.forum_card',['forum' => $forum])
-                    @endif
-                </div>
-            @endforeach
-        </section>
-    @endif --}}
 
     @if(!empty($recommendedTopics) and count($recommendedTopics))
         <section class="container forum-recommended-topics-section position-relative mt-25">

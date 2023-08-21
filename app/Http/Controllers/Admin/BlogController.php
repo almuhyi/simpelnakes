@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use App\Models\Translation\BlogTranslation;
 use App\Models\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -14,7 +13,6 @@ class BlogController extends Controller
 {
     public function index(Request $request)
     {
-        removeContentLocale();
 
         $this->authorize('admin_blog_lists');
 
@@ -93,7 +91,6 @@ class BlogController extends Controller
         $this->authorize('admin_blog_create');
 
         $this->validate($request, [
-            'locale' => 'required',
             'title' => 'required|string|max:255',
             'category_id' => 'required|numeric',
             'image' => 'required|string',
@@ -112,19 +109,11 @@ class BlogController extends Controller
             'status' => (!empty($data['status']) and $data['status'] == 'on') ? 'publish' : 'pending',
             'created_at' => time(),
             'updated_at' => time(),
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'meta_description' => $data['meta_description'],
+            'content' => $data['content'],
         ]);
-
-        if ($blog) {
-            BlogTranslation::updateOrCreate([
-                'blog_id' => $blog->id,
-                'locale' => mb_strtolower($data['locale']),
-            ], [
-                'title' => $data['title'],
-                'description' => $data['description'],
-                'meta_description' => $data['meta_description'],
-                'content' => $data['content'],
-            ]);
-        }
 
         return redirect('/admin/blog');
     }
@@ -135,8 +124,6 @@ class BlogController extends Controller
 
         $post = Blog::findOrFail($post_id);
 
-        $locale = $request->get('locale', app()->getLocale());
-        storeContentLocale($locale, $post->getTable(), $post->id);
 
         $categories = BlogCategory::all();
 
@@ -170,20 +157,12 @@ class BlogController extends Controller
             'enable_comment' => (!empty($data['enable_comment']) and $data['enable_comment'] == 'on'),
             'status' => (!empty($data['status']) and $data['status'] == 'on') ? 'publish' : 'pending',
             'updated_at' => time(),
-        ]);
-
-
-        BlogTranslation::updateOrCreate([
-            'blog_id' => $post->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
             'title' => $data['title'],
             'description' => $data['description'],
             'meta_description' => $data['meta_description'],
             'content' => $data['content'],
         ]);
 
-        removeContentLocale();
 
         if ($post->status == 'publish' and $post->author_id != auth()->id()) {
             $notifyOptions = [

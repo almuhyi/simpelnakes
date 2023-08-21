@@ -7,24 +7,6 @@
             <div class="row">
                 <div class="col-12 col-md-12">
 
-                    @if(!empty(getGeneralSettings('content_translate')))
-                        <div class="form-group mt-25">
-                            <label class="input-label">Bahasa</label>
-                            <select name="ajax[locale]"
-                                    class="form-control {{ !empty($quiz) ? 'js-webinar-content-locale' : '' }}"
-                                    data-webinar-id="{{ !empty($quiz) ? $quiz->webinar_id : '' }}"
-                                    data-id="{{ !empty($quiz) ? $quiz->id : '' }}"
-                                    data-relation="quizzes"
-                                    data-fields="title"
-                            >
-                                @foreach($userLanguages as $lang => $language)
-                                    <option value="{{ $lang }}" {{ (!empty($quiz) and !empty($quiz->locale)) ? (mb_strtolower($quiz->locale) == mb_strtolower($lang) ? 'selected' : '') : ($locale == $lang ? 'selected' : '') }}>{{ $language }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    @else
-                        <input type="hidden" name="ajax[locale]" value="{{ $defaultLocale }}">
-                    @endif
 
                     @if(empty($selectedWebinar))
                         <div class="form-group mt-25">

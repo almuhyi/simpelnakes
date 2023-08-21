@@ -23,6 +23,7 @@ use App\Models\UserOccupation;
 use App\Models\UserRegistrationPackage;
 use App\Models\Webinar;
 use App\User;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -129,6 +130,8 @@ class UserController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
+        $units = Unit::all();
+
 
         $query = $this->filters($query, $request);
 
@@ -151,6 +154,7 @@ class UserController extends Controller
             'totalStudents' => $totalStudents,
             'inactiveStudents' => $inactiveStudents,
             'banStudents' => $banStudents,
+            'units' => $units,
             'totalOrganizationsStudents' => $totalOrganizationsStudents,
             'userGroups' => $userGroups,
             'organizations' => $organizations,
@@ -563,6 +567,7 @@ class UserController extends Controller
 
         $userBadges = $user->getBadges(false);
 
+        $units = Unit::all();
         $roles = Role::all();
         $badges = Badge::all();
 
@@ -610,6 +615,7 @@ class UserController extends Controller
             'userBadges' => $userBadges,
             'roles' => $roles,
             'badges' => $badges,
+            'units' => $units,
             'categories' => $categories,
             'occupations' => $occupations,
             'becomeInstructor' => $becomeInstructor,
@@ -627,8 +633,7 @@ class UserController extends Controller
         // Purchased Bundles Data
         $data = array_merge($data, $this->getPurchasedBundlesData($user));
 
-        // Purchased Product Data
-        $data = array_merge($data, $this->getPurchasedProductsData($user));
+
 
         if (auth()->user()->can('admin_forum_topics_lists')) {
             $data['topics'] = ForumTopic::where('creator_id', $user->id)
@@ -734,61 +739,6 @@ class UserController extends Controller
         ];
     }
 
-    private function getPurchasedProductsData($user)
-    {
-        $manualAddedProducts = Sale::whereNull('refund_at')
-            ->where('buyer_id', $user->id)
-            ->whereNotNull('product_order_id')
-            ->where('sales.manual_added', true)
-            ->where('sales.access_to_purchased_item', true)
-            ->whereHas('productOrder')
-            ->with([
-                'productOrder' => function ($query) {
-                    $query->with([
-                        'product'
-                    ]);
-                }
-            ])
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        $manualDisabledProducts = Sale::whereNull('refund_at')
-            ->where('buyer_id', $user->id)
-            ->whereNotNull('product_order_id')
-            ->where('sales.access_to_purchased_item', false)
-            ->whereHas('productOrder')
-            ->with([
-                'productOrder' => function ($query) {
-                    $query->with([
-                        'product'
-                    ]);
-                }
-            ])
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        $purchasedProducts = Sale::whereNull('refund_at')
-            ->where('buyer_id', $user->id)
-            ->whereNotNull('product_order_id')
-            ->where('sales.access_to_purchased_item', true)
-            ->where('sales.manual_added', false)
-            ->whereHas('productOrder')
-            ->with([
-                'productOrder' => function ($query) {
-                    $query->with([
-                        'product'
-                    ]);
-                }
-            ])
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        return [
-            'manualAddedProducts' => $manualAddedProducts,
-            'purchasedProducts' => $purchasedProducts,
-            'manualDisabledProducts' => $manualDisabledProducts,
-        ];
-    }
 
     public function update(Request $request, $id)
     {
@@ -802,6 +752,7 @@ class UserController extends Controller
             'email' => (!empty($user->email)) ? 'required|email|unique:users,email,' . $user->id . ',id,deleted_at,NULL' : 'nullable|email|unique:users',
             'mobile' => (!empty($user->mobile)) ? 'required|numeric|unique:users,mobile,' . $user->id . ',id,deleted_at,NULL' : 'nullable|numeric|unique:users',
             'password' => 'nullable|string',
+            'unit_id' => 'nullable|string',
             'bio' => 'nullable|string|min:3|max:48',
             'about' => 'nullable|string|min:3',
             'certificate_additional' => 'nullable|string|max:255',
@@ -839,6 +790,7 @@ class UserController extends Controller
         $user->full_name = !empty($data['full_name']) ? $data['full_name'] : null;
         $user->role_name = $role->name;
         $user->role_id = $role->id;
+        $user->unit_id = !empty($data['unit_id']) ? $data['unit_id'] : null;
         $user->timezone = $data['timezone'] ?? null;
         $user->organ_id = !empty($data['organ_id']) ? $data['organ_id'] : null;
         $user->email = !empty($data['email']) ? $data['email'] : null;

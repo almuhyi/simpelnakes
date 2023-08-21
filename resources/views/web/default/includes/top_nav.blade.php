@@ -27,7 +27,7 @@
         <div class="xs-w-100 d-flex align-items-center justify-content-between ">
             <div class="d-flex">
 
-                @include(getTemplate().'.includes.shopping-cart-dropdwon')
+                {{-- @include(getTemplate().'.includes.shopping-cart-dropdwon') --}}
 
                 <div class="border-left mx-5 mx-lg-15"></div>
 

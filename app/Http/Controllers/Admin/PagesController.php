@@ -4,14 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Page;
-use App\Models\Translation\PageTranslation;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
     public function index()
     {
-        removeContentLocale();
 
         $this->authorize('admin_pages_list');
 
@@ -41,7 +39,6 @@ class PagesController extends Controller
         $this->authorize('admin_pages_create');
 
         $this->validate($request, [
-            'locale' => 'required',
             'name' => 'required',
             'link' => 'required|unique:pages,link',
             'title' => 'required',
@@ -64,12 +61,6 @@ class PagesController extends Controller
             'robot' => $data['robot'],
             'status' => $data['status'],
             'created_at' => time(),
-        ]);
-
-        PageTranslation::updateOrCreate([
-            'page_id' => $page->id,
-            'locale' => mb_strtolower($data['locale'])
-        ], [
             'title' => $data['title'],
             'seo_description' => $data['seo_description'] ?? null,
             'content' => $data['content'],
@@ -82,11 +73,8 @@ class PagesController extends Controller
     {
         $this->authorize('admin_pages_edit');
 
-        $locale = $request->get('locale', app()->getLocale());
 
         $page = Page::findOrFail($id);
-
-        storeContentLocale($locale, $page->getTable(), $page->id);
 
         $data = [
             'pageTitle' => 'Edit halaman' . $page->name,
@@ -103,7 +91,6 @@ class PagesController extends Controller
         $page = Page::findOrFail($id);
 
         $this->validate($request, [
-            'locale' => 'required',
             'name' => 'required',
             'link' => 'required|unique:pages,link,' . $page->id,
             'title' => 'required',
@@ -126,18 +113,10 @@ class PagesController extends Controller
             'robot' => $data['robot'],
             'status' => $data['status'],
             'created_at' => time(),
-        ]);
-
-        PageTranslation::updateOrCreate([
-            'page_id' => $page->id,
-            'locale' => mb_strtolower($data['locale'])
-        ], [
             'title' => $data['title'],
             'seo_description' => $data['seo_description'] ?? null,
             'content' => $data['content'],
         ]);
-
-        removeContentLocale();
 
         return redirect('/admin/pages');
     }

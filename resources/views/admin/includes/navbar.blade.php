@@ -14,24 +14,6 @@
     </form>
     <ul class="navbar-nav navbar-right">
 
-         <li class="dropdown dropdown-list-toggle">
-                <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg">
-                    <i class="fa fa-info-circle"></i>
-                </a>
-                <div class="dropdown-menu dropdown-list dropdown-menu-right">
-                    <div class="dropdown-list-icons mb-0" height="150px">
-                            <a href="javascript::void(0)" class="dropdown-item">
-                                <div class="dropdown-item-icon bg-info text-white d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-info"></i>
-                                </div>
-                                <div class="dropdown-item-desc">
-                                    Version 1
-                                   <div class="time text-primary">All rights reserved</div>
-                                </div>
-                            </a>
-                    </div>
-                </div>
-            </li>
 
         @can('admin_notifications_list')
             <li class="dropdown dropdown-list-toggle">

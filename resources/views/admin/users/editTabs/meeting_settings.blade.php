@@ -163,23 +163,7 @@
                         </div>
                     </div>
 
-                    {{-- <div class="col-12 col-lg-8">
-                        <div class="form-group">
-                            <input type="hidden" id="LocationLatitude" name="latitude" value="{{ (!empty($user->location)) ? $user->location[0] : '' }}">
-                            <input type="hidden" id="LocationLongitude" name="longitude" value="{{ (!empty($user->location)) ? $user->location[1] : '' }}">
 
-                            <div id="mapContainer" class="d-none">
-                                <label class="input-label">{{ trans('update.select_location') }}</label>
-                                <span class="d-block">{{ trans('update.select_location_hint') }}</span>
-
-                                <div class="region-map mt-10" id="mapBox"
-                                     data-zoom="12"
-                                >
-                                    <img src="/assets/default/img/location.png" class="marker">
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
 
                 <div class=" mt-4">

@@ -6,15 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Filter;
 use App\Models\FilterOption;
-use App\Models\Translation\FilterOptionTranslation;
-use App\Models\Translation\FilterTranslation;
 use Illuminate\Http\Request;
 
 class FilterController extends Controller
 {
     public function index()
     {
-        removeContentLocale();
 
         $this->authorize('admin_filters_list');
 
@@ -59,20 +56,13 @@ class FilterController extends Controller
 
         $filter = Filter::create([
             'category_id' => $data['category_id'],
-        ]);
-
-        FilterTranslation::updateOrCreate([
-            'filter_id' => $filter->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
             'title' => $data['title'],
         ]);
 
 
         $filterOptions = !empty($data['sub_filters']) ? $data['sub_filters'] : [];
-        $this->setSubFilters($filter, $filterOptions, $data['locale']);
+        $this->setSubFilters($filter, $filterOptions, $data);
 
-        removeContentLocale();
 
         return redirect('/admin/filters');
     }
@@ -90,8 +80,6 @@ class FilterController extends Controller
             ->orderBy('order', 'asc')
             ->get();
 
-        $locale = $request->get('locale', app()->getLocale());
-        storeContentLocale($locale, $filter->getTable(), $filter->id);
 
         $data = [
             'pageTitle' => 'Edit filter',
@@ -117,19 +105,11 @@ class FilterController extends Controller
         $filter = Filter::findOrFail($id);
         $filter->update([
             'category_id' => $data['category_id'],
-        ]);
-
-        FilterTranslation::updateOrCreate([
-            'filter_id' => $filter->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
             'title' => $data['title'],
         ]);
 
         $filterOptions = !empty($data['sub_filters']) ? $data['sub_filters'] : [];
-        $this->setSubFilters($filter, $filterOptions, $data['locale']);
-
-        removeContentLocale();
+        $this->setSubFilters($filter, $filterOptions, $data);
 
         return back();
     }
@@ -140,12 +120,11 @@ class FilterController extends Controller
 
         Filter::find($id)->delete();
 
-        removeContentLocale();
 
         return redirect('/admin/filters');
     }
 
-    public function setSubFilters(Filter $filter, $filterOptions, $locale)
+    public function setSubFilters(Filter $filter, $filterOptions)
     {
 
         $allFilterOptionsIds = $filter->options->pluck('id')->toArray();
@@ -169,24 +148,13 @@ class FilterController extends Controller
 
                         $oldFilterOption->update([
                             'order' => $order,
-                        ]);
-
-                        FilterOptionTranslation::updateOrCreate([
-                            'filter_option_id' => $oldFilterOption->id,
-                            'locale' => mb_strtolower($locale),
-                        ], [
                             'title' => $filterOption['title'],
                         ]);
+
                     } else {
                         $option = FilterOption::create([
                             'filter_id' => $filter->id,
                             'order' => $order,
-                        ]);
-
-                        FilterOptionTranslation::updateOrCreate([
-                            'filter_option_id' => $option->id,
-                            'locale' => mb_strtolower($locale),
-                        ], [
                             'title' => $filterOption['title'],
                         ]);
                     }

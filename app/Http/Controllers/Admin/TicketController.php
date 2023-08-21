@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Bundle;
 use App\Models\Ticket;
-use App\Models\Translation\TicketTranslation;
 use App\Models\Webinar;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
@@ -50,17 +49,9 @@ class TicketController extends Controller
                 'end_date' => strtotime($date[1]),
                 'discount' => $data['discount'],
                 'capacity' => $data['capacity'],
+                'title' => $data['title'],
                 'created_at' => time()
             ]);
-
-            if (!empty($ticket)) {
-                TicketTranslation::updateOrCreate([
-                    'ticket_id' => $ticket->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
-                    'title' => $data['title'],
-                ]);
-            }
         }
 
         return response()->json([
@@ -78,15 +69,6 @@ class TicketController extends Controller
             ->first();
 
         if (!empty($ticket)) {
-            $locale = $request->get('locale', app()->getLocale());
-            if (empty($locale)) {
-                $locale = app()->getLocale();
-            }
-            storeContentLocale($locale, $ticket->getTable(), $ticket->id);
-
-            $ticket->title = $ticket->getTitleAttribute();
-            $ticket->locale = mb_strtoupper($locale);
-
             return response()->json([
                 'ticket' => $ticket->toArray()
             ], 200);
@@ -119,18 +101,10 @@ class TicketController extends Controller
                 'end_date' => strtotime($date[1]),
                 'discount' => $data['discount'],
                 'capacity' => $data['capacity'],
+                'title' => $data['title'],
                 'updated_at' => time()
             ]);
-
-            TicketTranslation::updateOrCreate([
-                'ticket_id' => $ticket->id,
-                'locale' => mb_strtolower($data['locale']),
-            ], [
-                'title' => $data['title'],
-            ]);
         }
-
-        removeContentLocale();
 
         return response()->json([
             'code' => 200,

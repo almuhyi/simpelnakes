@@ -12,7 +12,6 @@ use App\Models\Meeting;
 use App\Models\Noticeboard;
 use App\Models\Notification;
 use App\Models\Permission;
-use App\Models\ProductOrder;
 use App\Models\QuizzesResult;
 use App\Models\Region;
 use App\Models\ReserveMeeting;
@@ -22,6 +21,7 @@ use App\Models\Follow;
 use App\Models\Sale;
 use App\Models\Section;
 use App\Models\Webinar;
+use App\Models\Unit;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -223,20 +223,6 @@ class User extends Authenticatable
             ->orWhere('teacher_id', $this->id);
     }
 
-    public function products()
-    {
-        return $this->hasMany('App\Models\Product', 'creator_id', 'id');
-    }
-
-    public function productOrdersAsBuyer()
-    {
-        return $this->hasMany('App\Models\ProductOrder', 'buyer_id', 'id');
-    }
-
-    public function productOrdersAsSeller()
-    {
-        return $this->hasMany('App\Models\ProductOrder', 'seller_id', 'id');
-    }
 
     public function forumTopics()
     {
@@ -302,6 +288,11 @@ class User extends Authenticatable
     public function occupations()
     {
         return $this->hasMany('App\Models\UserOccupation', 'user_id', 'id');
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo('App\Models\Unit', 'unit_id', 'id');
     }
 
     public function userRegistrationPackage()
@@ -499,14 +490,6 @@ class User extends Authenticatable
             ->count();
     }
 
-    public function productsSalesCount()
-    {
-        return Sale::where('seller_id', $this->id)
-            ->whereNotNull('product_order_id')
-            ->where('type', 'product')
-            ->whereNull('refund_at')
-            ->count();
-    }
 
     public function getUnReadNotifications()
     {
@@ -798,12 +781,6 @@ class User extends Authenticatable
         return $address;
     }
 
-    public function getWaitingDeliveryProductOrdersCount()
-    {
-        return ProductOrder::where('seller_id', $this->id)
-            ->where('status', ProductOrder::$waitingDelivery)
-            ->count();
-    }
 
     public function checkCanAccessToStore()
     {

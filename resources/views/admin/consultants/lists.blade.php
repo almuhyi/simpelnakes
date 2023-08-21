@@ -105,35 +105,10 @@
                             </div>
 
 
-                            {{-- <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="input-label">{{trans('admin/main.filters')}}</label>
-                                    <select name="sort" data-plugin-selectTwo class="form-control populate">
-                                        <option value="">{{trans('admin/main.filter_type')}}</option>
-                                        <option value="appointments_asc" @if(request()->get('sort') == 'appointments_asc') selected @endif>{{trans('admin/main.sales_appointments_ascending')}}</option>
-                                        <option value="appointments_desc" @if(request()->get('sort') == 'appointments_desc') selected @endif>{{trans('admin/main.sales_appointments_descending')}}</option>
-                                        <option value="appointments_income_asc" @if(request()->get('sort') == 'appointments_income_asc') selected @endif>{{trans('admin/main.appointments_income_ascending')}}</option>
-                                        <option value="appointments_income_desc" @if(request()->get('sort') == 'appointments_income_desc') selected @endif>{{trans('admin/main.appointments_income_descending')}}</option>
-                                        <option value="pending_appointments_asc" @if(request()->get('sort') == 'pending_appointments_asc') selected @endif>{{trans('admin/main.pending_appointments_ascending')}}</option>
-                                        <option value="pending_appointments_desc" @if(request()->get('sort') == 'pending_appointments_desc') selected @endif>{{trans('admin/main.pending_appointments_descending')}}</option>
-                                        <option value="created_at_asc" @if(request()->get('sort') == 'created_at_asc') selected @endif>{{trans('admin/main.register_date_ascending')}}</option>
-                                        <option value="created_at_desc" @if(request()->get('sort') == 'created_at_desc') selected @endif>{{trans('admin/main.register_date_descending')}}</option>
-                                    </select>
-                                </div>
-                            </div> --}}
 
 
-                            {{-- <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="input-label">{{trans('admin/main.organization')}}</label>
-                                    <select name="organization_id" data-plugin-selectTwo class="form-control populate">
-                                        <option value="">{{trans('admin/main.select_organization')}}</option>
-                                        @foreach($organizations as $organization)
-                                            <option value="{{ $organization->id }}" @if(request()->get('organization_id') == $organization->id) selected @endif>{{ $organization->full_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div> --}}
+
+
 
 
                             <div class="col-md-3">
@@ -217,9 +192,6 @@
                                         <div class="media-body">
                                             <div class="text-primary mt-0 mb-1 font-weight-bold">{{ $consultant->sales_count }}</div>
 
-                                            {{-- @if($consultant->sales_amount > 0)
-                                                <div class="text-small font-600-bold">{{ addCurrencyToPrice($consultant->sales_amount) }}</div>
-                                            @endif --}}
                                         </div>
                                     </td>
 
@@ -227,13 +199,7 @@
                                         {{ $consultant->pendingAppointments }}
                                     </td>
 
-                                    {{-- <td>
-                                        @if($consultant->totalIncome > 0)
-                                            {{ addCurrencyToPrice($consultant->getAccountingBalance()) }}
-                                        @else
-                                            0
-                                        @endif
-                                    </td> --}}
+
 
                                     <td>{{ !empty($consultant->userGroup) ? $consultant->userGroup->group->name : '-' }}</td>
 

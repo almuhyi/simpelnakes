@@ -47,128 +47,6 @@
             </div>
         </div>
 
-        {{-- <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                @can('admin_general_dashboard_daily_sales_statistics')
-                    @if(!empty($dailySalesTypeStatistics))
-                        <div class="card card-statistic-2">
-                            <div class="card-stats">
-                                <div class="card-stats-title">{{trans('admin/main.daily_sales_type_statistics')}}</div>
-
-                                <div class="card-stats-items">
-                                    <div class="card-stats-item">
-                                        <div class="card-stats-item-count">{{ $dailySalesTypeStatistics['webinarsSales'] }}</div>
-                                        <div class="card-stats-item-label">{{trans('admin/main.live_class')}}</div>
-                                    </div>
-
-                                    <div class="card-stats-item">
-                                        <div class="card-stats-item-count">{{ $dailySalesTypeStatistics['courseSales'] }}</div>
-                                        <div class="card-stats-item-label">{{trans('admin/main.course')}}</div>
-                                    </div>
-
-                                    <div class="card-stats-item">
-                                        <div class="card-stats-item-count">{{ $dailySalesTypeStatistics['appointmentSales'] }}</div>
-                                        <div class="card-stats-item-label">{{trans('admin/main.appointment')}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-icon shadow-primary bg-primary">
-                                <i class="fas fa-archive"></i>
-                            </div>
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h4>{{trans('admin/main.today_sales')}}</h4>
-                                </div>
-                                <div class="card-body">
-                                    {{ $dailySalesTypeStatistics['allSales'] }}
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                @endcan
-            </div>
-
-
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                @can('admin_general_dashboard_income_statistics')
-                    @if(!empty($getIncomeStatistics))
-                        <div class="card card-statistic-2">
-                            <div class="card-stats">
-                                <div class="card-stats-title">{{trans('admin/main.income_statistics')}}</div>
-
-                                <div class="card-stats-items">
-                                    <div class="card-stats-item">
-                                        <div class="card-stats-item-count">{{ addCurrencyToPrice($getIncomeStatistics['todaySales']) }}</div>
-                                        <div class="card-stats-item-label">{{trans('admin/main.today')}}</div>
-                                    </div>
-
-                                    <div class="card-stats-item">
-                                        <div class="card-stats-item-count">{{ addCurrencyToPrice($getIncomeStatistics['monthSales']) }}</div>
-                                        <div class="card-stats-item-label">{{trans('admin/main.this_month')}}</div>
-                                    </div>
-
-                                    <div class="card-stats-item">
-                                        <div class="card-stats-item-count">{{ addCurrencyToPrice($getIncomeStatistics['yearSales']) }}</div>
-                                        <div class="card-stats-item-label">{{trans('admin/main.this_year')}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-icon shadow-primary bg-primary">
-                                <i class="fas fa-dollar-sign"></i>
-                            </div>
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h4>{{trans('admin/main.total_incomes')}}</h4>
-                                </div>
-                                <div class="card-body">
-                                    {{ addCurrencyToPrice($getIncomeStatistics['totalSales']) }}
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                @endcan
-            </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                @can('admin_general_dashboard_total_sales_statistics')
-                    @if(!empty($getTotalSalesStatistics))
-                        <div class="card card-statistic-2">
-                            <div class="card-stats">
-                                <div class="card-stats-title">{{trans('admin/main.salescount')}}</div>
-
-                                <div class="card-stats-items">
-                                    <div class="card-stats-item">
-                                        <div class="card-stats-item-count">{{ $getTotalSalesStatistics['todaySales'] }}</div>
-                                        <div class="card-stats-item-label">{{trans('admin/main.today')}}</div>
-                                    </div>
-                                    <div class="card-stats-item">
-                                        <div class="card-stats-item-count">{{ $getTotalSalesStatistics['monthSales'] }}</div>
-                                        <div class="card-stats-item-label">{{trans('admin/main.this_month')}}</div>
-                                    </div>
-                                    <div class="card-stats-item">
-                                        <div class="card-stats-item-count">{{ $getTotalSalesStatistics['yearSales'] }}</div>
-                                        <div class="card-stats-item-label">{{trans('admin/main.this_year')}}</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card-icon shadow-primary bg-primary">
-                                <i class="fas fa-shopping-cart"></i>
-                            </div>
-
-                            <div class="card-wrap">
-                                <div class="card-header">
-                                    <h4>{{trans('admin/main.total_sales')}}</h4>
-                                </div>
-                                <div class="card-body">
-                                    {{ $getTotalSalesStatistics['totalSales'] }}
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                @endcan
-            </div>
-        </div> --}}
 
         <div class="row">
 
@@ -224,116 +102,13 @@
                 </div>
             @endcan
 
-            {{-- @can('admin_general_dashboard_new_reviews')
-                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    <a class="card card-statistic-1">
-                        <div class="card-icon bg-success">
-                            <i class="fas fa-eye"></i></div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Review</h4>
-                            </div>
-                            <div class="card-body">
-                                {{ $getPendingReviewCount }}
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            @endcan --}}
+
 
         </div>
 
 
         <div class="row">
-            {{-- @can('admin_general_dashboard_sales_statistics_chart')
-                <div class="col-lg-8 col-md-12 col-12 col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>{{trans('admin/main.sales_statistics')}}</h4>
-                            <div class="card-header-action">
-                                <div class="btn-group">
-                                    <button type="button" class="js-sale-chart-month btn">{{trans('admin/main.month')}}</button>
-                                    <button type="button" class="js-sale-chart-year btn btn-primary">{{trans('admin/main.year')}}</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="position-relative">
-                                        <canvas id="saleStatisticsChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-12">
-                                    @if(!empty($getMonthAndYearSalesChartStatistics))
-                                        <div class="statistic-details mt-4 position-relative">
-                                            <div class="statistic-details-item">
-                                                <span class="text-muted">
-                                                    @if($getMonthAndYearSalesChartStatistics['todaySales']['grow_percent']['status'] == 'up')
-                                                        <span class="text-primary"><i class="fas fa-caret-up"></i></span>
-                                                    @else
-                                                        <span class="text-danger"><i class="fas fa-caret-down"></i></span>
-                                                    @endif
-
-                                                    {{ $getMonthAndYearSalesChartStatistics['todaySales']['grow_percent']['percent'] }}
-                                                </span>
-
-                                                <div class="detail-value">{{ addCurrencyToPrice($getMonthAndYearSalesChartStatistics['todaySales']['amount']) }}</div>
-                                                <div class="detail-name">{{trans('admin/main.today_sales')}}</div>
-                                            </div>
-                                            <div class="statistic-details-item">
-                                                <span class="text-muted">
-                                                    @if($getMonthAndYearSalesChartStatistics['weekSales']['grow_percent']['status'] == 'up')
-                                                        <span class="text-primary"><i class="fas fa-caret-up"></i></span>
-                                                    @else
-                                                        <span class="text-danger"><i class="fas fa-caret-down"></i></span>
-                                                    @endif
-
-                                                    {{ $getMonthAndYearSalesChartStatistics['weekSales']['grow_percent']['percent'] }}
-                                                </span>
-
-                                                <div class="detail-value">{{ addCurrencyToPrice($getMonthAndYearSalesChartStatistics['weekSales']['amount']) }}</div>
-                                                <div class="detail-name">{{trans('admin/main.week_sales')}}</div>
-                                            </div>
-                                            <div class="statistic-details-item">
-                                                <span class="text-muted">
-                                                    @if($getMonthAndYearSalesChartStatistics['monthSales']['grow_percent']['status'] == 'up')
-                                                        <span class="text-primary"><i class="fas fa-caret-up"></i></span>
-                                                    @else
-                                                        <span class="text-danger"><i class="fas fa-caret-down"></i></span>
-                                                    @endif
-
-                                                    {{ $getMonthAndYearSalesChartStatistics['monthSales']['grow_percent']['percent'] }}
-                                                </span>
-
-                                                <div class="detail-value">{{ addCurrencyToPrice($getMonthAndYearSalesChartStatistics['monthSales']['amount']) }}</div>
-                                                <div class="detail-name">{{trans('admin/main.month_sales')}}</div>
-                                            </div>
-                                            <div class="statistic-details-item">
-                                                <span class="text-muted">
-                                                    @if($getMonthAndYearSalesChartStatistics['yearSales']['grow_percent']['status'] == 'up')
-                                                        <span class="text-primary"><i class="fas fa-caret-up"></i></span>
-                                                    @else
-                                                        <span class="text-danger"><i class="fas fa-caret-down"></i></span>
-                                                    @endif
-
-                                                    {{ $getMonthAndYearSalesChartStatistics['yearSales']['grow_percent']['percent'] }}
-                                                </span>
-
-                                                <div class="detail-value">{{ addCurrencyToPrice($getMonthAndYearSalesChartStatistics['yearSales']['amount']) }}</div>
-                                                <div class="detail-name">{{trans('admin/main.year_sales')}}</div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endcan --}}
 
             @can('admin_general_dashboard_recent_comments')
                 <div class="col-lg-12 col-md-12 col-12 col-sm-12 @if(count($recentComments) < 6) pb-30 @endif">
@@ -532,32 +307,7 @@
             @endcan
         </div>
 
-        {{-- @can('admin_general_dashboard_users_statistics_chart')
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-12 col-sm-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>{{trans('admin/main.new_registration_statistics')}}</h4>
-                            <div class="card-header-action">
-                                <div class="btn-group">
-                                    <a href="#" class="btn">Views
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="position-relative">
-                                        <canvas id="usersStatisticsChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endcan --}}
+
     </section>
 @endsection
 

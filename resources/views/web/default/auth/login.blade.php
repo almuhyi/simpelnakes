@@ -46,19 +46,7 @@
                         <button type="submit" class="btn btn-primary btn-block mt-20">Masuk</button>
                     </form>
 
-                    {{-- <div class="text-center mt-20">
-                        <span class="badge badge-circle-gray300 text-secondary d-inline-flex align-items-center justify-content-center">Atau</span>
-                    </div> --}}
 
-                    {{-- <a href="/google" target="_blank" class="social-login mt-20 p-10 text-center d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('') }}assets/default/img/auth/google.svg" class="mr-auto" alt=" google svg"/>
-                        <span class="flex-grow-1">Masuk dengan akun google</span>
-                    </a>
-
-                    <a href="{{url('/facebook/redirect')}}" target="_blank" class="social-login mt-20 p-10 text-center d-flex align-items-center justify-content-center ">
-                        <img src="{{ asset('') }}assets/default/img/auth/facebook.svg" class="mr-auto" alt="facebook svg"/>
-                        <span class="flex-grow-1">Masuk dengan akun facebook</span>
-                    </a> --}}
 
                     <div class="mt-30 text-center">
                         <a href="{{ url('/forget-password') }}" target="_blank">Lupa kata sandi?</a>

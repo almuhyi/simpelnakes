@@ -7,7 +7,6 @@ use App\Models\RegistrationPackage;
 use App\Models\Role;
 use App\Models\Sale;
 use App\Models\Setting;
-use App\Models\Translation\RegistrationPackageTranslation;
 use Illuminate\Http\Request;
 
 class RegistrationPackagesController extends Controller
@@ -112,16 +111,9 @@ class RegistrationPackagesController extends Controller
             'meeting_count' => $data['meeting_count'] ?? null,
             'product_count' => $data['product_count'] ?? null,
             'status' => $data['status'],
-            'created_at' => time(),
-        ]);
-
-
-        RegistrationPackageTranslation::updateOrCreate([
-            'registration_package_id' => $package->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
             'title' => $data['title'],
             'description' => $data['description'] ?? null,
+            'created_at' => time(),
         ]);
 
         return redirect(route('adminRegistrationPackagesLists'));
@@ -132,9 +124,6 @@ class RegistrationPackagesController extends Controller
         $this->authorize('admin_registration_packages_edit');
 
         $package = RegistrationPackage::findOrFail($id);
-
-        $locale = $request->get('locale', app()->getLocale());
-        storeContentLocale($locale, $package->getTable(), $package->id);
 
         $data = [
             'pageTitle' => 'Edit',
@@ -183,17 +172,11 @@ class RegistrationPackagesController extends Controller
             'meeting_count' => $data['meeting_count'] ?? null,
             'product_count' => $data['product_count'] ?? null,
             'status' => $data['status'],
+            'title' => $data['title'],
+            'description' => $data['description'] ?? null,
             'created_at' => time(),
         ]);
 
-
-        RegistrationPackageTranslation::updateOrCreate([
-            'registration_package_id' => $package->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
-            'title' => $data['title'],
-            'description' => $data['description'] ?? null,
-        ]);
 
         return redirect()->back();
     }
@@ -212,8 +195,6 @@ class RegistrationPackagesController extends Controller
     public function settings()
     {
         $this->authorize('admin_registration_packages_settings');
-
-        removeContentLocale();
 
         $names = [Setting::$registrationPackagesGeneralName, Setting::$registrationPackagesInstructorsName, Setting::$registrationPackagesOrganizationsName];
 

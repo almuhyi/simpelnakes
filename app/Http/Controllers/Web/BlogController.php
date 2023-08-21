@@ -119,11 +119,6 @@ class BlogController extends Controller
 
                 return view(getTemplate() . '.blog.show', $data);
             }
-            if (!empty($translate)) {
-                app()->setLocale($translate->locale);
-
-
-            }
         }
 
         abort(404);

@@ -24,8 +24,8 @@
 
             <select name="type" class="custom-select @error('type')  is-invalid @enderror">
                 <option value="webinar" @if(!empty($webinar) and $webinar->isWebinar()) selected @endif>Webinar</option>
-                <option value="course" @if(!empty($webinar) and $webinar->type == 'course') selected @endif>Pelajaran video</option>
-                <option value="text_lesson" @if(!empty($webinar) and $webinar->type == 'text_lesson') selected @endif>Pelajaran teks</option>
+                <option value="pelatihan" @if(!empty($webinar) and $webinar->type == 'pelatihan') selected @endif>Pelajaran video</option>
+                <option value="teks" @if(!empty($webinar) and $webinar->type == 'teks') selected @endif>Pelajaran teks</option>
             </select>
 
             @error('type')

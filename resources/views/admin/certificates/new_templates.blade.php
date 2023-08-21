@@ -43,23 +43,6 @@
 
                         <div class="row">
                             <div class="col-lg-6">
-                                @if(!empty(getGeneralSettings('content_translate')))
-                                    <div class="form-group">
-                                        <label class="input-label">Bahasa</label>
-                                        <select name="locale" class="form-control {{ !empty($template) ? 'js-edit-content-locale' : '' }}">
-                                            @foreach($userLanguages as $lang => $language)
-                                                <option value="{{ $lang }}" @if(mb_strtolower(request()->get('locale', app()->getLocale())) == mb_strtolower($lang)) selected @endif>{{ $language }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('locale')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                @else
-                                    <input type="hidden" name="locale" value="{{ getDefaultLocale() }}">
-                                @endif
 
                                 <div class="form-group">
                                     <label class="control-label" for="inputDefault">Jenis</label>
@@ -136,14 +119,6 @@
                             <div class="invalid-feedback">@error('body') {{ $message }} @enderror</div>
                         </div>
 
-                        {{-- <div class="form-group custom-switches-stacked">
-                            <label class="custom-switch pl-0">
-                                <input type="hidden" name="rtl" value="0">
-                                <input type="checkbox" id="rtl" name="rtl" value="1" {{ (!empty($template) and $template->rtl) ? 'checked="checked"' : '' }} class="custom-switch-input"/>
-                                <span class="custom-switch-indicator"></span>
-                                <label class="custom-switch-description mb-0 cursor-pointer" for="rtl">{{ trans('admin/main.rtl') }}</label>
-                            </label>
-                        </div> --}}
 
                         <div class="form-group custom-switches-stacked">
                             <label class="custom-switch pl-0">

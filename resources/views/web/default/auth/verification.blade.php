@@ -35,7 +35,7 @@
 
                     <div class="text-center mt-20">
                         <span class="text-secondary">
-                            <a href="/verification/resend" class="font-weight-bold">Kirim ulang kode</a>
+                            <a href="{{ url('/verification/resend') }}" class="font-weight-bold">Kirim ulang kode</a>
                         </span>
                     </div>
 

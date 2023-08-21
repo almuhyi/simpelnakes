@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Subscribe;
-use App\Models\Translation\SubscribeTranslation;
 use Illuminate\Http\Request;
 
 class SubscribesController extends Controller
@@ -13,7 +12,6 @@ class SubscribesController extends Controller
     {
         $this->authorize('admin_subscribe_list');
 
-        removeContentLocale();
 
         $subscribes = Subscribe::with([
             'sales' => function ($query) {
@@ -33,7 +31,6 @@ class SubscribesController extends Controller
     {
         $this->authorize('admin_subscribe_create');
 
-        removeContentLocale();
 
         $data = [
             'pageTitle' => trans('admin/pages/financial.new_subscribe'),
@@ -64,17 +61,9 @@ class SubscribesController extends Controller
             'is_popular' => (!empty($data['is_popular']) and $data['is_popular'] == '1'),
             'infinite_use' => (!empty($data['infinite_use']) and $data['infinite_use'] == '1'),
             'created_at' => time(),
+            'title' => $data['title'],
+            'description' => !empty($data['description']) ? $data['description'] : null,
         ]);
-
-        if (!empty($subscribe)) {
-            SubscribeTranslation::updateOrCreate([
-                'subscribe_id' => $subscribe->id,
-                'locale' => mb_strtolower($data['locale']),
-            ], [
-                'title' => $data['title'],
-                'description' => !empty($data['description']) ? $data['description'] : null,
-            ]);
-        }
 
         return redirect('/admin/financial/subscribes');
     }
@@ -84,9 +73,6 @@ class SubscribesController extends Controller
         $this->authorize('admin_subscribe_edit');
 
         $subscribe = Subscribe::findOrFail($id);
-
-        $locale = $request->get('locale', app()->getLocale());
-        storeContentLocale($locale, $subscribe->getTable(), $subscribe->id);
 
         $data = [
             'pageTitle' => trans('admin/pages/financial.new_subscribe'),
@@ -119,17 +105,10 @@ class SubscribesController extends Controller
             'is_popular' => (!empty($data['is_popular']) and $data['is_popular'] == '1'),
             'infinite_use' => (!empty($data['infinite_use']) and $data['infinite_use'] == '1'),
             'created_at' => time(),
-        ]);
-
-        SubscribeTranslation::updateOrCreate([
-            'subscribe_id' => $subscribe->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
             'title' => $data['title'],
             'description' => !empty($data['description']) ? $data['description'] : null,
         ]);
 
-        removeContentLocale();
 
         return redirect('/admin/financial/subscribes');
     }

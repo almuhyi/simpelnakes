@@ -3,29 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 
-class Subscribe extends Model implements TranslatableContract
+class Subscribe extends Model
 {
-    use Translatable;
 
     protected $table = 'subscribes';
     public $timestamps = false;
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
 
-    public $translatedAttributes = ['title', 'description'];
-
-    public function getTitleAttribute()
-    {
-        return getTranslateAttributeValue($this, 'title');
-    }
-
-    public function getDescriptionAttribute()
-    {
-        return getTranslateAttributeValue($this, 'description');
-    }
 
     public function sales()
     {

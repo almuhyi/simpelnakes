@@ -202,28 +202,6 @@ Route::group(['namespace' => 'Panel', 'prefix' => 'panel', 'middleware' => ['imp
         Route::get('/{id}/finish', 'ReserveMeetingController@finish');
     });
 
-    Route::group(['prefix' => 'financial'], function () {
-        Route::get('/sales', 'SaleController@index');
-        Route::get('/summary', 'AccountingController@index');
-        Route::get('/payout', 'PayoutController@index');
-        Route::post('/request-payout', 'PayoutController@requestPayout');
-        Route::get('/account', 'AccountingController@account');
-        Route::post('/charge', 'AccountingController@charge');
-
-        Route::group(['prefix' => 'offline-payments'], function () {
-            Route::get('/{id}/edit', 'AccountingController@account');
-            Route::post('/{id}/update', 'AccountingController@updateOfflinePayment');
-            Route::get('/{id}/delete', 'AccountingController@deleteOfflinePayment');
-        });
-
-        Route::get('/subscribes', 'SubscribesController@index');
-        Route::post('/pay-subscribes', 'SubscribesController@pay');
-
-        Route::group(['prefix' => 'registration-packages'], function () {
-            Route::get('/', 'RegistrationPackagesController@index')->name('panelRegistrationPackagesLists');
-            Route::post('/pay-registration-packages', 'RegistrationPackagesController@pay')->name('payRegistrationPackage');
-        });
-    });
 
     Route::group(['prefix' => 'setting'], function () {
         Route::get('/step/{step?}', 'UserController@setting');
@@ -249,17 +227,7 @@ Route::group(['namespace' => 'Panel', 'prefix' => 'panel', 'middleware' => ['imp
         });
     });
 
-    Route::group(['prefix' => 'marketing', 'middleware' => 'user.not.access'], function () {
-        Route::get('/special_offers', 'SpecialOfferController@index')->name('special_offer_index');
-        Route::post('/special_offers/store', 'SpecialOfferController@store');
-        Route::get('/special_offers/{id}/disable', 'SpecialOfferController@disable');
-        Route::get('/promotions', 'MarketingController@promotions');
-        Route::post('/pay-promotion', 'MarketingController@payPromotion');
-    });
 
-    Route::group(['prefix' => 'marketing'], function () {
-        Route::get('/affiliates', 'AffiliateController@affiliates');
-    });
 
     Route::group(['prefix' => 'noticeboard'], function () {
         Route::get('/', 'NoticeboardController@index');
@@ -286,80 +254,7 @@ Route::group(['namespace' => 'Panel', 'prefix' => 'panel', 'middleware' => ['imp
         Route::get('/{user_type}/{user_id}/delete', 'UserController@deleteUser');
     });
 
-    Route::group(['prefix' => 'rewards'], function () {
-        Route::get('/', 'RewardController@index');
-        Route::post('/exchange', 'RewardController@exchange');
-    });
 
-    Route::group(['prefix' => 'store', 'namespace' => 'Store'], function () {
-        Route::group(['middleware' => 'user.not.access'], function () {
-
-            Route::group(['prefix' => 'products'], function () {
-                Route::get('/', 'ProductController@index');
-                Route::get('/new', 'ProductController@create');
-                Route::post('/store', 'ProductController@store');
-                Route::get('/{id}/step/{step?}', 'ProductController@edit');
-                Route::get('/{id}/edit', 'ProductController@edit');
-                Route::post('/{id}/update', 'ProductController@update');
-                Route::get('/{id}/delete', 'ProductController@destroy');
-                Route::post('/{id}/getContentItemByLocale', 'ProductController@getContentItemByLocale');
-
-                Route::group(['prefix' => 'filters'], function () {
-                    Route::get('/get-by-category-id/{categoryId}', 'ProductFilterController@getByCategoryId');
-                });
-
-                Route::group(['prefix' => 'specifications'], function () {
-                    Route::get('/{id}/get', 'ProductSpecificationController@getItem');
-                    Route::post('/store', 'ProductSpecificationController@store');
-                    Route::post('/{id}/update', 'ProductSpecificationController@update');
-                    Route::get('/{id}/delete', 'ProductSpecificationController@destroy');
-                    Route::post('/order-items', 'ProductSpecificationController@orderItems');
-                    Route::post('/search', 'ProductSpecificationController@search');
-                    Route::get('/get-by-category-id/{categoryId}', 'ProductSpecificationController@getByCategoryId');
-                });
-
-                Route::group(['prefix' => 'files'], function () {
-                    Route::post('/store', 'ProductFileController@store');
-                    Route::post('/{id}/update', 'ProductFileController@update');
-                    Route::get('/{id}/delete', 'ProductFileController@destroy');
-                    Route::post('/order-items', 'ProductFileController@orderItems');
-                });
-
-                Route::group(['prefix' => 'faqs'], function () {
-                    Route::post('/store', 'ProductFaqController@store');
-                    Route::post('/{id}/update', 'ProductFaqController@update');
-                    Route::get('/{id}/delete', 'ProductFaqController@destroy');
-                    Route::post('/order-items', 'ProductFaqController@orderItems');
-                });
-
-                Route::group(['prefix' => 'comments'], function () {
-                    Route::get('/', 'CommentController@index');
-                });
-            });
-
-            Route::group(['prefix' => 'sales'], function () {
-                Route::get('/', 'SaleController@index');
-                Route::get('/{id}/productOrder/{order_id}/invoice', 'SaleController@invoice');
-                Route::get('/{id}/getProductOrder/{order_id}', 'SaleController@getProductOrder');
-                Route::post('/{id}/productOrder/{order_id}/setTrackingCode', 'SaleController@setTrackingCode');
-            });
-        });
-
-        Route::group(['prefix' => 'purchases'], function () {
-            Route::get('/', 'MyPurchaseController@index');
-            Route::get('/{id}/getProductOrder/{order_id}', 'MyPurchaseController@getProductOrder');
-            Route::get('/{id}/productOrder/{order_id}/setGotTheParcel', 'MyPurchaseController@setGotTheParcel');
-            Route::get('/{id}/productOrder/{order_id}/invoice', 'MyPurchaseController@invoice');
-        });
-
-
-        Route::group(['prefix' => 'products'], function () {
-
-            Route::get('/my-comments', 'CommentController@myComments');
-
-            Route::get('/files/{id}/download', 'ProductFileController@download');
-        });
-    });
 
     Route::group(['prefix' => 'assignments'], function () {
         Route::get('/my-assignments', 'AssignmentController@myAssignments');
@@ -367,26 +262,7 @@ Route::group(['namespace' => 'Panel', 'prefix' => 'panel', 'middleware' => ['imp
         Route::get('/{id}/students', 'AssignmentController@students');
     });
 
-    Route::group(['prefix' => 'bundles'], function () {
-        Route::group(['middleware' => 'user.not.access'], function () {
-            Route::get('/', 'BundlesController@index');
-            Route::get('/new', 'BundlesController@create');
-            Route::post('/store', 'BundlesController@store');
-            Route::get('/{id}/step/{step?}', 'BundlesController@edit');
-            Route::get('/{id}/edit', 'BundlesController@edit');
-            Route::post('/{id}/update', 'BundlesController@update');
-            Route::get('/{id}/delete', 'BundlesController@destroy');
-            Route::post('/{id}/getContentItemByLocale', 'BundlesController@getContentItemByLocale');
-            Route::get('/{id}/courses', 'BundlesController@courses');
-            Route::get('/{id}/export-students-list', 'BundlesController@exportStudentsList');
-        });
-    });
 
-    Route::group(['prefix' => 'bundle-webinars'], function () {
-        Route::post('/store', 'BundleWebinarsController@store');
-        Route::post('/{id}/update', 'BundleWebinarsController@update');
-        Route::get('/{id}/delete', 'BundleWebinarsController@destroy');
-    });
 
     Route::group(['prefix' => 'course-noticeboard'], function () {
         Route::get('/', 'CourseNoticeboardController@index');

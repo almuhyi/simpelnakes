@@ -4,23 +4,6 @@
     <form action="{{ url('/admin/files/store') }}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="webinar_id" value="{{  !empty($webinar) ? $webinar->id :''  }}">
 
-        @if(!empty(getGeneralSettings('content_translate')))
-            <div class="form-group">
-                <label class="input-label">Bahasa</label>
-                <select name="locale" class="form-control ">
-                    @foreach($userLanguages as $lang => $language)
-                        <option value="{{ $lang }}" @if(mb_strtolower(request()->get('locale', app()->getLocale())) == mb_strtolower($lang)) selected @endif>{{ $language }}</option>
-                    @endforeach
-                </select>
-                @error('locale')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
-        @else
-            <input type="hidden" name="locale" value="{{ getDefaultLocale() }}">
-        @endif
 
         <div class="form-group">
             <label class="input-label">Judul</label>

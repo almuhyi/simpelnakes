@@ -4,12 +4,10 @@ namespace App\Models;
 
 use App\Models\Traits\SequenceContent;
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 
-class TextLesson extends Model implements TranslatableContract
+
+class TextLesson extends Model
 {
-    use Translatable;
     use SequenceContent;
 
     protected $table = 'text_lessons';
@@ -20,23 +18,6 @@ class TextLesson extends Model implements TranslatableContract
     static $Active = 'active';
     static $Inactive = 'inactive';
     static $Status = ['active', 'inactive'];
-
-    public $translatedAttributes = ['title', 'summary', 'content'];
-
-    public function getTitleAttribute()
-    {
-        return getTranslateAttributeValue($this, 'title');
-    }
-
-    public function getSummaryAttribute()
-    {
-        return getTranslateAttributeValue($this, 'summary');
-    }
-
-    public function getContentAttribute()
-    {
-        return getTranslateAttributeValue($this, 'content');
-    }
 
 
     public function attachments()

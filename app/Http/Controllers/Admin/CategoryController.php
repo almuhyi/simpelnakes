@@ -4,14 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Translation\CategoryTranslation;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        removeContentLocale();
 
         $this->authorize('admin_categories_list');
 
@@ -54,21 +52,14 @@ class CategoryController extends Controller
         $data = $request->all();
         $category = Category::create([
             'icon' => $data['icon'],
-        ]);
-
-        CategoryTranslation::updateOrCreate([
-            'category_id' => $category->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
             'title' => $data['title'],
         ]);
 
         $hasSubCategories = (!empty($request->get('has_sub')) and $request->get('has_sub') == 'on');
-        $this->setSubCategory($category, $request->get('sub_categories'), $hasSubCategories, $data['locale']);
+        $this->setSubCategory($category, $request->get('sub_categories'), $hasSubCategories, $data);
 
         cache()->forget(Category::$cacheKey);
 
-        removeContentLocale();
 
         return redirect('/admin/categories');
     }
@@ -81,9 +72,6 @@ class CategoryController extends Controller
         $subCategories = Category::where('parent_id', $category->id)
             ->orderBy('order', 'asc')
             ->get();
-
-        $locale = $request->get('locale', app()->getLocale());
-        storeContentLocale($locale, $category->getTable(), $category->id);
 
         $data = [
             'pageTitle' => 'Edit kategori profesi',
@@ -108,22 +96,15 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->update([
             'icon' => $data['icon'],
-        ]);
-
-        CategoryTranslation::updateOrCreate([
-            'category_id' => $category->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
             'title' => $data['title'],
         ]);
 
         $hasSubCategories = (!empty($request->get('has_sub')) and $request->get('has_sub') == 'on');
-        $this->setSubCategory($category, $request->get('sub_categories'), $hasSubCategories, $data['locale']);
+        $this->setSubCategory($category, $request->get('sub_categories'), $hasSubCategories, $data);
 
 
         cache()->forget(Category::$cacheKey);
 
-        removeContentLocale();
 
         return redirect('/admin/categories');
     }
@@ -164,7 +145,7 @@ class CategoryController extends Controller
         return response()->json($categories, 200);
     }
 
-    public function setSubCategory(Category $category, $subCategories, $hasSubCategories, $locale)
+    public function setSubCategory(Category $category, $subCategories, $hasSubCategories)
     {
         $order = 1;
         $oldIds = [];
@@ -182,25 +163,14 @@ class CategoryController extends Controller
                         $check->update([
                             'order' => $order,
                             'icon' => $subCategory['icon'] ?? null,
-                        ]);
-
-                        CategoryTranslation::updateOrCreate([
-                            'category_id' => $check->id,
-                            'locale' => mb_strtolower($locale),
-                        ], [
                             'title' => $subCategory['title'],
                         ]);
+
                     } else {
                         $new = Category::create([
                             'parent_id' => $category->id,
                             'icon' => $subCategory['icon'] ?? null,
                             'order' => $order,
-                        ]);
-
-                        CategoryTranslation::updateOrCreate([
-                            'category_id' => $new->id,
-                            'locale' => mb_strtolower($locale),
-                        ], [
                             'title' => $subCategory['title'],
                         ]);
 

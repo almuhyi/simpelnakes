@@ -20,7 +20,6 @@ class HomeSection extends Model
         'best_sellers',
         'discount_classes',
         'free_classes',
-        'store_products',
         'testimonials',
         'subscribes',
         'find_instructors',
@@ -43,7 +42,6 @@ class HomeSection extends Model
     static $best_sellers = 'best_sellers';
     static $discount_classes = 'discount_classes';
     static $free_classes = 'free_classes';
-    static $store_products = 'store_products';
     static $testimonials = 'testimonials';
     static $subscribes = 'subscribes';
     static $find_instructors = 'find_instructors';

@@ -89,8 +89,6 @@ class CertificateController extends Controller
     {
         $this->authorize('admin_certificate_template_list');
 
-        removeContentLocale();
-
         $templates = CertificateTemplate::orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -106,7 +104,6 @@ class CertificateController extends Controller
     {
         $this->authorize('admin_certificate_template_create');
 
-        removeContentLocale();
 
         $data = [
             'pageTitle' => 'Buat template baru',
@@ -164,19 +161,12 @@ class CertificateController extends Controller
                 'font_size' => $data['font_size'],
                 'text_color' => $data['text_color'],
                 'created_at' => time(),
+                'title' => $data['title'],
+                'body' => $data['body'],
+                'rtl' => $data['rtl'],
             ]);
         }
 
-        CertificateTemplateTranslation::updateOrCreate([
-            'certificate_template_id' => $template->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
-            'title' => $data['title'],
-            'body' => $data['body'],
-            'rtl' => $data['rtl'],
-        ]);
-
-        removeContentLocale();
 
         return redirect('/admin/certificates/templates');
     }
@@ -231,8 +221,6 @@ class CertificateController extends Controller
 
         $template = CertificateTemplate::findOrFail($template_id);
 
-        $locale = $request->get('locale', app()->getLocale());
-        storeContentLocale($locale, $template->getTable(), $template->id);
 
         $data = [
             'pageTitle' => 'Edit template sertifikat',

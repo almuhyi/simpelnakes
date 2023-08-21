@@ -4,12 +4,9 @@ namespace App\Models;
 
 use App\Models\Traits\SequenceContent;
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 
-class Quiz extends Model implements TranslatableContract
+class Quiz extends Model
 {
-    use Translatable;
     use SequenceContent;
 
     const ACTIVE = 'active';
@@ -18,13 +15,6 @@ class Quiz extends Model implements TranslatableContract
     public $timestamps = false;
     protected $table = 'quizzes';
     protected $guarded = ['id'];
-
-    public $translatedAttributes = ['title'];
-
-    public function getTitleAttribute()
-    {
-        return getTranslateAttributeValue($this, 'title');
-    }
 
 
     public function quizQuestions()

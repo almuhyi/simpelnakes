@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Panel;
 use App\Http\Controllers\Controller;
 use App\Models\Bundle;
 use App\Models\Faq;
-use App\Models\Translation\FaqTranslation;
 use App\Models\Webinar;
 use Illuminate\Http\Request;
 use Validator;
@@ -50,18 +49,10 @@ class FAQController extends Controller
                 'creator_id' => $user->id,
                 'webinar_id' => !empty($data['webinar_id']) ? $data['webinar_id'] : null,
                 'bundle_id' => !empty($data['bundle_id']) ? $data['bundle_id'] : null,
-                'created_at' => time()
+                'created_at' => time(),
+                'title' => $data['title'],
+                'answer' => $data['answer'],
             ]);
-
-            if (!empty($faq)) {
-                FaqTranslation::updateOrCreate([
-                    'faq_id' => $faq->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
-                    'title' => $data['title'],
-                    'answer' => $data['answer'],
-                ]);
-            }
 
             return response()->json([
                 'code' => 200,
@@ -112,13 +103,7 @@ class FAQController extends Controller
 
             if (!empty($faq)) {
                 $faq->update([
-                    'updated_at' => time()
-                ]);
-
-                FaqTranslation::updateOrCreate([
-                    'faq_id' => $faq->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
+                    'updated_at' => time(),
                     'title' => $data['title'],
                     'answer' => $data['answer'],
                 ]);

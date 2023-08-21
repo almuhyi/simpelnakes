@@ -3,12 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 
-class QuizzesQuestion extends Model implements TranslatableContract
+
+class QuizzesQuestion extends Model
 {
-    use Translatable;
 
     protected $table = 'quizzes_questions';
     public $timestamps = false;
@@ -16,18 +14,6 @@ class QuizzesQuestion extends Model implements TranslatableContract
 
     static $multiple = 'multiple';
     static $descriptive = 'descriptive';
-
-    public $translatedAttributes = ['title', 'correct'];
-
-    public function getTitleAttribute()
-    {
-        return getTranslateAttributeValue($this, 'title');
-    }
-
-    public function getCorrectAttribute()
-    {
-        return getTranslateAttributeValue($this, 'correct');
-    }
 
 
     public function quizzesQuestionsAnswers()

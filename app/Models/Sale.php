@@ -11,7 +11,6 @@ class Sale extends Model
     public static $subscribe = 'subscribe';
     public static $promotion = 'promotion';
     public static $registrationPackage = 'registration_package';
-    public static $product = 'product';
     public static $bundle = 'bundle';
 
     public static $credit = 'credit';
@@ -76,10 +75,6 @@ class Sale extends Model
         return $this->hasOne('App\Models\SaleLog', 'sale_id', 'id');
     }
 
-    public function productOrder()
-    {
-        return $this->belongsTo('App\Models\ProductOrder', 'product_order_id', 'id');
-    }
 
     public static function createSales($orderItem, $payment_method)
     {
@@ -92,8 +87,6 @@ class Sale extends Model
             $orderType = Order::$promotion;
         } elseif (!empty($orderItem->registration_package_id)) {
             $orderType = Order::$registrationPackage;
-        } elseif (!empty($orderItem->product_id)) {
-            $orderType = Order::$product;
         } elseif (!empty($orderItem->bundle_id)) {
             $orderType = Order::$bundle;
         }
@@ -135,11 +128,6 @@ class Sale extends Model
             $title = $orderItem->promotion->title . ' ' . 'Promosi';
         } else if (!empty($orderItem->registration_package_id)) {
             $title = $orderItem->registrationPackage->title . ' ' . 'Paket SaaS';
-        } else if (!empty($orderItem->product_id)) {
-            $title = $orderItem->product->title;
-
-            $buyStoreReward = RewardAccounting::calculateScore(Reward::BUY_STORE_PRODUCT, $orderItem->total_amount);
-            RewardAccounting::makeRewardAccounting($orderItem->user_id, $buyStoreReward, Reward::BUY_STORE_PRODUCT, $orderItem->product_id);
         }
 
         $buyReward = RewardAccounting::calculateScore(Reward::BUY, $orderItem->total_amount);
@@ -155,13 +143,6 @@ class Sale extends Model
             ];
             sendNotification('new_appointment', $notifyOptions, $orderItem->user_id);
             sendNotification('new_appointment', $notifyOptions, $reserveMeeting->meeting->creator_id);
-        } elseif (!empty($orderItem->product_id)) {
-            $notifyOptions = [
-                '[p.title]' => $title,
-            ];
-
-            sendNotification('product_new_sale', $notifyOptions, $seller_id);
-            sendNotification('product_new_purchase', $notifyOptions, $orderItem->user_id);
         } else {
             $notifyOptions = [
                 '[c.title]' => $title,

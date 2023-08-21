@@ -5,12 +5,10 @@ namespace App\Models;
 use App\Models\Traits\SequenceContent;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\CalendarLinks\Link;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 
-class Session extends Model implements TranslatableContract
+class Session extends Model
 {
-    use Translatable;
+
     use SequenceContent;
 
     public $timestamps = false;
@@ -21,18 +19,6 @@ class Session extends Model implements TranslatableContract
     static $Active = 'active';
     static $Inactive = 'inactive';
     static $Status = ['active', 'inactive'];
-
-    public $translatedAttributes = ['title', 'description'];
-
-    public function getTitleAttribute()
-    {
-        return getTranslateAttributeValue($this, 'title');
-    }
-
-    public function getDescriptionAttribute()
-    {
-        return getTranslateAttributeValue($this, 'description');
-    }
 
 
     public function creator()

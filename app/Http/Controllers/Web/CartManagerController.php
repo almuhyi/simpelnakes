@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\Bundle;
 use App\Models\Cart;
-use App\Models\Product;
-use App\Models\ProductOrder;
 use App\Models\ReserveMeeting;
 use App\Models\Ticket;
 use App\Models\Webinar;
@@ -25,21 +23,11 @@ class CartManagerController extends Controller
         if (auth()->check()) {
             $user = auth()->user();
 
-            $user->carts()
-                ->whereNotNull('product_order_id')
-                ->where(function ($query) {
-                    $query->whereDoesntHave('productOrder');
-                    $query->orWhereDoesntHave('productOrder.product');
-                })
-                ->delete();
 
             $carts = $user->carts()
                 ->with([
                     'webinar',
                     'bundle',
-                    'productOrder' => function ($query) {
-                        $query->with(['product']);
-                    }
                 ])
                 ->get();
         } else {
@@ -92,21 +80,8 @@ class CartManagerController extends Controller
 
                                 $carts->add($item);
                             }
-                        } elseif (!empty($cookieCart['item_name']) and $cookieCart['item_name'] == 'product_id') {
-                            $product = Product::where('id', $cookieCart['item_id'])->first();
-
-                            if (!empty($product)) {
-                                $item = new Cart();
-
-                                $item->product_order_id = $product->id;
-                                $item->productOrder = (object)[
-                                    'quantity' => $cookieCart['quantity'] ?? 1,
-                                    'product' => $product
-                                ];
-
-                                $carts->add($item);
-                            }
                         }
+
                     }
                 }
             }
@@ -131,8 +106,6 @@ class CartManagerController extends Controller
 
                                 if ($cart['item_name'] == 'webinar_id') {
                                     $this->storeUserWebinarCart($user, $cart);
-                                } elseif ($cart['item_name'] == 'product_id') {
-                                    $this->storeUserProductCart($user, $cart);
                                 } elseif ($cart['item_name'] == 'bundle_id') {
                                     $this->storeUserBundleCart($user, $cart);
                                 }
@@ -225,55 +198,7 @@ class CartManagerController extends Controller
         return back()->with(['toast' => $toastData]);
     }
 
-    public function storeUserProductCart($user, $data)
-    {
-        $product_id = $data['item_id'];
-        $specifications = $data['specifications'] ?? null;
-        $quantity = $data['quantity'] ?? 1;
 
-        $product = Product::where('id', $product_id)
-            ->where('status', 'active')
-            ->first();
-
-        if (!empty($product) and !empty($user)) {
-            $checkProductForSale = checkProductForSale($product, $user);
-
-            if ($checkProductForSale != 'ok') {
-                return $checkProductForSale;
-            }
-
-            $activeDiscount = $product->getActiveDiscount();
-
-            $productOrder = ProductOrder::updateOrCreate([
-                'product_id' => $product->id,
-                'seller_id' => $product->creator_id,
-                'buyer_id' => $user->id,
-            ], [
-                'specifications' => $specifications ? json_encode($specifications) : null,
-                'quantity' => $quantity,
-                'discount_id' => !empty($activeDiscount) ? $activeDiscount->id : null,
-                'status' => 'pending',
-                'created_at' => time()
-            ]);
-
-            Cart::updateOrCreate([
-                'creator_id' => $user->id,
-                'product_order_id' => $productOrder->id,
-            ], [
-                'product_discount_id' => !empty($activeDiscount) ? $activeDiscount->id : null,
-                'created_at' => time()
-            ]);
-
-            return 'ok';
-        }
-
-        $toastData = [
-            'title' => 'Permintaan gagal',
-            'msg' => 'Pelatihan tidak ditemukan!',
-            'status' => 'error'
-        ];
-        return back()->with(['toast' => $toastData]);
-    }
 
     public function storeCookieCart($data)
     {
@@ -314,8 +239,6 @@ class CartManagerController extends Controller
 
             if ($item_name == 'webinar_id') {
                 $result = $this->storeUserWebinarCart($user, $data);
-            } elseif ($item_name == 'product_id') {
-                $result = $this->storeUserProductCart($user, $data);
             } elseif ($item_name == 'bundle_id') {
                 $result = $this->storeUserBundleCart($user, $data);
             }

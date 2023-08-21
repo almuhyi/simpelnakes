@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\QuizzesQuestion;
 use App\Models\QuizzesQuestionsAnswer;
-use App\Models\Translation\QuizzesQuestionsAnswerTranslation;
-use App\Models\Translation\QuizzesQuestionTranslation;
 use Illuminate\Http\Request;
 use App\Models\Quiz;
 use Illuminate\Support\Facades\Validator;
@@ -75,18 +73,11 @@ class QuizQuestionController extends Controller
                 'type' => $data['type'],
                 'image' => $data['image'] ?? null,
                 'video' => $data['video'] ?? null,
+                'title' => $data['title'],
+                'correct' => $data['correct'] ?? null,
                 'created_at' => time()
             ]);
 
-            if (!empty($quizQuestion)) {
-                QuizzesQuestionTranslation::updateOrCreate([
-                    'quizzes_question_id' => $quizQuestion->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
-                    'title' => $data['title'],
-                    'correct' => $data['correct'] ?? null,
-                ]);
-            }
 
             $quiz->increaseTotalMark($quizQuestion->grade);
 
@@ -99,17 +90,9 @@ class QuizQuestionController extends Controller
                             'creator_id' => $creator->id,
                             'image' => $answer['file'] ?? null,
                             'correct' => isset($answer['correct']) ? true : false,
+                            'title' => $answer['title'],
                             'created_at' => time()
                         ]);
-
-                        if (!empty($questionAnswer)) {
-                            QuizzesQuestionsAnswerTranslation::updateOrCreate([
-                                'quizzes_questions_answer_id' => $questionAnswer->id,
-                                'locale' => mb_strtolower($data['locale']),
-                            ], [
-                                'title' => $answer['title'],
-                            ]);
-                        }
                     }
                 }
             }
@@ -132,14 +115,11 @@ class QuizQuestionController extends Controller
             $quiz = Quiz::find($question->quiz_id);
 
             if (!empty($quiz)) {
-                $locale = app()->getLocale();
 
                 $data = [
                     'pageTitle' => $question->title,
                     'quiz' => $quiz,
                     'question_edit' => $question,
-                    'locale' => mb_strtolower($locale),
-                    'defaultLocale' => getDefaultLocale(),
                 ];
 
                 if ($question->type == 'multiple') {
@@ -166,11 +146,10 @@ class QuizQuestionController extends Controller
             ->first();
 
         if (!empty($question)) {
-            $locale = $request->get('locale', app()->getLocale());
 
             foreach ($question->translatedAttributes as $attribute) {
                 try {
-                    $question->$attribute = $question->translate(mb_strtolower($locale))->$attribute;
+                    $question->$attribute = $question->$attribute;
                 } catch (\Exception $e) {
                     $question->$attribute = null;
                 }
@@ -180,7 +159,7 @@ class QuizQuestionController extends Controller
                 foreach ($question->quizzesQuestionsAnswers as $answer) {
                     foreach ($answer->translatedAttributes as $att) {
                         try {
-                            $answer->$att = $answer->translate(mb_strtolower($locale))->$att;
+                            $answer->$att = $answer->$att;
                         } catch (\Exception $e) {
                             $answer->$att = null;
                         }
@@ -266,15 +245,9 @@ class QuizQuestionController extends Controller
                     'type' => $data['type'],
                     'image' => $data['image'] ?? null,
                     'video' => $data['video'] ?? null,
-                    'updated_at' => time()
-                ]);
-
-                QuizzesQuestionTranslation::updateOrCreate([
-                    'quizzes_question_id' => $quizQuestion->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
                     'title' => $data['title'],
                     'correct' => $data['correct'] ?? null,
+                    'updated_at' => time()
                 ]);
 
                 $quiz->increaseTotalMark($quizQuestion->grade);
@@ -309,16 +282,8 @@ class QuizQuestionController extends Controller
                                     'creator_id' => $creator->id,
                                     'image' => $answer['file'],
                                     'correct' => isset($answer['correct']) ? true : false,
-                                    'created_at' => time()
-                                ]);
-                            }
-
-                            if ($quizQuestionsAnswer) {
-                                QuizzesQuestionsAnswerTranslation::updateOrCreate([
-                                    'quizzes_questions_answer_id' => $quizQuestionsAnswer->id,
-                                    'locale' => mb_strtolower($data['locale']),
-                                ], [
                                     'title' => $answer['title'],
+                                    'created_at' => time()
                                 ]);
                             }
                         }
@@ -329,15 +294,12 @@ class QuizQuestionController extends Controller
                     }
                 }
 
-                removeContentLocale();
-
                 return response()->json([
                     'code' => 200
                 ], 200);
             }
         }
 
-        removeContentLocale();
 
         return response()->json([
             'code' => 422

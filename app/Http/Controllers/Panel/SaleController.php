@@ -32,7 +32,6 @@ class SaleController extends Controller
         $sales = $query->orderBy('created_at', 'desc')
             ->with([
                 'webinar',
-                'productOrder',
                 'bundle',
                 'registrationPackage',
                 'promotion',

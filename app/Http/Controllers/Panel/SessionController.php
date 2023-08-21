@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\AgoraHistory;
 use App\Models\Sale;
 use App\Models\Session;
-use App\Models\Translation\SessionTranslation;
 use App\Models\Webinar;
 use App\Models\WebinarChapterItem;
 use Illuminate\Http\Request;
@@ -87,17 +86,12 @@ class SessionController extends Controller
                 'access_after_day' => $data['access_after_day'],
                 'extra_time_to_join' => $data['extra_time_to_join'] ?? null,
                 'status' => (!empty($data['status']) and $data['status'] == 'on') ? Session::$Active : Session::$Inactive,
-                'created_at' => time()
+                'created_at' => time(),
+                'title' => $data['title'],
+                'description' => $data['description'],
             ]);
 
             if (!empty($session)) {
-                SessionTranslation::updateOrCreate([
-                    'session_id' => $session->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
-                    'title' => $data['title'],
-                    'description' => $data['description'],
-                ]);
 
                 WebinarChapterItem::makeItem($user->id, $session->chapter_id, $session->id, WebinarChapterItem::$chapterSession);
             }
@@ -202,18 +196,11 @@ class SessionController extends Controller
                     'check_previous_parts' => $data['check_previous_parts'],
                     'access_after_day' => $data['access_after_day'],
                     'extra_time_to_join' => $data['extra_time_to_join'] ?? null,
-                    'updated_at' => time()
+                    'updated_at' => time(),
+                    'title' => $data['title'],
+                    'description' => $data['description'],
                 ]);
 
-                if (!empty($session)) {
-                    SessionTranslation::updateOrCreate([
-                        'session_id' => $session->id,
-                        'locale' => mb_strtolower($data['locale']),
-                    ], [
-                        'title' => $data['title'],
-                        'description' => $data['description'],
-                    ]);
-                }
 
                 return response()->json([
                     'code' => 200,

@@ -14,10 +14,10 @@ class WebinarExtraDescription extends Model implements TranslatableContract
     public $timestamps = false;
     protected $guarded = ['id'];
 
-    static $types = ['Materi', 'Logo', 'Persyaratan'];
-    static $LEARNING_MATERIALS = 'Materi';
-    static $COMPANY_LOGOS = 'Logo';
-    static $REQUIREMENTS = 'Persyaratan';
+    static $types = ['learning_materials', 'company_logos', 'requirements'];
+    static $LEARNING_MATERIALS = 'learning_materials';
+    static $COMPANY_LOGOS = 'company_logos';
+    static $REQUIREMENTS = 'requirements';
 
     public $translatedAttributes = ['value'];
 

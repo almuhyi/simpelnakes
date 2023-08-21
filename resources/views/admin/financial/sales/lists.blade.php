@@ -26,9 +26,7 @@
                             <div class="card-body">
                                 {{ $totalSales['count'] }}
                             </div>
-                            {{-- <div class="text-primary font-weight-bold">
-                                {{ addCurrencyToPrice($totalSales['amount']) }}
-                            </div> --}}
+
                         </div>
                     </div>
                 </div>
@@ -43,9 +41,7 @@
                             <div class="card-body">
                                 {{ $classesSales['count'] }}
                             </div>
-                            {{-- <div class="text-success font-weight-bold">
-                                {{ addCurrencyToPrice($classesSales['amount']) }}
-                            </div> --}}
+
                         </div>
                     </div>
                 </div>
@@ -60,9 +56,7 @@
                             <div class="card-body">
                                 {{ $appointmentSales['count'] }}
                             </div>
-                            {{-- <div class="text-danger font-weight-bold">
-                                {{ addCurrencyToPrice($appointmentSales['amount']) }}
-                            </div> --}}
+
                         </div>
                     </div>
                 </div>
@@ -113,17 +107,7 @@
                             </div>
 
 
-                            {{-- <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="input-label">{{ trans('admin/main.status') }}</label>
-                                    <select name="status" data-plugin-selectTwo class="form-control populate">
-                                        <option value="">{{ trans('admin/main.all_status') }}</option>
-                                        <option value="success" @if(request()->get('status') == 'success') selected @endif>{{ trans('admin/main.success') }}</option>
-                                        <option value="refund" @if(request()->get('status') == 'refund') selected @endif>{{ trans('admin/main.refund') }}</option>
-                                        <option value="blocked" @if(request()->get('status') == 'blocked') selected @endif>{{ trans('update.access_blocked') }}</option>
-                                    </select>
-                                </div>
-                            </div> --}}
+
 
 
                             <div class="col-md-3">

@@ -26,24 +26,6 @@
                             <form action="/admin/financial/subscribes/{{ !empty($subscribe) ? $subscribe->id.'/update' : 'store' }}" method="Post">
                                 {{ csrf_field() }}
 
-                                @if(!empty(getGeneralSettings('content_translate')))
-                                    <div class="form-group">
-                                        <label class="input-label">{{ trans('auth.language') }}</label>
-                                        <select name="locale" class="form-control {{ !empty($subscribe) ? 'js-edit-content-locale' : '' }}">
-                                            @foreach($userLanguages as $lang => $language)
-                                                <option value="{{ $lang }}" @if(mb_strtolower(request()->get('locale', app()->getLocale())) == mb_strtolower($lang)) selected @endif>{{ $language }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('locale')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                @else
-                                    <input type="hidden" name="locale" value="{{ getDefaultLocale() }}">
-                                @endif
-
 
                                 <div class="form-group">
                                     <label>{{ trans('admin/main.title') }}</label>

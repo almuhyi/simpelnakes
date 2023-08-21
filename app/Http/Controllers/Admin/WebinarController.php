@@ -295,7 +295,7 @@ class WebinarController extends Controller
         $this->authorize('admin_webinars_create');
 
         $this->validate($request, [
-            'type' => 'required|in:webinar,course,text_lesson',
+            'type' => 'required|in:webinar,pelatihan,teks',
             'title' => 'required|max:255',
             'slug' => 'max:255|unique:webinars,slug',
             'thumbnail' => 'required',
@@ -503,7 +503,7 @@ class WebinarController extends Controller
         $publish = (!empty($data['draft']) and $data['draft'] == 'publish');
 
         $rules = [
-            'type' => 'required|in:webinar,course,text_lesson',
+            'type' => 'required|in:webinar,pelatihan,teks',
             'title' => 'required|max:255',
             'slug' => 'max:255|unique:webinars,slug,' . $webinar->id,
             'thumbnail' => 'required',

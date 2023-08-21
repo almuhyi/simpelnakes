@@ -38,10 +38,7 @@ class Cart extends Model
         return $this->belongsTo('App\Models\Ticket', 'ticket_id', 'id');
     }
 
-    public function productOrder()
-    {
-        return $this->belongsTo('App\Models\ProductOrder', 'product_order_id', 'id');
-    }
+
 
     public static function emptyCart($userId)
     {
@@ -62,10 +59,6 @@ class Cart extends Model
                     $totalPrice += $cart->bundle->price;
                 } else if (!empty($cart->reserve_meeting_id) and !empty($cart->reserveMeeting)) {
                     $totalPrice += $cart->reserveMeeting->paid_amount;
-                } else if (!empty($cart->product_order_id) and !empty($cart->productOrder) and !empty($cart->productOrder->product)) {
-                    $product = $cart->productOrder->product;
-
-                    $totalPrice += (($product->price * $cart->productOrder->quantity) - $product->getDiscountPrice());
                 }
             }
         }
@@ -100,18 +93,7 @@ class Cart extends Model
                 $info['rate'] = $bundle->getRate();
                 $info['price'] = $bundle->price;
                 $info['discountPrice'] = $bundle->getDiscount($this->ticket) ? ($bundle->price - $bundle->getDiscount($this->ticket)) : null;
-            } elseif (!empty($this->productOrder) and !empty($this->productOrder->product)) {
-                $product = $this->productOrder->product;
 
-                $info['imgPath'] = $product->thumbnail;
-                $info['itemUrl'] = $product->getUrl();
-                $info['title'] = $product->title;
-                $info['profileUrl'] = $product->creator->getProfileUrl();
-                $info['teacherName'] = $product->creator->full_name;
-                $info['rate'] = $product->getRate();
-                $info['quantity'] = $this->productOrder->quantity;
-                $info['price'] = $product->price;
-                $info['discountPrice'] = ($product->getPriceWithActiveDiscountPrice() < $product->price) ? $product->getPriceWithActiveDiscountPrice() : null;
             } elseif (!empty($this->reserve_meeting_id)) {
                 $creator = $this->reserveMeeting->meeting->creator;
 

@@ -5,24 +5,6 @@
     <form action="{{ url('/admin/sessions/store') }}" method="post" class="session-form">
         <input type="hidden" name="webinar_id" value="{{ !empty($webinar) ? $webinar->id :''  }}">
 
-        @if(!empty(getGeneralSettings('content_translate')))
-            <div class="form-group">
-                <label class="input-label">Bahasa</label>
-                <select name="locale" class="form-control ">
-                    @foreach($userLanguages as $lang => $language)
-                        <option value="{{ $lang }}" @if(mb_strtolower(request()->get('locale', app()->getLocale())) == mb_strtolower($lang)) selected @endif>{{ $language }}</option>
-                    @endforeach
-                </select>
-                @error('locale')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
-        @else
-            <input type="hidden" name="locale" value="{{ getDefaultLocale() }}">
-        @endif
-
 
         <div class="form-group">
             <label class="input-label">Pilih penyedia kelas langsung (live)</label>
@@ -149,17 +131,7 @@
                 </div>
             @endif
 
-            {{--
-                <div class="form-group mt-20">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <label class="cursor-pointer input-label" for="sessionAgoraRecordSwitch_record">{{ trans('update.record') }}</label>
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" name="agora_record" class="custom-control-input" id="sessionAgoraRecordSwitch_record" >
-                            <label class="custom-control-label" for="sessionAgoraRecordSwitch_record"></label>
-                        </div>
-                    </div>
-                </div>
-            --}}
+
 
         </div>
 

@@ -240,20 +240,6 @@ Route::group(['namespace' => 'Web', 'middleware' => ['impersonate', 'share']], f
         Route::get('/wizard', 'InstructorFinderController@wizard');
     });
 
-    Route::group(['prefix' => 'products'], function () {
-        Route::get('/', 'ProductController@searchLists');
-        Route::get('/{slug}', 'ProductController@show');
-        Route::post('/{slug}/points/apply', 'ProductController@buyWithPoint');
-
-        Route::group(['prefix' => 'reviews'], function () {
-            Route::post('/store', 'ProductReviewController@store');
-            Route::post('/store-reply-comment', 'ProductReviewController@storeReplyComment');
-            Route::get('/{id}/delete', 'ProductReviewController@destroy');
-            Route::get('/{id}/delete-comment/{commentId}', 'ProductReviewController@destroy');
-        });
-    });
-
-    Route::get('/reward-products', 'RewardProductsController@index');
 
     Route::group(['prefix' => 'bundles'], function () {
         Route::get('/{slug}', 'BundleController@index');

@@ -6,7 +6,6 @@ use App\Exports\FeatureWebinarsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\FeatureWebinar;
-use App\Models\Translation\FeatureWebinarTranslation;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -16,7 +15,6 @@ class FeatureWebinarsControllers extends Controller
     {
         $this->authorize('admin_feature_webinars');
 
-        removeContentLocale();
 
         $categories = Category::where('parent_id', null)
             ->with('subCategories')
@@ -81,8 +79,6 @@ class FeatureWebinarsControllers extends Controller
     {
         $this->authorize('admin_feature_webinars_create');
 
-        removeContentLocale();
-
         $data = [
             'pageTitle' => trans('public.create') . ' ' . trans('admin/pages/webinars.feature_webinars'),
         ];
@@ -104,17 +100,9 @@ class FeatureWebinarsControllers extends Controller
             'webinar_id' => $data['webinar_id'],
             'page' => $data['page'],
             'status' => $data['status'] ?? 'pending',
-            'updated_at' => time()
+            'updated_at' => time(),
+            'description' => $data['description'],
         ]);
-
-        if (!empty($feature)) {
-            FeatureWebinarTranslation::updateOrCreate([
-                'feature_webinar_id' => $feature->id,
-                'locale' => mb_strtolower($data['locale']),
-            ], [
-                'description' => $data['description'],
-            ]);
-        }
 
         return redirect('/admin/webinars/features');
     }
@@ -124,9 +112,6 @@ class FeatureWebinarsControllers extends Controller
         $this->authorize('admin_feature_webinars_create');
 
         $feature = FeatureWebinar::findOrFail($id);
-
-        $locale = $request->get('locale', app()->getLocale());
-        storeContentLocale($locale, $feature->getTable(), $feature->id);
 
         $data = [
             'pageTitle' => trans('public.edit') . ' ' . trans('admin/pages/webinars.feature_webinars'),
@@ -151,17 +136,9 @@ class FeatureWebinarsControllers extends Controller
             'webinar_id' => $data['webinar_id'],
             'page' => $data['page'],
             'status' => $data['status'] ?? 'pending',
-            'updated_at' => time()
-        ]);
-
-        FeatureWebinarTranslation::updateOrCreate([
-            'feature_webinar_id' => $feature->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
+            'updated_at' => time(),
             'description' => $data['description'],
         ]);
-
-        removeContentLocale();
 
         return back();
     }

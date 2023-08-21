@@ -419,8 +419,8 @@ class InstructorFinderController extends Controller
         $provinces = null;
         $cities = null;
         $districts = null;
-        $mapCenter = [37.718590, 37.617188]; // default Location
-        $mapZoom = 3;
+        $mapCenter = [-6.217624, 106.411834]; // default Location
+        $mapZoom = 10;
 
         if ($request->get('country_id')) {
             $provinces = Region::select(DB::raw(' *, ST_AsText(geo_center) as geo_center'))

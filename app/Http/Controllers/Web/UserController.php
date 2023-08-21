@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\ForumTopic;
 use App\Models\Newsletter;
-use App\Models\Product;
 use App\Models\ReserveMeeting;
 use App\Models\Reward;
 use App\Models\RewardAccounting;
@@ -41,9 +40,6 @@ class UserController extends Controller
                             $query->where('status', 'active');
                         }
                     ]);
-                },
-                'products' => function ($query) {
-                    $query->where('status', Product::$active);
                 },
             ])
             ->first();

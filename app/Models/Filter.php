@@ -3,24 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 
-class Filter extends Model implements TranslatableContract
+
+class Filter extends Model
 {
-    use Translatable;
-
     protected $table = 'filters';
     public $timestamps = false;
     protected $guarded = ['id'];
-
-    public $translatedAttributes = ['title'];
-
-    public function getTitleAttribute()
-    {
-        return getTranslateAttributeValue($this, 'title');
-    }
-
 
     public function category()
     {

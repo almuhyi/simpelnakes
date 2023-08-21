@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Session;
-use App\Models\Translation\SessionTranslation;
 use App\Models\Webinar;
 use App\Models\WebinarChapterItem;
 use App\Sessions\Zoom;
@@ -90,17 +89,12 @@ class SessionController extends Controller
                     'check_previous_parts' => $data['check_previous_parts'],
                     'access_after_day' => $data['access_after_day'],
                     'status' => (!empty($data['status']) and $data['status'] == 'on') ? Session::$Active : Session::$Inactive,
-                    'created_at' => time()
+                    'created_at' => time(),
+                    'title' => $data['title'],
+                    'description' => $data['description'],
                 ]);
 
                 if (!empty($session)) {
-                    SessionTranslation::updateOrCreate([
-                        'session_id' => $session->id,
-                        'locale' => mb_strtolower($data['locale']),
-                    ], [
-                        'title' => $data['title'],
-                        'description' => $data['description'],
-                    ]);
 
                     if (!empty($session->chapter_id)) {
                         WebinarChapterItem::makeItem($webinar->creator_id, $session->chapter_id, $session->id, WebinarChapterItem::$chapterSession);
@@ -208,16 +202,11 @@ class SessionController extends Controller
                     'agora_settings' => $agoraSettings,
                     'check_previous_parts' => $data['check_previous_parts'],
                     'access_after_day' => $data['access_after_day'],
+                    'title' => $data['title'],
+                    'description' => $data['description'],
                     'updated_at' => time()
                 ]);
 
-                SessionTranslation::updateOrCreate([
-                    'session_id' => $session->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
-                    'title' => $data['title'],
-                    'description' => $data['description'],
-                ]);
 
                 WebinarChapterItem::where('user_id', $session->creator_id)
                     ->where('item_id', $session->id)
@@ -228,7 +217,6 @@ class SessionController extends Controller
                     WebinarChapterItem::makeItem($webinar->creator_id, $session->chapter_id, $session->id, WebinarChapterItem::$chapterSession);
                 }
 
-                removeContentLocale();
 
                 return response()->json([
                     'code' => 200,
@@ -236,7 +224,6 @@ class SessionController extends Controller
             }
         }
 
-        removeContentLocale();
 
         return response()->json([], 422);
     }

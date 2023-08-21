@@ -88,17 +88,7 @@
                                             @enderror
                                         </div>
 
-                                        {{-- <div class="form-group" id="groupSelect">
-                                            <label class="input-label d-block">{{ trans('admin/main.group') }}</label>
-                                            <select name="group_id" class="form-control select2 @error('group_id') is-invalid @enderror">
-                                                <option value="" selected disabled></option>
 
-                                                @foreach($userGroups as $userGroup)
-                                                    <option value="{{ $userGroup->id }}" @if(!empty($notification) and !empty($notification->group) and $notification->group->id == $userGroup->id) selected @endif>{{ $userGroup->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            <div class="invalid-feedback">@error('group_id') {{ $message }} @enderror</div>
-                                        </div> --}}
 
                                         <div class="form-group">
                                             <label>Status</label>

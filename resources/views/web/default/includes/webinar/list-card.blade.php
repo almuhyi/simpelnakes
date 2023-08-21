@@ -1,20 +1,6 @@
 <div class="webinar-card webinar-list webinar-list-2 d-flex mt-30">
     <div class="image-box">
-        {{-- @if($webinar->bestTicket() < $webinar->price)
-            <span class="badge badge-danger">{{ $webinar->bestTicket(true)['percent'] }}% penawaran</span>
-        @elseif(empty($isFeature) and !empty($webinar->feature))
-            <span class="badge badge-warning">Unggulan</span>
-        @elseif($webinar->type == 'webinar')
-            @if($webinar->start_date > time())
-                <span class="badge badge-primary">Tidak dilakukan</span>
-            @elseif($webinar->isProgressing())
-                <span class="badge badge-secondary">Sedang berlangsung</span>
-            @else
-                <span class="badge badge-secondary">Selesai</span>
-            @endif
-        @else
-            <span class="badge badge-primary">{{ ('pelatihan '.$webinar->type) }}</span>
-        @endif --}}
+
 
         <a href="{{ url($webinar->getUrl()) }}">
             <img src="{{ asset($webinar->getImage()) }}" class="img-cover" alt="{{ $webinar->title }}">
@@ -71,18 +57,7 @@
                 </div>
             </div>
 
-            {{--<div class="webinar-price-box d-flex flex-column justify-content-center align-items-center">
-                @if(!empty($webinar->price) and $webinar->price > 0)
-                    @if($webinar->bestTicket() < $webinar->price)
-                        <span class="off">{{ handlePrice($webinar->price) }}</span>
-                        <span class="real">{{ handlePrice($webinar->bestTicket()) }}</span>
-                    @else
-                        <span class="real">{{ handlePrice($webinar->price) }}</span>
-                    @endif
-                @else
-                    <span class="real font-14">{{ trans('public.free') }}</span>
-                @endif
-            </div>--}}
+
         </div>
     </div>
 </div>

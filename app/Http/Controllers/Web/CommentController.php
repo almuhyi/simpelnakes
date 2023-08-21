@@ -39,14 +39,6 @@ class CommentController extends Controller
                 '[u.name]' => $user->full_name
             ];
             sendNotification('new_comment', $notifyOptions, 1);
-        } elseif ($item_name == 'product_id') {
-            $product = $comment->product;
-
-            $notifyOptions = [
-                '[p.title]' => $product->title,
-                '[u.name]' => $user->full_name
-            ];
-            sendNotification('product_new_comment', $notifyOptions, 1);
         } elseif ($item_name == 'blog_id') {
             $blog = $comment->blog;
 

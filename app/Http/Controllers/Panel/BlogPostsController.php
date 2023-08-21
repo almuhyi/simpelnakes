@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Comment;
-use App\Models\Translation\BlogTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -74,7 +73,6 @@ class BlogPostsController extends Controller
         $this->handleAuthorize($user);
 
         $this->validate($request, [
-            'locale' => 'required',
             'title' => 'required|string|max:255',
             'category_id' => 'required|numeric',
             'image' => 'required|string',
@@ -93,19 +91,11 @@ class BlogPostsController extends Controller
             'status' => 'pending',
             'created_at' => time(),
             'updated_at' => time(),
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'meta_description' => strip_tags($data['description']),
+            'content' => $data['content'],
         ]);
-
-        if ($blog) {
-            BlogTranslation::updateOrCreate([
-                'blog_id' => $blog->id,
-                'locale' => mb_strtolower($data['locale']),
-            ], [
-                'title' => $data['title'],
-                'description' => $data['description'],
-                'meta_description' => strip_tags($data['description']),
-                'content' => $data['content'],
-            ]);
-        }
 
         return redirect('/panel/blog/posts');
     }
@@ -121,14 +111,12 @@ class BlogPostsController extends Controller
             ->first();
 
         if (!empty($post)) {
-            $locale = $request->get('locale', app()->getLocale());
 
             $blogCategories = BlogCategory::all();
 
             $data = [
                 'pageTitle' => 'Edit' . ' | ' . $post->title,
                 'blogCategories' => $blogCategories,
-                'locale' => mb_strtolower($locale),
                 'post' => $post,
             ];
 
@@ -162,18 +150,13 @@ class BlogPostsController extends Controller
                 'image' => $data['image'],
                 'status' => 'pending',
                 'updated_at' => time(),
-            ]);
-
-
-            BlogTranslation::updateOrCreate([
-                'blog_id' => $post->id,
-                'locale' => mb_strtolower($data['locale']),
-            ], [
                 'title' => $data['title'],
                 'description' => $data['description'],
                 'meta_description' => strip_tags($data['description']),
                 'content' => $data['content'],
             ]);
+
+
 
             return redirect('/panel/blog/posts');
         }

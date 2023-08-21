@@ -63,6 +63,23 @@
                 @enderror
             </div>
 
+
+            <div class="form-group">
+                <label class="input-label">Unit kerja</label>
+                <select name="unit_id" class="form-control select2" data-allow-clear="false">
+                    <option value="" {{ empty($user->unit_id) ? 'selected' : '' }} disabled>Pilih</option>
+                    @foreach($units as $unit)
+                        <option value="{{ $unit->id }}" @if(!empty($user) and $user->unit == $unit) selected @endif>{{ $unit->nama }}</option>
+                    @endforeach
+                </select>
+                @error('unit_id')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+
+
             <div class="form-group">
                 <label class="input-label">Bahasa</label>
                 <select name="language" class="form-control">
@@ -77,6 +94,7 @@
                 </div>
                 @enderror
             </div>
+
 
             <div class="form-group">
                 <label class="input-label">Zona waktu</label>
@@ -107,6 +125,15 @@
                 <div class="custom-control custom-switch">
                     <input type="checkbox" name="public_messages" class="custom-control-input" id="publicMessagesSwitch" {{ (!empty($user) and $user->public_message) ? 'checked' : '' }}>
                     <label class="custom-control-label" for="publicMessagesSwitch"></label>
+                </div>
+            </div>
+
+              <div class="form-group mt-30 d-flex align-items-center justify-content-between">
+                <label class="cursor-pointer input-label" for="isPnsSwitch">
+                    Status PNS</label>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" name="is_pns" class="custom-control-input" id="isPnsSwitch" {{ (!empty($user) and $user->is_pns) ? 'checked' : '' }}>
+                    <label class="custom-control-label" for="isPnsSwitch"></label>
                 </div>
             </div>
 

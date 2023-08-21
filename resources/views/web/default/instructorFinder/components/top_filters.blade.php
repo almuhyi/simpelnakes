@@ -9,21 +9,7 @@
                 </div>
             </div>
 
-            {{-- <div class="d-flex align-items-center justify-content-between justify-content-md-center mx-0 mx-md-20 my-20 my-md-0">
-                <label class="mb-0 mr-10 cursor-pointer" for="free_meetings">{{ trans('public.free_meetings') }}</label>
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" name="free_meetings" class="custom-control-input" id="free_meetings" @if(request()->get('free_meetings',null) == 'on') checked="checked" @endif>
-                    <label class="custom-control-label" for="free_meetings"></label>
-                </div>
-            </div> --}}
 
-            {{-- <div class="d-flex align-items-center justify-content-between justify-content-md-center">
-                <label class="mb-0 mr-10 cursor-pointer" for="discount">{{ trans('public.discount') }}</label>
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" name="discount" class="custom-control-input" id="discount" @if(request()->get('discount',null) == 'on') checked="checked" @endif>
-                    <label class="custom-control-label" for="discount"></label>
-                </div>
-            </div> --}}
 
         </div>
 

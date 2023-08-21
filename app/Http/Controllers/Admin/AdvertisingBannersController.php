@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdvertisingBanner;
-use App\Models\Translation\AdvertisingBannerTranslation;
 use Illuminate\Http\Request;
 
 class AdvertisingBannersController extends Controller
@@ -54,15 +53,9 @@ class AdvertisingBannersController extends Controller
             'size' => $data['size'],
             'link' => $data['link'],
             'published' => $data['published'],
-            'created_at' => time(),
-        ]);
-
-        AdvertisingBannerTranslation::updateOrCreate([
-            'advertising_banner_id' => $banner->id,
-            'locale' => mb_strtolower($data['locale'])
-        ], [
             'title' => $data['title'],
             'image' => $data['image'],
+            'created_at' => time(),
         ]);
 
         return redirect('/admin/advertising/banners');
@@ -74,9 +67,6 @@ class AdvertisingBannersController extends Controller
 
 
         $banner = AdvertisingBanner::findOrFail($id);
-
-        $locale = $request->get('locale', app()->getLocale());
-        storeContentLocale($locale, $banner->getTable(), $banner->id);
 
         $data = [
             'pageTitle' => 'Edit',
@@ -107,17 +97,10 @@ class AdvertisingBannersController extends Controller
             'size' => $data['size'],
             'link' => $data['link'],
             'published' => $data['published'],
-        ]);
-
-        AdvertisingBannerTranslation::updateOrCreate([
-            'advertising_banner_id' => $banner->id,
-            'locale' => mb_strtolower($data['locale'])
-        ], [
             'title' => $data['title'],
             'image' => $data['image'],
         ]);
 
-        removeContentLocale();
 
         return redirect('/admin/advertising/banners');
     }

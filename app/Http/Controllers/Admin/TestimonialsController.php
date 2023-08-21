@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Testimonial;
-use App\Models\Translation\TestimonialTranslation;
 use Illuminate\Http\Request;
 
 class TestimonialsController extends Controller
@@ -13,7 +12,6 @@ class TestimonialsController extends Controller
     {
         $this->authorize('admin_testimonials_list');
 
-        removeContentLocale();
 
         $testimonials = Testimonial::query()->paginate(10);
 
@@ -29,7 +27,6 @@ class TestimonialsController extends Controller
     {
         $this->authorize('admin_testimonials_create');
 
-        removeContentLocale();
 
         $data = [
             'pageTitle' => 'Tambah testimoni baru',
@@ -61,18 +58,10 @@ class TestimonialsController extends Controller
             'rate' => $data['rate'],
             'status' => $data['status'],
             'created_at' => time(),
+            'user_name' => $data['user_name'],
+            'user_bio' => $data['user_bio'],
+            'comment' => $data['comment'],
         ]);
-
-        if (!empty($testimonial)) {
-            TestimonialTranslation::updateOrCreate([
-                'testimonial_id' => $testimonial->id,
-                'locale' => mb_strtolower($data['locale']),
-            ], [
-                'user_name' => $data['user_name'],
-                'user_bio' => $data['user_bio'],
-                'comment' => $data['comment'],
-            ]);
-        }
 
         return redirect('/admin/testimonials');
     }
@@ -83,9 +72,6 @@ class TestimonialsController extends Controller
         $this->authorize('admin_testimonials_edit');
 
         $testimonial = Testimonial::findOrFail($id);
-
-        $locale = $request->get('locale', app()->getLocale());
-        storeContentLocale($locale, $testimonial->getTable(), $testimonial->id);
 
         $data = [
             'pageTitle' => 'Edit testimoni',
@@ -120,18 +106,10 @@ class TestimonialsController extends Controller
             'user_avatar' => $data['user_avatar'],
             'rate' => $data['rate'],
             'status' => $data['status'],
-        ]);
-
-        TestimonialTranslation::updateOrCreate([
-            'testimonial_id' => $testimonial->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
             'user_name' => $data['user_name'],
             'user_bio' => $data['user_bio'],
             'comment' => $data['comment'],
         ]);
-
-        removeContentLocale();
 
         return redirect('/admin/testimonials');
     }

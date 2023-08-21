@@ -7,7 +7,6 @@ use App\Models\Quiz;
 use App\Models\Reward;
 use App\Models\RewardAccounting;
 use App\Models\Role;
-use App\Models\Translation\QuizTranslation;
 use App\Models\WebinarChapter;
 use App\Models\WebinarChapterItem;
 use App\User;
@@ -120,13 +119,11 @@ class QuizController extends Controller
                 ->orWhere('creator_id', $user->id);
         })->get();
 
-        $locale = $request->get('locale', app()->getLocale());
 
         $data = [
             'pageTitle' => 'Kuis baru',
             'webinars' => $webinars,
             'userLanguages' => getUserLanguagesLists(),
-            'locale' => mb_strtolower($locale),
             'defaultLocale' => getDefaultLocale(),
         ];
 
@@ -184,16 +181,10 @@ class QuizController extends Controller
             'status' => (!empty($data['status']) and $data['status'] == 'on') ? Quiz::ACTIVE : Quiz::INACTIVE,
             'certificate' => (!empty($data['certificate']) and $data['certificate'] == 'on') ? true : false,
             'created_at' => time(),
+            'title' => $data['title'],
         ]);
 
         if (!empty($quiz)) {
-            QuizTranslation::updateOrCreate([
-                'quiz_id' => $quiz->id,
-                'locale' => mb_strtolower($data['locale']),
-            ], [
-                'title' => $data['title'],
-            ]);
-
             if (!empty($quiz->chapter_id)) {
                 WebinarChapterItem::makeItem($user->id, $quiz->chapter_id, $quiz->id, WebinarChapterItem::$chapterQuiz);
             }
@@ -239,7 +230,6 @@ class QuizController extends Controller
                 $chapters = $quiz->webinar->chapters;
             }
 
-            $locale = $request->get('locale', app()->getLocale());
 
             $data = [
                 'pageTitle' => 'Edit' . ' ' . $quiz->title,
@@ -248,7 +238,6 @@ class QuizController extends Controller
                 'quizQuestions' => $quiz->quizQuestions,
                 'chapters' => $chapters,
                 'userLanguages' => getUserLanguagesLists(),
-                'locale' => mb_strtolower($locale),
                 'defaultLocale' => getDefaultLocale(),
             ];
 
@@ -308,6 +297,7 @@ class QuizController extends Controller
             'status' => (!empty($data['status']) and $data['status'] == 'on') ? Quiz::ACTIVE : Quiz::INACTIVE,
             'certificate' => (!empty($data['certificate']) and $data['certificate'] == 'on') ? true : false,
             'updated_at' => time(),
+            'title' => $data['title'],
         ]);
 
 
@@ -328,12 +318,6 @@ class QuizController extends Controller
             $checkChapterItem->delete();
         }
 
-        QuizTranslation::updateOrCreate([
-            'quiz_id' => $quiz->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
-            'title' => $data['title'],
-        ]);
 
         if ($request->ajax()) {
             return response()->json([

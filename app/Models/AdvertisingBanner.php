@@ -3,20 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 
-class AdvertisingBanner extends Model implements TranslatableContract
+
+class AdvertisingBanner extends Model
 {
-    use Translatable;
-
     protected $table = 'advertising_banners';
     public $timestamps = false;
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
-
-    public $translatedAttributes = ['title', 'image'];
-
 
     static $positions = [
         'home1', 'home2', 'course', 'course_sidebar', 'product_show', 'bundle', 'bundle_sidebar'
@@ -29,13 +23,4 @@ class AdvertisingBanner extends Model implements TranslatableContract
         '3' => '1/4'
     ];
 
-    public function getTitleAttribute()
-    {
-        return getTranslateAttributeValue($this, 'title');
-    }
-
-    public function getImageAttribute()
-    {
-        return getTranslateAttributeValue($this, 'image');
-    }
 }

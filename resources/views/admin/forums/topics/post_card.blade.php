@@ -25,15 +25,7 @@
                     @endif
                         </span>
 
-                {{-- @if(!empty($cardUserBadges) and count($cardUserBadges))
-                    <div class="d-flex align-items-center justify-content-center w-100">
-                        @foreach($cardUserBadges as $badge)
-                            <div class="mr-10 mt-4" data-toggle="tooltip" data-placement="bottom" data-html="true" title="{!! (!empty($badge->badge_id) ? nl2br($badge->badge->description) : nl2br($badge->description)) !!}">
-                                <img src="{{ !empty($badge->badge_id) ? $badge->badge->image : $badge->image }}" width="32" height="32" alt="{{ !empty($badge->badge_id) ? $badge->badge->title : $badge->title }}">
-                            </div>
-                        @endforeach
-                    </div>
-                @endif --}}
+
 
                 <div class="mt-3 w-100">
                     <div class="d-flex align-items-center justify-content-between font-12 text-gray">

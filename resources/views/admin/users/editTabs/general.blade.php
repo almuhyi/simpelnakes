@@ -87,6 +87,21 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="input-label">Unit kerja</label>
+                    <select name="unit_id" class="form-control select2" data-allow-clear="false">
+                        <option value="" {{ empty($user->unit_id) ? 'selected' : '' }} disabled>Pilih</option>
+                        @foreach($units as $unit)
+                            <option value="{{ $unit->id }}" @if(!empty($user) and $user->unit == $unit) selected @endif>{{ $unit->nama }}</option>
+                        @endforeach
+                    </select>
+                    @error('unit_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label>Kata sandi</label>
                     <input type="password" name="password"
                         class="form-control @error('password') is-invalid @enderror" />
@@ -146,20 +161,7 @@
                     @enderror
                 </div>
 
-                {{-- <div class="form-group">
-                    <label class="input-label">{{ trans('auth.language') }}</label>
-                    <select name="language" class="form-control">
-                        <option value="">{{ trans('auth.language') }}</option>
-                        @foreach ($userLanguages as $lang => $language)
-                            <option value="{{ $lang }}" @if (!empty($user) and mb_strtolower($user->language) == mb_strtolower($lang)) selected @endif>{{ $language }}</option>
-                        @endforeach
-                    </select>
-                    @error('language')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div> --}}
+
 
                 <div class="form-group custom-switches-stacked mt-2">
                     <label class="custom-switch pl-0">
@@ -237,16 +239,6 @@
                             for="affiliateSwitch">Afiliasi</label>
                     </label>
                 </div>
-
-                {{-- <div class="form-group custom-switches-stacked mt-2">
-                    <label class="custom-switch pl-0">
-                        <input type="hidden" name="can_create_store" value="0">
-                        <input type="checkbox" name="can_create_store" id="canCreateStoreSwitch" value="1" {{ (!empty($user) and $user->can_create_store) ? 'checked="checked"' : '' }} class="custom-switch-input"/>
-                        <span class="custom-switch-indicator"></span>
-                        <label class="custom-switch-description mb-0 cursor-pointer" for="canCreateStoreSwitch">{{ trans('update.store') }}</label>
-                    </label>
-                    <div class="text-muted text-small">{{ trans('update.admin_user_edit_can_create_store_hint') }}</div>
-                </div> --}}
 
                 <div class="form-group custom-switches-stacked mt-2">
                     <label class="custom-switch pl-0">

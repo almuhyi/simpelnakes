@@ -190,7 +190,7 @@
                 <div class="available-meetings">11:30 AM</div>
             </div>
         </div>
-    </div>--}}
+    </div> --}}
 </section>
 
 @push('scripts_bottom')

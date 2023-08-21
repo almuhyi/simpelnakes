@@ -64,8 +64,8 @@ class RegionController extends Controller
         $data = [
             'pageTitle' => $type,
             'countries' => $countries,
-            'latitude' => 42.67,
-            'longitude' => 12.65,
+            'latitude' => -6.217624,
+            'longitude' => 106.411834,
         ];
 
         return view('admin.regions.create', $data);

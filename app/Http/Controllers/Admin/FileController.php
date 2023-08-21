@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\File;
-use App\Models\Translation\FileTranslation;
 use App\Models\Webinar;
 use App\Models\WebinarChapterItem;
 use Illuminate\Http\Request;
@@ -140,18 +139,12 @@ class FileController extends Controller
                 'check_previous_parts' => $data['check_previous_parts'],
                 'access_after_day' => $data['access_after_day'],
                 'status' => (!empty($data['status']) and $data['status'] == 'on') ? File::$Active : File::$Inactive,
+                'title' => $data['title'],
+                'description' => $data['description'],
                 'created_at' => time()
             ]);
 
             if (!empty($file)) {
-                FileTranslation::updateOrCreate([
-                    'file_id' => $file->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
-                    'title' => $data['title'],
-                    'description' => $data['description'],
-                ]);
-
                 if (!empty($file->chapter_id)) {
                     WebinarChapterItem::makeItem($file->creator_id, $file->chapter_id, $file->id, WebinarChapterItem::$chapterFile);
                 }
@@ -173,16 +166,7 @@ class FileController extends Controller
         $file = File::where('id', $id)->first();
 
         if (!empty($file)) {
-            $locale = $request->get('locale', app()->getLocale());
-            if (empty($locale)) {
-                $locale = app()->getLocale();
-            }
-            storeContentLocale($locale, $file->getTable(), $file->id);
-
-            $file->title = $file->getTitleAttribute();
-            $file->description = $file->getDescriptionAttribute();
             $file->file_path = $file->file;
-            $file->locale = mb_strtoupper($locale);
 
             return response()->json([
                 'file' => $file
@@ -310,15 +294,9 @@ class FileController extends Controller
                 'check_previous_parts' => $data['check_previous_parts'],
                 'access_after_day' => $data['access_after_day'],
                 'status' => (!empty($data['status']) and $data['status'] == 'on') ? File::$Active : File::$Inactive,
-                'updated_at' => time()
-            ]);
-
-            FileTranslation::updateOrCreate([
-                'file_id' => $file->id,
-                'locale' => mb_strtolower($data['locale']),
-            ], [
                 'title' => $data['title'],
                 'description' => $data['description'],
+                'updated_at' => time()
             ]);
 
             WebinarChapterItem::where('user_id', $file->creator_id)
@@ -330,14 +308,12 @@ class FileController extends Controller
                 WebinarChapterItem::makeItem($file->creator_id, $file->chapter_id, $file->id, WebinarChapterItem::$chapterFile);
             }
 
-            removeContentLocale();
 
             return response()->json([
                 'code' => 200,
             ], 200);
         }
 
-        removeContentLocale();
 
         return response()->json([], 422);
     }

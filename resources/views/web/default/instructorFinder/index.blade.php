@@ -11,7 +11,7 @@
 @section('content')
     <div class="instructor-finder">
 
-        {{-- @if((!empty($mapCenter) and is_array($mapCenter)))
+        @if((!empty($mapCenter) and is_array($mapCenter)))
             <section id="instructorFinderMap"
                      class="instructor-finder-map"
                      data-latitude="{{ $mapCenter[0] }}"
@@ -20,7 +20,7 @@
             >
 
             </section>
-        @endif --}}
+        @endif
 
         <div class="container">
 
@@ -74,10 +74,9 @@
     <script src="{{ asset('') }}assets/vendors/leaflet/leaflet.markercluster/leaflet.markercluster-src.js"></script>
     <script src="{{ asset('') }}assets/default/vendors/swiper/swiper-bundle.min.js"></script>
 
+
     <script>
-        var currency = '{{ $currency }}';
         var profileLang = 'Profil';
-        var hourLang = 'Jam';
         var mapUsers = JSON.parse(@json($mapUsers->toJson()));
         var selectProvinceLang = 'Pilih Provinsi';
         var selectCityLang = 'Pilih Kota';

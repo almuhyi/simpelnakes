@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Panel;
 use App\Http\Controllers\Controller;
 use App\Models\Bundle;
 use App\Models\Ticket;
-use App\Models\Translation\TicketTranslation;
 use App\Models\Webinar;
 use Illuminate\Http\Request;
 use Validator;
@@ -69,17 +68,9 @@ class TicketController extends Controller
                 'end_date' => strtotime($data['end_date']),
                 'discount' => $data['discount'],
                 'capacity' => $data['capacity'],
+                'title' => $data['title'],
                 'created_at' => time()
             ]);
-
-            if (!empty($ticket)) {
-                TicketTranslation::updateOrCreate([
-                    'ticket_id' => $ticket->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
-                    'title' => $data['title'],
-                ]);
-            }
 
             return response()->json([
                 'code' => 200,
@@ -149,14 +140,8 @@ class TicketController extends Controller
                     'end_date' => strtotime($data['end_date']),
                     'discount' => $data['discount'],
                     'capacity' => $data['capacity'],
-                    'updated_at' => time()
-                ]);
-
-                TicketTranslation::updateOrCreate([
-                    'ticket_id' => $ticket->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
                     'title' => $data['title'],
+                    'updated_at' => time()
                 ]);
 
                 return response()->json([

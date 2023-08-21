@@ -5,12 +5,9 @@ namespace App\Models;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 
-class Forum extends Model implements TranslatableContract
+class Forum extends Model
 {
-    use Translatable;
     use Sluggable;
 
     protected $table = 'forums';
@@ -18,17 +15,6 @@ class Forum extends Model implements TranslatableContract
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
 
-    public $translatedAttributes = ['title', 'description'];
-
-    public function getTitleAttribute()
-    {
-        return getTranslateAttributeValue($this, 'title');
-    }
-
-    public function getDescriptionAttribute()
-    {
-        return getTranslateAttributeValue($this, 'description');
-    }
 
     public function sluggable(): array
     {

@@ -29,23 +29,6 @@
                                 <div class="row">
                                     <div class="col-12 col-md-6">
 
-                                        @if(!empty(getGeneralSettings('content_translate')) and !empty($userLanguages))
-                                            <div class="form-group">
-                                                <label class="input-label">Bahasa</label>
-                                                <select name="locale" class="form-control {{ !empty($post) ? 'js-edit-content-locale' : '' }}">
-                                                    @foreach($userLanguages as $lang => $language)
-                                                        <option value="{{ $lang }}" @if(mb_strtolower(request()->get('locale', app()->getLocale())) == mb_strtolower($lang)) selected @endif>{{ $language }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('locale')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                                @enderror
-                                            </div>
-                                        @else
-                                            <input type="hidden" name="locale" value="{{ getDefaultLocale() }}">
-                                        @endif
 
                                         <div class="form-group">
                                             <label>Judul</label>
@@ -54,6 +37,27 @@
                                                    value="{{ !empty($post) ? $post->title : old('title') }}"
                                                    placeholder="Judul"/>
                                             @error('title')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-group mt-15 ">
+                                            <label class="input-label d-block">Penulis</label>
+
+                                            <select name="author_id" class="form-control search-user-select2"
+                                                    data-placeholder="Pilih penulis"
+                                                    data-search-option="except_user"
+                                            >
+                                                @if(!empty($post))
+                                                    <option value="{{ $post->author->id }}" selected>{{ $post->author->full_name }}</option>
+                                                @else
+                                                    <option selected disabled>Pilih penulis</option>
+                                                @endif
+                                            </select>
+
+                                            @error('teacher_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\File;
 use App\Models\TextLesson;
 use App\Models\TextLessonAttachment;
-use App\Models\Translation\TextLessonTranslation;
 use App\Models\Webinar;
 use App\Models\WebinarChapterItem;
 use Illuminate\Http\Request;
@@ -63,18 +62,12 @@ class TextLessonsController extends Controller
                 'access_after_day' => $data['access_after_day'],
                 'status' => (!empty($data['status']) and $data['status'] == 'on') ? TextLesson::$Active : TextLesson::$Inactive,
                 'created_at' => time(),
+                'title' => $data['title'],
+                'summary' => $data['summary'],
+                'content' => $data['content'],
             ]);
 
             if ($textLesson) {
-                TextLessonTranslation::updateOrCreate([
-                    'text_lesson_id' => $textLesson->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
-                    'title' => $data['title'],
-                    'summary' => $data['summary'],
-                    'content' => $data['content'],
-                ]);
-
 
                 if (!empty($data['attachments'])) {
                     $attachments = $data['attachments'];
@@ -138,12 +131,6 @@ class TextLessonsController extends Controller
                 'access_after_day' => $data['access_after_day'],
                 'status' => (!empty($data['status']) and $data['status'] == 'on') ? TextLesson::$Active : TextLesson::$Inactive,
                 'updated_at' => time(),
-            ]);
-
-            TextLessonTranslation::updateOrCreate([
-                'text_lesson_id' => $textLesson->id,
-                'locale' => mb_strtolower($data['locale']),
-            ], [
                 'title' => $data['title'],
                 'summary' => $data['summary'],
                 'content' => $data['content'],
@@ -165,14 +152,12 @@ class TextLessonsController extends Controller
                 WebinarChapterItem::makeItem($textLesson->creator_id, $textLesson->chapter_id, $textLesson->id, WebinarChapterItem::$chapterTextLesson);
             }
 
-            removeContentLocale();
 
             return response()->json([
                 'code' => 200,
             ], 200);
         }
 
-        removeContentLocale();
 
         return response()->json([], 422);
     }

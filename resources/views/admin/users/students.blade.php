@@ -31,20 +31,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-success">
-                        <i class="fas fa-briefcase"></i></div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>{{ trans('admin/main.organizations_students') }}</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalOrganizationsStudents }}
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
+
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div class="card card-statistic-1">
                     <div class="card-icon bg-warning">
@@ -95,64 +82,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="input-label">Tanggal akhir</label>
-                                <div class="input-group">
-                                    <input type="date" id="to" class="text-center form-control" name="to" value="{{ request()->get('to') }}" placeholder="End Date">
-                                </div>
-                            </div>
-                        </div> --}}
 
-
-                        {{-- <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="input-label">{{ trans('admin/main.filters') }}</label>
-                                <select name="sort" data-plugin-selectTwo class="form-control populate">
-                                    <option value="">{{ trans('admin/main.filter_type') }}</option>
-                                    <option value="purchased_classes_asc" @if(request()->get('sort') == 'purchased_classes_asc') selected @endif>{{ trans('admin/main.purchased_classes_ascending') }}</option>
-                                    <option value="purchased_classes_desc" @if(request()->get('sort') == 'purchased_classes_desc') selected @endif>{{ trans('admin/main.purchased_classes_descending') }}</option>
-
-                                    <option value="purchased_classes_amount_asc" @if(request()->get('sort') == 'purchased_classes_amount_asc') selected @endif>{{ trans('admin/main.purchased_classes_amount_ascending') }}</option>
-                                    <option value="purchased_classes_amount_desc" @if(request()->get('sort') == 'purchased_classes_amount_desc') selected @endif>{{ trans('admin/main.purchased_classes_amount_descending') }}</option>
-
-
-                                    <option value="purchased_appointments_asc" @if(request()->get('sort') == 'purchased_appointments_asc') selected @endif>{{ trans('admin/main.purchased_appointments_ascending') }}</option>
-                                    <option value="purchased_appointments_desc" @if(request()->get('sort') == 'purchased_appointments_desc') selected @endif>{{ trans('admin/main.purchased_appointments_descending') }}</option>
-
-                                    <option value="purchased_appointments_amount_asc" @if(request()->get('sort') == 'purchased_appointments_amount_asc') selected @endif>{{ trans('admin/main.purchased_appointments_amount_ascending') }}</option>
-                                    <option value="purchased_appointments_amount_desc" @if(request()->get('sort') == 'purchased_appointments_amount_desc') selected @endif>{{ trans('admin/main.purchased_appointments_amount_descending') }}</option>
-
-                                    <option value="register_asc" @if(request()->get('sort') == 'register_asc') selected @endif>{{ trans('admin/main.register_date_ascending') }}</option>
-                                    <option value="register_desc" @if(request()->get('sort') == 'register_desc') selected @endif>{{ trans('admin/main.register_date_descending') }}</option>
-                                </select>
-                            </div>
-                        </div> --}}
-
-
-                        {{-- <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="input-label">{{ trans('admin/main.organization') }}</label>
-                                <select name="organization_id" data-plugin-selectTwo class="form-control populate">
-                                    <option value="">{{ trans('admin/main.select_organization') }}</option>
-                                    @foreach($organizations as $organization)
-                                        <option value="{{ $organization->id }}" @if(request()->get('organization_id') == $organization->id) selected @endif>{{ $organization->full_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div> --}}
-
-                        {{-- <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="input-label">{{ trans('admin/main.users_group') }}</label>
-                                <select name="group_id" data-plugin-selectTwo class="form-control populate">
-                                    <option value="">{{ trans('admin/main.select_users_group') }}</option>
-                                    @foreach($userGroups as $userGroup)
-                                        <option value="{{ $userGroup->id }}" @if(request()->get('group_id') == $userGroup->id) selected @endif>{{ $userGroup->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div> --}}
 
 
                         <div class="col-md-3">
@@ -241,11 +171,6 @@
                                 </div>
                             </td>
 
-                            {{-- <td>{{ addCurrencyToPrice($user->getAccountingBalance()) }}</td> --}}
-
-                            {{-- <td>
-                                {{ !empty($user->userGroup) ? $user->userGroup->group->name : '' }}
-                            </td> --}}
 
                             <td>{{ dateTimeFormat($user->created_at, 'j M Y | H:i') }}</td>
 

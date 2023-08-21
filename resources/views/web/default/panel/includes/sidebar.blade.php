@@ -165,28 +165,6 @@
             </div>
         </li>
 
-        {{-- @if($authUser->isOrganization() or $authUser->isTeacher())
-            <li class="sidenav-item {{ (request()->is('panel/bundles') or request()->is('panel/bundles/*')) ? 'sidenav-item-active' : '' }}">
-                <a class="d-flex align-items-center" data-toggle="collapse" href="#bundlesCollapse" role="button" aria-expanded="false" aria-controls="bundlesCollapse">
-                <span class="sidenav-item-icon assign-fill mr-10">
-                    @include('web.default.panel.includes.sidebar_icons.bundles')
-                </span>
-                    <span class="font-14 text-dark-blue font-weight-500">{{ trans('update.bundles') }}</span>
-                </a>
-
-                <div class="collapse {{ (request()->is('panel/bundles') or request()->is('panel/bundles/*')) ? 'show' : '' }}" id="bundlesCollapse">
-                    <ul class="sidenav-item-collapse">
-                        <li class="mt-5 {{ (request()->is('panel/bundles/new')) ? 'active' : '' }}">
-                            <a href="/panel/bundles/new">{{ trans('public.new') }}</a>
-                        </li>
-
-                        <li class="mt-5 {{ (request()->is('panel/bundles')) ? 'active' : '' }}">
-                            <a href="/panel/bundles">{{ trans('update.my_bundles') }}</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        @endif --}}
 
         @if(getFeaturesSettings('webinar_assignment_status'))
             <li class="sidenav-item {{ (request()->is('panel/assignments') or request()->is('panel/assignments/*')) ? 'sidenav-item-active' : '' }}">
@@ -308,99 +286,7 @@
             </div>
         </li>
 
-        {{-- @if($authUser->checkCanAccessToStore())
-            <li class="sidenav-item {{ (request()->is('panel/store') or request()->is('panel/store/*')) ? 'sidenav-item-active' : '' }}">
-                <a class="d-flex align-items-center" data-toggle="collapse" href="#storeCollapse" role="button" aria-expanded="false" aria-controls="storeCollapse">
-                <span class="sidenav-item-icon assign-fill mr-10">
-                    @include('web.default.panel.includes.sidebar_icons.store')
-                </span>
-                    <span class="font-14 text-dark-blue font-weight-500">{{ trans('update.store') }}</span>
-                </a>
 
-                <div class="collapse {{ (request()->is('panel/store') or request()->is('panel/store/*')) ? 'show' : '' }}" id="storeCollapse">
-                    <ul class="sidenav-item-collapse">
-                        @if($authUser->isOrganization() || $authUser->isTeacher())
-                            <li class="mt-5 {{ (request()->is('panel/store/products/new')) ? 'active' : '' }}">
-                                <a href="/panel/store/products/new">{{ trans('update.new_product') }}</a>
-                            </li>
-
-                            <li class="mt-5 {{ (request()->is('panel/store/products')) ? 'active' : '' }}">
-                                <a href="/panel/store/products">{{ trans('update.products') }}</a>
-                            </li>
-
-                            @php
-                                $sellerProductOrderWaitingDeliveryCount = $authUser->getWaitingDeliveryProductOrdersCount();
-                            @endphp
-
-                            <li class="mt-5 {{ (request()->is('panel/store/sales')) ? 'active' : '' }}">
-                                <a href="/panel/store/sales">{{ trans('panel.sales') }}</a>
-
-                                @if($sellerProductOrderWaitingDeliveryCount > 0)
-                                    <span class="d-inline-flex align-items-center justify-content-center font-weight-500 ml-15 panel-sidebar-store-sales-circle-badge">{{ $sellerProductOrderWaitingDeliveryCount }}</span>
-                                @endif
-                            </li>
-
-                        @endif
-
-                        <li class="mt-5 {{ (request()->is('panel/store/purchases')) ? 'active' : '' }}">
-                            <a href="/panel/store/purchases">{{ trans('panel.my_purchases') }}</a>
-                        </li>
-
-                        @if($authUser->isOrganization() || $authUser->isTeacher())
-                            <li class="mt-5 {{ (request()->is('panel/store/products/comments')) ? 'active' : '' }}">
-                                <a href="/panel/store/products/comments">{{ trans('update.product_comments') }}</a>
-                            </li>
-                        @endif
-
-                        <li class="mt-5 {{ (request()->is('panel/store/products/my-comments')) ? 'active' : '' }}">
-                            <a href="/panel/store/products/my-comments">{{ trans('panel.my_comments') }}</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        @endif --}}
-
-        {{-- <li class="sidenav-item {{ (request()->is('panel/financial') or request()->is('panel/financial/*')) ? 'sidenav-item-active' : '' }}">
-            <a class="d-flex align-items-center" data-toggle="collapse" href="#financialCollapse" role="button" aria-expanded="false" aria-controls="financialCollapse">
-                <span class="sidenav-item-icon mr-10">
-                    @include('web.default.panel.includes.sidebar_icons.financial')
-                </span>
-                <span class="font-14 text-dark-blue font-weight-500">{{ trans('panel.financial') }}</span>
-            </a>
-
-            <div class="collapse {{ (request()->is('panel/financial') or request()->is('panel/financial/*')) ? 'show' : '' }}" id="financialCollapse">
-                <ul class="sidenav-item-collapse">
-
-                    @if($authUser->isOrganization() || $authUser->isTeacher())
-                        <li class="mt-5 {{ (request()->is('panel/financial/sales')) ? 'active' : '' }}">
-                            <a href="/panel/financial/sales">{{ trans('financial.sales_report') }}</a>
-                        </li>
-                    @endif
-
-                    <li class="mt-5 {{ (request()->is('panel/financial/summary')) ? 'active' : '' }}">
-                        <a href="/panel/financial/summary">{{ trans('financial.financial_summary') }}</a>
-                    </li>
-
-                    <li class="mt-5 {{ (request()->is('panel/financial/payout')) ? 'active' : '' }}">
-                        <a href="/panel/financial/payout">{{ trans('financial.payout') }}</a>
-                    </li>
-
-                    <li class="mt-5 {{ (request()->is('panel/financial/account')) ? 'active' : '' }}">
-                        <a href="/panel/financial/account">{{ trans('financial.charge_account') }}</a>
-                    </li>
-
-                    <li class="mt-5 {{ (request()->is('panel/financial/subscribes')) ? 'active' : '' }}">
-                        <a href="/panel/financial/subscribes">{{ trans('financial.subscribes') }}</a>
-                    </li>
-
-                    @if(($authUser->isOrganization() || $authUser->isTeacher()) and getRegistrationPackagesGeneralSettings('status'))
-                        <li class="mt-5 {{ (request()->is('panel/financial/registration-packages')) ? 'active' : '' }}">
-                            <a href="{{ route('panelRegistrationPackagesLists') }}">{{ trans('update.registration_packages') }}</a>
-                        </li>
-                    @endif
-                </ul>
-            </div>
-        </li> --}}
 
         <li class="sidenav-item {{ (request()->is('panel/support') or request()->is('panel/support/*')) ? 'sidenav-item-active' : '' }}">
             <a class="d-flex align-items-center" data-toggle="collapse" href="#supportCollapse" role="button" aria-expanded="false" aria-controls="supportCollapse">
@@ -425,35 +311,7 @@
             </div>
         </li>
 
-        {{-- @if(!$authUser->isUser() or (!empty($referralSettings) and $referralSettings['status'] and $authUser->affiliate))
-            <li class="sidenav-item {{ (request()->is('panel/marketing') or request()->is('panel/marketing/*')) ? 'sidenav-item-active' : '' }}">
-                <a class="d-flex align-items-center" data-toggle="collapse" href="#marketingCollapse" role="button" aria-expanded="false" aria-controls="marketingCollapse">
-                <span class="sidenav-item-icon mr-10">
-                    @include('web.default.panel.includes.sidebar_icons.marketing')
-                </span>
-                    <span class="font-14 text-dark-blue font-weight-500">{{ trans('panel.marketing') }}</span>
-                </a>
 
-                <div class="collapse {{ (request()->is('panel/marketing') or request()->is('panel/marketing/*')) ? 'show' : '' }}" id="marketingCollapse">
-                    <ul class="sidenav-item-collapse">
-                        @if(!$authUser->isUser())
-                            <li class="mt-5 {{ (request()->is('panel/marketing/special_offers')) ? 'active' : '' }}">
-                                <a href="/panel/marketing/special_offers">{{ trans('panel.discounts') }}</a>
-                            </li>
-                            <li class="mt-5 {{ (request()->is('panel/marketing/promotions')) ? 'active' : '' }}">
-                                <a href="/panel/marketing/promotions">{{ trans('panel.promotions') }}</a>
-                            </li>
-                        @endif
-
-                        @if(!empty($referralSettings) and $referralSettings['status'] and $authUser->affiliate)
-                            <li class="mt-5 {{ (request()->is('panel/marketing/affiliates')) ? 'active' : '' }}">
-                                <a href="/panel/marketing/affiliates">{{ trans('panel.affiliates') }}</a>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </li>
-        @endif --}}
 
         @if(getFeaturesSettings('forums_status'))
             <li class="sidenav-item {{ (request()->is('panel/forums') or request()->is('panel/forums/*')) ? 'sidenav-item-active' : '' }}">
@@ -549,16 +407,6 @@
             $rewardSetting = getRewardsSettings();
         @endphp
 
-        {{-- @if(!empty($rewardSetting) and $rewardSetting['status'] == '1')
-            <li class="sidenav-item {{ (request()->is('panel/rewards')) ? 'sidenav-item-active' : '' }}">
-                <a href="/panel/rewards" class="d-flex align-items-center">
-                <span class="sidenav-item-icon assign-strock mr-10">
-                    @include('web.default.panel.includes.sidebar_icons.rewards')
-                </span>
-                    <span class="font-14 text-dark-blue font-weight-500">{{ trans('update.rewards') }}</span>
-                </a>
-            </li>
-        @endif --}}
 
         <li class="sidenav-item {{ (request()->is('panel/notifications')) ? 'sidenav-item-active' : '' }}">
             <a href="{{ url('/panel/notifications') }}" class="d-flex align-items-center">

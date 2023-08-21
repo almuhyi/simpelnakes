@@ -36,7 +36,7 @@
                                             </div>
                                         </div>
 
-                                        {{-- <div class="form-group">
+                                        <div class="form-group">
                                             <label class="input-label">{{ trans('admin/main.map_position') }}</label>
                                             <div class="row">
                                                 <div class="col">
@@ -46,13 +46,13 @@
                                                     <input type="text" name="value[longitude]" value="{{ (!empty($value) and !empty($value['longitude'])) ? $value['longitude'] : '' }}" class="form-control" placeholder="{{ trans('admin/main.map_position_longitude') }}"/>
                                                 </div>
                                             </div>
-                                        </div> --}}
+                                        </div>
 
 
-                                        {{-- <div class="form-group">
+                                        <div class="form-group">
                                             <label class="input-label">{{ trans('admin/main.map_zoom') }}</label>
                                             <input type="text" name="value[map_zoom]" value="{{ (!empty($value) and !empty($value['map_zoom'])) ? $value['map_zoom'] : '' }}" class="form-control" placeholder="{{ trans('admin/main.map_zoom') }}"/>
-                                        </div> --}}
+                                        </div>
 
                                         <div class="form-group">
                                             <label class="input-label">No HP</label>

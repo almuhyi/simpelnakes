@@ -119,20 +119,7 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="input-label">{{trans('admin/main.filters')}}</label>
-                                    <select name="sort" data-plugin-selectTwo class="form-control populate">
-                                        <option value="">{{trans('admin/main.filter_type')}}</option>
-                                        <option value="has_discount" @if(request()->get('sort') == 'has_discount') selected @endif>{{trans('admin/main.discounted_appointments')}}</option>
-                                        <option value="free" @if(request()->get('sort') == 'free') selected @endif>{{trans('admin/main.free_appointments')}}</option>
-                                        <option value="amount_asc" @if(request()->get('sort') == 'amount_asc') selected @endif>{{trans('admin/main.cost_ascending')}}</option>
-                                        <option value="amount_desc" @if(request()->get('sort') == 'amount_desc') selected @endif>{{trans('admin/main.cost_descending')}}</option>
-                                        <option value="date_asc" @if(request()->get('sort') == 'date_asc') selected @endif>{{trans('admin/main.date_ascending')}}</option>
-                                        <option value="date_desc" @if(request()->get('sort') == 'date_desc') selected @endif>{{trans('admin/main.date_descending')}}</option>
-                                    </select>
-                                </div>
-                            </div> --}}
+
 
 
                             <div class="col-md-3">
@@ -212,11 +199,6 @@
                                         <span class="">{{ $appointment->meeting_type }}</span>
                                     </td>
 
-                                    {{-- <td>
-                                        <div class="media-body">
-                                            <div class=" mt-0 mb-1 font-weight-bold">{{ addCurrencyToPrice(handlePriceFormat($appointment->paid_amount)) }}</div>
-                                        </div>
-                                    </td> --}}
 
                                     <td class="text-center">{{ dateTimeFormat($appointment->start_at, 'j M Y') }}</td>
 

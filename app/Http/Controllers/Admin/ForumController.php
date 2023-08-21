@@ -10,7 +10,6 @@ use App\Models\ForumTopicPost;
 use App\Models\Group;
 use App\Models\Role;
 use App\Models\Translation\CategoryTranslation;
-use App\Models\Translation\ForumTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,7 +17,6 @@ class ForumController extends Controller
 {
     public function index(Request $request)
     {
-        removeContentLocale();
 
         $this->authorize('admin_forum_list');
 
@@ -106,20 +104,12 @@ class ForumController extends Controller
             'role_id' => $data['role_id'] ?? null,
             'status' => $data['status'],
             'close' => (!empty($data['close']) and $data['close'] == 1),
-        ]);
-
-        ForumTranslation::updateOrCreate([
-            'forum_id' => $forum->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
             'title' => $data['title'],
             'description' => $data['description'],
         ]);
 
         $hasSubForum = (!empty($request->get('has_sub')) and $request->get('has_sub') == 'on');
-        $this->setSubForum($forum, $request->get('sub_forums'), $hasSubForum, $data['locale']);
-
-        removeContentLocale();
+        $this->setSubForum($forum, $request->get('sub_forums'), $hasSubForum, $data);
 
         return redirect('/admin/forums');
     }
@@ -138,9 +128,6 @@ class ForumController extends Controller
             ->get();
 
         $roles = Role::all();
-
-        $locale = $request->get('locale', app()->getLocale());
-        storeContentLocale($locale, $forum->getTable(), $forum->id);
 
         $data = [
             'pageTitle' => 'Edit',
@@ -175,20 +162,12 @@ class ForumController extends Controller
             'role_id' => $data['role_id'] ?? null,
             'status' => $data['status'],
             'close' => (!empty($data['close']) and $data['close'] == 1),
-        ]);
-
-        ForumTranslation::updateOrCreate([
-            'forum_id' => $forum->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
             'title' => $data['title'],
             'description' => $data['description'],
         ]);
 
         $hasSubForums = (!empty($request->get('has_sub')) and $request->get('has_sub') == 'on');
-        $this->setSubForum($forum, $request->get('sub_forums'), $hasSubForums, $data['locale']);
-
-        removeContentLocale();
+        $this->setSubForum($forum, $request->get('sub_forums'), $hasSubForums, $data);
 
         return redirect('/admin/forums');
     }
@@ -241,7 +220,7 @@ class ForumController extends Controller
         return response()->json($topics, 200);
     }
 
-    public function setSubForum(Forum $forum, $subForums, $hasSubForums, $locale)
+    public function setSubForum(Forum $forum, $subForums, $hasSubForums)
     {
         $order = 1;
         $oldIds = [];
@@ -264,15 +243,10 @@ class ForumController extends Controller
                             'role_id' => $subForum['role_id'] ?? null,
                             'status' => $subForum['status'],
                             'close' => $forum->close || ((!empty($subForum['close']) and $subForum['close'] == 1)),
-                        ]);
-
-                        ForumTranslation::updateOrCreate([
-                            'forum_id' => $check->id,
-                            'locale' => mb_strtolower($locale),
-                        ], [
                             'title' => $subForum['title'],
                             'description' => $subForum['description'],
                         ]);
+
                     } else {
                         $new = Forum::create([
                             'slug' => Forum::makeSlug($subForum['title']),
@@ -283,12 +257,6 @@ class ForumController extends Controller
                             'role_id' => $subForum['role_id'] ?? null,
                             'status' => $subForum['status'],
                             'close' => $forum->close || ((!empty($subForum['close']) and $subForum['close'] == 1)),
-                        ]);
-
-                        ForumTranslation::updateOrCreate([
-                            'forum_id' => $new->id,
-                            'locale' => mb_strtolower($locale),
-                        ], [
                             'title' => $subForum['title'],
                             'description' => $subForum['description'],
                         ]);

@@ -101,7 +101,7 @@
 
 @stack('styles_bottom')
 @stack('scripts_bottom')
-<script src="{{ asset('') }}assets/default/js//parts/main.min.js"></script>
+<script src="{{ asset('') }}assets/default/js/parts/main.min.js"></script>
 
 <script src="{{ asset('') }}assets/default/js/panel/public.min.js"></script>
 

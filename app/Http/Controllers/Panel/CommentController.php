@@ -113,13 +113,11 @@ class CommentController extends Controller
         $this->validate($request, [
             'user_id' => 'required',
             'webinar_id' => 'required_without:product_id',
-            'product_id' => 'required_without:webinar_id',
             'comment' => 'nullable',
         ]);
 
         Comment::create([
             'webinar_id' => $request->input('webinar_id'),
-            'product_id' => $request->input('product_id'),
             'user_id' => $request->input('user_id'),
             'comment' => $request->input('comment'),
             'reply_id' => $request->input('reply_id'),
@@ -189,9 +187,6 @@ class CommentController extends Controller
                         $query->orWhere('teacher_id', $user->id);
                     });
                 });
-                $query->orWhereHas('product', function ($query) use ($user) {
-                    $query->where('creator_id', $user->id);
-                });
             })->first();
 
         if (!empty($comment)) {
@@ -200,7 +195,6 @@ class CommentController extends Controller
                 'user_id' => $user->id,
                 'comment' => $request->get('comment'),
                 'webinar_id' => $comment->webinar_id,
-                'product_id' => $comment->product_id,
                 'reply_id' => $comment->id,
                 'status' => 'active',
                 'created_at' => time()
@@ -209,7 +203,7 @@ class CommentController extends Controller
 
         return response()->json([
             'code' => 200,
-            'msg' => trans('product.comment_success_store')
+            'msg' => 'Komentar berhasil dikirim'
         ], 200);
     }
 
@@ -231,16 +225,12 @@ class CommentController extends Controller
                         $query->orWhere('teacher_id', $user->id);
                     });
                 });
-                $query->orWhereHas('product', function ($query) use ($user) {
-                    $query->where('creator_id', $user->id);
-                });
             })->first();
 
         if (!empty($comment)) {
 
             CommentReport::create([
                 'webinar_id' => $comment->webinar_id,
-                'product_id' => $comment->product_id,
                 'user_id' => $user->id,
                 'comment_id' => $comment->id,
                 'message' => $data['message'],

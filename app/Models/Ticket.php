@@ -3,23 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 
-class Ticket extends Model implements TranslatableContract
+class Ticket extends Model
 {
-    use Translatable;
 
     public $timestamps = false;
     protected $table = 'tickets';
     protected $guarded = ['id'];
-
-    public $translatedAttributes = ['title'];
-
-    public function getTitleAttribute()
-    {
-        return getTranslateAttributeValue($this, 'title');
-    }
 
     public function isValid()
     {

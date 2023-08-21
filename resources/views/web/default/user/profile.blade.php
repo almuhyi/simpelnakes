@@ -132,11 +132,7 @@
                     </li>
                 @endif
 
-                {{-- @if(!empty(getStoreSettings('status')) and getStoreSettings('status'))
-                    <li class="nav-item mr-20 mr-lg-50 mt-30">
-                        <a class="position-relative text-dark-blue font-weight-500 font-16 {{ (request()->get('tab') == 'products') ? 'active' : ''  }}" id="webinars-tab" data-toggle="tab" href="#products" role="tab" aria-controls="products" aria-selected="false">Produk</a>
-                    </li>
-                @endif --}}
+
 
                 <li class="nav-item mr-20 mr-lg-50 mt-30">
                     <a class="position-relative text-dark-blue font-weight-500 font-16 {{ (request()->get('tab') == 'posts') ? 'active' : ''  }}" id="webinars-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="false">Artikel</a>
@@ -148,9 +144,7 @@
                     </li>
                 @endif
 
-                {{-- <li class="nav-item mr-20 mr-lg-50 mt-30">
-                    <a class="position-relative text-dark-blue font-weight-500 font-16 {{ (request()->get('tab') == 'badges') ? 'active' : ''  }}" id="badges-tab" data-toggle="tab" href="#badges" role="tab" aria-controls="badges" aria-selected="false">Lencana</a>
-                </li> --}}
+
 
                 <li class="nav-item mr-20 mr-lg-50 mt-30">
                     <a class="position-relative text-dark-blue font-weight-500 font-16 {{ (request()->get('tab') == 'appointments') ? 'active' : ''  }}" id="appointments-tab" data-toggle="tab" href="#appointments" role="tab" aria-controls="appointments" aria-selected="false">Buat jadwal pertemuan</a>

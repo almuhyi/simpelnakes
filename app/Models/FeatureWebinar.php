@@ -3,12 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 
-class FeatureWebinar extends Model implements TranslatableContract
+class FeatureWebinar extends Model
 {
-    use Translatable;
 
     protected $dateFormat = 'U';
     public $timestamps = false;
@@ -16,13 +13,6 @@ class FeatureWebinar extends Model implements TranslatableContract
     protected $table = 'feature_webinars';
 
     static $pages = ['categories', 'home', 'home_categories'];
-
-    public $translatedAttributes = ['description'];
-
-    public function getDescriptionAttribute()
-    {
-        return getTranslateAttributeValue($this, 'description');
-    }
 
     public function webinar()
     {

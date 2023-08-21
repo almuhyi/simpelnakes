@@ -3,13 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 use App\Models\Traits\SequenceContent;
 
-class File extends Model implements TranslatableContract
+class File extends Model
 {
-    use Translatable;
     use SequenceContent;
 
     public $timestamps = false;
@@ -32,18 +29,6 @@ class File extends Model implements TranslatableContract
     static $Active = 'active';
     static $Inactive = 'inactive';
     static $fileStatus = ['active', 'inactive'];
-
-    public $translatedAttributes = ['title', 'description'];
-
-    public function getTitleAttribute()
-    {
-        return getTranslateAttributeValue($this, 'title');
-    }
-
-    public function getDescriptionAttribute()
-    {
-        return getTranslateAttributeValue($this, 'description');
-    }
 
 
     public function chapter()

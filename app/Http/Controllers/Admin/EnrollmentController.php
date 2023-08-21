@@ -7,8 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Accounting;
 use App\Models\Bundle;
 use App\Models\Order;
-use App\Models\Product;
-use App\Models\ProductOrder;
 use App\Models\ReserveMeeting;
 use App\Models\Sale;
 use App\Models\SaleLog;
@@ -153,8 +151,6 @@ class EnrollmentController extends Controller
             $rules['webinar_id'] = 'required|exists:webinars,id';
         } elseif (!empty($data['bundle_id'])) {
             $rules['bundle_id'] = 'required|exists:bundles,id';
-        } elseif (!empty($data['product_id'])) {
-            $rules['product_id'] = 'required|exists:products,id';
         }
 
         $validator = Validator::make($data, $rules);
@@ -206,20 +202,6 @@ class EnrollmentController extends Controller
 
                     $checkUserHasBought = $bundle->checkUserHasBought($user);
                 }
-            } elseif (!empty($data['product_id'])) {
-
-                $product = Product::find($data['product_id']);
-
-                if (!empty($product)) {
-                    $sellerId = $product->creator_id;
-                    $itemId = $product->id;
-                    $itemType = Sale::$product;
-                    $itemColumnName = 'product_order_id';
-
-                    $isOwner = ($product->creator_id == $user->id);
-
-                    $checkUserHasBought = $product->checkUserHasBought($user);
-                }
             }
 
             $errors = [];
@@ -229,7 +211,6 @@ class EnrollmentController extends Controller
                     'user_id' => ['Anda tidak dapat membeli pelatihan Anda.'],
                     'webinar_id' => ['Anda tidak dapat membeli pelatihan Anda.'],
                     'bundle_id' => ['Anda tidak dapat membeli pelatihan Anda.'],
-                    'product_id' => ['Anda tidak dapat membeli produk Anda.'],
                 ];
             }
 
@@ -238,7 +219,6 @@ class EnrollmentController extends Controller
                     'user_id' => ['Pelatihan berhasil didaftarkan.'],
                     'webinar_id' => ['Pelatihan berhasil didaftarkan.'],
                     'bundle_id' => ['Anda telah membeli bundel ini.'],
-                    'product_id' => ['Anda telah membeli produk ini.'],
                 ];
             }
 
@@ -253,64 +233,12 @@ class EnrollmentController extends Controller
                 }
             }
 
-            if (!empty($itemType) and !empty($itemId) and !empty($itemColumnName) and !empty($sellerId)) {
-
-                $productOrder = null;
-                if (!empty($product)) {
-                    $productOrder = ProductOrder::create([
-                        'product_id' => $product->id,
-                        'seller_id' => $product->creator_id,
-                        'buyer_id' => $user->id,
-                        'specifications' => null,
-                        'quantity' => 1,
-                        'status' => 'pending',
-                        'created_at' => time()
-                    ]);
-
-                    $itemId = $productOrder->id;
-                    $itemType = Sale::$product;
-                    $itemColumnName = 'product_order_id';
-                }
-
-                $sale = Sale::create([
-                    'buyer_id' => $user->id,
-                    'seller_id' => $sellerId,
-                    $itemColumnName => $itemId,
-                    'type' => $itemType,
-                    'manual_added' => true,
-                    'payment_method' => Sale::$credit,
-                    'amount' => 0,
-                    'total_amount' => 0,
-                    'created_at' => time(),
-                ]);
-
-                if (!empty($product) and !empty($productOrder)) {
-                    $productOrder->update([
-                        'sale_id' => $sale->id,
-                        'status' => $product->isVirtual() ? ProductOrder::$success : ProductOrder::$waitingDelivery,
-                    ]);
-                }
-
-                if ($request->ajax()) {
-                    return response()->json([
-                        'code' => 200
-                    ]);
-                } else {
-                    $toastData = [
-                        'title' => 'Permintaan berhasil',
-                        'msg' => 'Item berhasil ditambahkan.',
-                        'status' => 'success'
-                    ];
-                    return redirect('/admin/enrollments/history')->with(['toast' => $toastData]);
-                }
-            }
         }
 
         $errors = [
             'user_id' => ['Ada yang salah...'],
             'webinar_id' => ['Ada yang salah...'],
             'bundle_id' => ['Ada yang salah...'],
-            'product_id' => ['Ada yang salah...'],
         ];
 
         if ($request->ajax()) {

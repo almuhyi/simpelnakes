@@ -33,24 +33,6 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-6">
 
-                                        @if(!empty(getGeneralSettings('content_translate')))
-                                            <div class="form-group">
-                                                <label class="input-label">Bahasa</label>
-                                                <select name="locale" class="form-control {{ !empty($page) ? 'js-edit-content-locale' : '' }}">
-                                                    @foreach($userLanguages as $lang => $language)
-                                                        <option value="{{ $lang }}" @if(mb_strtolower(request()->get('locale', app()->getLocale())) == mb_strtolower($lang)) selected @endif>{{ $language }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('locale')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                                @enderror
-                                            </div>
-                                        @else
-                                            <input type="hidden" name="locale" value="{{ getDefaultLocale() }}">
-                                        @endif
-
 
                                         <div class="form-group">
                                             <label>Nama</label>

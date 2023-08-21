@@ -17,6 +17,7 @@ use App\Models\Role;
 use App\Models\UserMeta;
 use App\Models\UserOccupation;
 use App\Models\UserZoomApi;
+use App\Models\Unit;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -49,6 +50,7 @@ class UserController extends Controller
 
         $occupations = $user->occupations->pluck('category_id')->toArray();
 
+        $units = Unit::all();
 
         $userLanguages = getGeneralSettings('user_languages');
         if (!empty($userLanguages) and is_array($userLanguages)) {
@@ -97,6 +99,7 @@ class UserController extends Controller
             'occupations' => $occupations,
             'userLanguages' => $userLanguages,
             'currentStep' => $step,
+            'units' => $units,
             'countries' => $countries,
             'provinces' => $provinces,
             'cities' => $cities,
@@ -162,11 +165,13 @@ class UserController extends Controller
                     'email' => $data['email'],
                     'full_name' => $data['full_name'],
                     'mobile' => $data['mobile'],
+                    'unit_id' => $data['unit_id'],
                     'nik' => $data['nik'],
                     'language' => $data['language'],
                     'timezone' => $data['timezone'] ?? null,
                     'newsletter' => $joinNewsletter,
                     'public_message' => (!empty($data['public_messages']) and $data['public_messages'] == 'on'),
+                    'is_pns' => (!empty($data['is_pns']) and $data['is_pns'] == 'on'),
                 ];
 
                 $this->handleNewsletter($data['email'], $user->id, $joinNewsletter);
@@ -576,6 +581,7 @@ class UserController extends Controller
                 'affiliate' => $usersAffiliateStatus,
                 'newsletter' => (!empty($data['join_newsletter']) and $data['join_newsletter'] == 'on'),
                 'public_message' => (!empty($data['public_messages']) and $data['public_messages'] == 'on'),
+                'is_pns' => (!empty($data['is_pns']) and $data['is_pns'] == 'on'),
                 'created_at' => time()
             ]);
 

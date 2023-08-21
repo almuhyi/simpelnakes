@@ -7,7 +7,6 @@ use App\Exports\QuizzesAdminExport;
 use App\Http\Controllers\Controller;
 use App\Models\Quiz;
 use App\Models\QuizzesResult;
-use App\Models\Translation\QuizTranslation;
 use App\Models\Webinar;
 use App\Models\WebinarChapter;
 use App\Models\WebinarChapterItem;
@@ -23,7 +22,6 @@ class QuizController extends Controller
     {
         $this->authorize('admin_quizzes_list');
 
-        removeContentLocale();
 
         $query = Quiz::query();
 
@@ -173,7 +171,6 @@ class QuizController extends Controller
         $this->authorize('admin_quizzes_create');
 
         $data = $request->all();
-        $locale = $request->get('locale', getDefaultLocale());
 
         $rules = [
             'title' => 'required|max:255',
@@ -219,15 +216,10 @@ class QuizController extends Controller
                 'time' => $data['time'] ?? null,
                 'status' => (!empty($data['status']) and $data['status'] == 'on') ? Quiz::ACTIVE : Quiz::INACTIVE,
                 'certificate' => (!empty($data['certificate']) and $data['certificate'] == 'on'),
+                'title' => $data['title'],
                 'created_at' => time(),
             ]);
 
-            QuizTranslation::updateOrCreate([
-                'quiz_id' => $quiz->id,
-                'locale' => mb_strtolower($locale),
-            ], [
-                'title' => $data['title'],
-            ]);
 
             if (!empty($quiz->chapter_id)) {
                 WebinarChapterItem::makeItem($webinar->creator_id, $quiz->chapter_id, $quiz->id, WebinarChapterItem::$chapterQuiz);
@@ -269,14 +261,7 @@ class QuizController extends Controller
                     ->orWhere('creator_id', $creator->id);
             })->get();
 
-        $locale = $request->get('locale', app()->getLocale());
-        if (empty($locale)) {
-            $locale = app()->getLocale();
-        }
-        storeContentLocale($locale, $quiz->getTable(), $quiz->id);
 
-        $quiz->title = $quiz->getTitleAttribute();
-        $quiz->locale = mb_strtoupper($locale);
 
         $chapters = collect();
 
@@ -291,8 +276,6 @@ class QuizController extends Controller
             'quizQuestions' => $quiz->quizQuestions,
             'creator' => $creator,
             'chapters' => $chapters,
-            'locale' => mb_strtolower($locale),
-            'defaultLocale' => getDefaultLocale(),
         ];
 
         return view('admin.quizzes.edit', $data);
@@ -307,7 +290,6 @@ class QuizController extends Controller
         ];
 
         $data = $request->all();
-        $locale = $request->get('locale', getDefaultLocale());
 
         if ($request->ajax()) {
             $data = $request->get('ajax');
@@ -353,16 +335,11 @@ class QuizController extends Controller
             'time' => $data['time'] ?? null,
             'status' => (!empty($data['status']) and $data['status'] == 'on') ? Quiz::ACTIVE : Quiz::INACTIVE,
             'certificate' => (!empty($data['certificate']) and $data['certificate'] == 'on') ? true : false,
+            'title' => $data['title'],
             'updated_at' => time(),
         ]);
 
         if (!empty($quiz)) {
-            QuizTranslation::updateOrCreate([
-                'quiz_id' => $quiz->id,
-                'locale' => mb_strtolower($locale),
-            ], [
-                'title' => $data['title'],
-            ]);
 
             $checkChapterItem = WebinarChapterItem::where('user_id', $user->id)
                 ->where('item_id', $quiz->id)
@@ -382,7 +359,6 @@ class QuizController extends Controller
             }
         }
 
-        removeContentLocale();
 
         if ($request->ajax()) {
             return response()->json([

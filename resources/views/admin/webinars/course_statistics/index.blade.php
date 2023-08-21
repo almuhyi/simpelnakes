@@ -216,36 +216,6 @@
         </section>
 
 
-        {{-- <section>
-            <div class="row">
-                <div class="col-12 col-md-6 mt-3">
-                    <div class="course-statistic-cards-shadow monthly-sales-card pt-2 px-2 pb-3 rounded-sm bg-white">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h3 class="font-16 text-dark font-weight-bold">{{ trans('panel.monthly_sales') }}</h3>
-
-                            <span class="font-16 font-weight-500 text-gray">{{ dateTimeFormat(time(),'M Y') }}</span>
-                        </div>
-
-                        <div class="monthly-sales-chart mt-2">
-                            <canvas id="monthlySalesChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-6 mt-3">
-                    <div class="course-statistic-cards-shadow monthly-sales-card pt-2 px-2 pb-3 rounded-sm bg-white">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h3 class="font-16 text-dark font-weight-bold">{{ trans('update.course_progress') }} (%)</h3>
-                        </div>
-
-                        <div class="monthly-sales-chart mt-2">
-                            <canvas id="courseProgressLineChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
-
         <section class="mt-5">
             <h2 class="section-title">Daftar peserta</h2>
 

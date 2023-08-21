@@ -45,14 +45,7 @@
 
                                 @include(getTemplate() . '.includes.webinar.rate',['rate' => $favorite->webinar->getRate()])
 
-                                {{-- <div class="webinar-price-box mt-15">
-                                    @if($favorite->webinar->bestTicket() < $favorite->webinar->price)
-                                        <span class="real">{{ handlePrice($favorite->webinar->bestTicket(), true, true) }}</span>
-                                        <span class="off ml-10">{{ handlePrice($favorite->webinar->price, true, true) }}</span>
-                                    @else
-                                        <span class="real">{{ handlePrice($favorite->webinar->price, true, true) }}</span>
-                                    @endif
-                                </div> --}}
+
 
                                 <div class="d-flex align-items-center justify-content-between flex-wrap mt-auto">
                                     <div class="d-flex align-items-start flex-column mt-20 mr-15">

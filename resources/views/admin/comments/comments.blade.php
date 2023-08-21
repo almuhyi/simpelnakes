@@ -135,20 +135,6 @@
                                         </select>
                                     </div>
                                 </div>
-                            {{-- @elseif($page == 'products')
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="input-label">{{ trans('update.products') }}</label>
-                                        <select name="product_ids[]" multiple="multiple" class="form-control search-product-select2 " data-placeholder="Search products">
-
-                                            @if(!empty($products) and $products->count() > 0)
-                                                @foreach($products as $product)
-                                                    <option value="{{ $product->id }}" selected>{{ $product->title }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                </div> --}}
                             @endif
 
 

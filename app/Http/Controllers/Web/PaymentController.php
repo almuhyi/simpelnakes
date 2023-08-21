@@ -9,8 +9,6 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\PaymentChannel;
-use App\Models\Product;
-use App\Models\ProductOrder;
 use App\Models\ReserveMeeting;
 use App\Models\Reward;
 use App\Models\RewardAccounting;
@@ -234,9 +232,6 @@ class PaymentController extends Controller
                     Accounting::createAccounting($orderItem, $type);
                     TicketUser::useTicket($orderItem);
 
-                    if (!empty($orderItem->product_id)) {
-                        $this->updateProductOrder($sale, $orderItem);
-                    }
                 }
             }
         }
@@ -280,30 +275,5 @@ class PaymentController extends Controller
         $meetingReserveReward = RewardAccounting::calculateScore($type);
 
         RewardAccounting::makeRewardAccounting($user->id, $meetingReserveReward, $type);
-    }
-
-    private function updateProductOrder($sale, $orderItem)
-    {
-        $product = $orderItem->product;
-
-        $status = ProductOrder::$waitingDelivery;
-
-        if ($product and $product->isVirtual()) {
-            $status = ProductOrder::$success;
-        }
-
-        ProductOrder::where('product_id', $orderItem->product_id)
-            ->where('buyer_id', $orderItem->user_id)
-            ->update([
-                'sale_id' => $sale->id,
-                'status' => $status,
-            ]);
-
-        if ($product and $product->getAvailability() < 1) {
-            $notifyOptions = [
-                '[p.title]' => $product->title,
-            ];
-            sendNotification('product_out_of_stock', $notifyOptions, $product->creator_id);
-        }
     }
 }

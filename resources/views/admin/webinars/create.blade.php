@@ -68,13 +68,11 @@
 
                                             <div class="form-group mt-15 ">
                                                 <label class="input-label d-block">Tipe Pelatihan</label>
-
-                                                <select name="type" class="custom-select @error('type')  is-invalid @enderror">
+                                                <select name="type" class="custom-select @error('type') is-invalid @enderror">
                                                     <option value="webinar" @if((!empty($webinar) and $webinar->isWebinar()) or old('type') == \App\Models\Webinar::$webinar) selected @endif>Pelatihan webinar</option>
-                                                    <option value="course" @if((!empty($webinar) and $webinar->isCourse()) or old('type') == \App\Models\Webinar::$course) selected @endif>Pelatihan Video</option>
-                                                    <option value="text_lesson" @if((!empty($webinar) and $webinar->isTextCourse()) or old('type') == \App\Models\Webinar::$textLesson) selected @endif>Pelatihan Text</option>
+                                                    <option value="pelatihan" @if((!empty($webinar) and $webinar->isCourse()) or old('type') == \App\Models\Webinar::$course) selected @endif>Pelatihan Video</option>
+                                                    <option value="teks" @if((!empty($webinar) and $webinar->isTextCourse()) or old('type') == \App\Models\Webinar::$textLesson) selected @endif>Pelatihan Text</option>
                                                 </select>
-
                                                 @error('type')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -506,55 +504,6 @@
                                 </section>
 
                                 @if(!empty($webinar))
-                                    {{-- <section class="mt-30">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h2 class="section-title after-line">Paket Harga</h2>
-                                            <button id="webinarAddTicket" type="button" class="btn btn-primary btn-sm mt-3">Tambah paket harga</button>
-                                        </div>
-
-                                        <div class="row mt-10">
-                                            <div class="col-12">
-
-                                                @if(!empty($tickets) and !$tickets->isEmpty())
-                                                    <div class="table-responsive">
-                                                        <table class="table table-striped text-center font-14">
-
-                                                            <tr>
-                                                                <th>Judul</th>
-                                                                <th>Diskon</th>
-                                                                <th>Kapasitas</th>
-                                                                <th>Tanggal</th>
-                                                                <th></th>
-                                                            </tr>
-
-                                                            @foreach($tickets as $ticket)
-                                                                <tr>
-                                                                    <th scope="row">{{ $ticket->title }}</th>
-                                                                    <td>{{ $ticket->discount }}%</td>
-                                                                    <td>{{ $ticket->capacity }}</td>
-                                                                    <td>{{ dateTimeFormat($ticket->start_date,'j F Y') }} - {{ (new DateTime())->setTimestamp($ticket->end_date)->format('j F Y') }}</td>
-                                                                    <td>
-                                                                        <button type="button" data-ticket-id="{{ $ticket->id }}" data-webinar-id="{{ !empty($webinar) ? $webinar->id : '' }}" class="edit-ticket btn-transparent text-primary mt-1" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                                            <i class="fa fa-edit"></i>
-                                                                        </button>
-
-                                                                        @include('admin.includes.delete_button',['url' => '/admin/tickets/'. $ticket->id .'/delete', 'btnClass' => ' mt-1'])
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-
-                                                        </table>
-                                                    </div>
-                                                @else
-                                                    @include('admin.includes.no-result',[
-                                                        'file_name' => 'ticket.png',
-                                                        'title' => 'Tidak ada paket harga!',
-                                                        'hint' => 'Dengan membuat rencana harga, Anda dapat menambahkan waktu dan harga yang bergantung pada kapasitas untuk pelatihan Anda.',
-                                                    ])
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </section> --}}
 
 
                                     @include('admin.webinars.create_includes.contents')

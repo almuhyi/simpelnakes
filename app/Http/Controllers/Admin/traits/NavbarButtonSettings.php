@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\traits;
 
 use App\Models\NavbarButton;
 use App\Models\Role;
-use App\Models\Translation\NavbarButtonTranslation;
 use Illuminate\Http\Request;
 
 trait NavbarButtonSettings
@@ -13,7 +12,6 @@ trait NavbarButtonSettings
 
     public function navbarButtonSettings(Request $request)
     {
-        removeContentLocale();
 
         $this->authorize('admin_settings_personalization');
 
@@ -22,14 +20,11 @@ trait NavbarButtonSettings
                 'role'
             ])->get();
 
-        $defaultLocal = getDefaultLocale();
-        $locale = $request->get('locale', mb_strtolower($defaultLocal));
 
         $data = [
             'pageTitle' => 'Pengaturan',
             'navbarButtons' => $navbarButtons,
             'name' => $this->settingName,
-            'selectedLocale' => $locale,
             'roles' => Role::all()
         ];
 
@@ -54,17 +49,11 @@ trait NavbarButtonSettings
 
         if (empty($navbarButton)) {
             $navbarButton = NavbarButton::create([
-                'role_id' => $data['role_id']
+                'role_id' => $data['role_id'],
+                'title' => $data['title'],
+                'url' => $data['url'],
             ]);
         }
-
-        NavbarButtonTranslation::updateOrCreate([
-            'navbar_button_id' => $navbarButton->id,
-            'locale' => mb_strtolower($data['locale']),
-        ], [
-            'title' => $data['title'],
-            'url' => $data['url'],
-        ]);
 
         return redirect('/admin/settings/personalization/navbar_button');
     }
@@ -75,16 +64,11 @@ trait NavbarButtonSettings
 
         $navbarButton = NavbarButton::findOrFail($id);
 
-        $defaultLocal = getDefaultLocale();
-        $locale = $request->get('locale', mb_strtolower($defaultLocal));
-        storeContentLocale($locale, $navbarButton->getTable(), $navbarButton->id);
-
         $data = [
             'pageTitle' => 'Pengaturan',
             'navbarButton' => $navbarButton,
             'roles' => Role::all(),
             'name' => $this->settingName,
-            'selectedLocale' => $locale,
         ];
 
         return view('admin.settings.personalization', $data);
